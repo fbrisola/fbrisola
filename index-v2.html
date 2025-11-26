@@ -1,0 +1,1524 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <!-- SEO Meta Tags -->
+    <title>Fernando Brisola Batista - O Mago da Inovação e da Boa Vibe!</title>
+    <meta name="description"
+        content="Conheça Fernando Brisola Batista, engenheiro, empreendedor, tech guru e coach que une tecnologia e coração para transformar sonhos em realidade.">
+    <meta name="keywords"
+        content="Fernando Brisola Batista, coach, empreendedor, tecnologia, inovação, marketing digital, desenvolvimento pessoal, FBB Solution, FarmGate, DentalSmart, Agência Logos, MyDNA, Maturi">
+    <meta name="author" content="Fernando Brisola Batista">
+
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Space+Grotesk:wght@300;400;500;600;700&display=swap"
+        rel="stylesheet">
+
+    <!-- Font Awesome for Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+    <style>
+        /* --- GLOBAL STYLES & VARIABLES --- */
+        :root {
+            --primary: #6366f1;
+            --primary-dark: #4f46e5;
+            --secondary: #8b5cf6;
+            --accent: #06b6d4;
+            --success: #10b981;
+            --warning: #f59e0b;
+            --bg-dark: #0f172a;
+            --bg-darker: #020617;
+            --bg-light: #f8fafc;
+            --text-dark: #0f172a;
+            --text-light: #64748b;
+            --text-lighter: #94a3b8;
+            --font-title: 'Space Grotesk', sans-serif;
+            --font-body: 'Inter', sans-serif;
+            --shadow-sm: 0 2px 8px rgba(0, 0, 0, 0.04);
+            --shadow: 0 10px 40px rgba(0, 0, 0, 0.1);
+            --shadow-lg: 0 20px 60px rgba(0, 0, 0, 0.15);
+            --shadow-color: 0 30px 80px rgba(99, 102, 241, 0.3);
+            --border-radius: 24px;
+            --border-radius-sm: 16px;
+            --transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        *,
+        *::before,
+        *::after {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        html {
+            scroll-behavior: smooth;
+            font-size: 16px;
+        }
+
+        body {
+            font-family: var(--font-body);
+            color: var(--text-dark);
+            background: var(--bg-light);
+            line-height: 1.7;
+            overflow-x: hidden;
+            position: relative;
+            font-weight: 400;
+        }
+
+        .container {
+            max-width: 1280px;
+            margin: 0 auto;
+            padding: 0 24px;
+        }
+
+        section {
+            padding: 120px 0;
+            overflow: hidden;
+            position: relative;
+        }
+
+        h1, h2, h3 {
+            font-family: var(--font-title);
+            font-weight: 700;
+            color: var(--text-dark);
+            line-height: 1.1;
+            margin-bottom: 20px;
+        }
+
+        h2 {
+            font-size: clamp(2.5rem, 5vw, 3.5rem);
+            text-align: center;
+            margin-bottom: 80px;
+            position: relative;
+            background: linear-gradient(135deg, var(--primary) 0%, var(--secondary) 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        h2::after {
+            content: '';
+            display: block;
+            width: 80px;
+            height: 5px;
+            background: linear-gradient(90deg, var(--primary), var(--secondary));
+            border-radius: 3px;
+            margin: 24px auto 0;
+        }
+
+        .btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 12px;
+            padding: 18px 36px;
+            background: linear-gradient(135deg, var(--primary) 0%, var(--secondary) 100%);
+            color: white;
+            border-radius: 16px;
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 1.1rem;
+            transition: var(--transition);
+            border: none;
+            cursor: pointer;
+            position: relative;
+            overflow: hidden;
+            box-shadow: var(--shadow-color);
+        }
+
+        .btn::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.3), transparent);
+            transition: left 0.6s;
+        }
+
+        .btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 30px 80px rgba(99, 102, 241, 0.4);
+        }
+
+        .btn:hover::before {
+            left: 100%;
+        }
+
+        /* Fade-in Animation on Scroll */
+        .fade-in {
+            opacity: 0;
+            transform: translateY(40px);
+            transition: all 0.8s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        .fade-in.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        /* --- HEADER & NAVIGATION --- */
+        #main-nav {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            z-index: 1000;
+            background: rgba(255, 255, 255, 0.8);
+            backdrop-filter: blur(20px);
+            border-bottom: 1px solid rgba(0, 0, 0, 0.05);
+            transition: var(--transition);
+        }
+
+        #main-nav.scrolled {
+            background: rgba(255, 255, 255, 0.95);
+            box-shadow: var(--shadow-sm);
+        }
+
+        #main-nav .container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            height: 80px;
+        }
+
+        .logo {
+            font-family: var(--font-title);
+            font-size: 1.8rem;
+            font-weight: 700;
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            text-decoration: none;
+            transition: var(--transition);
+        }
+
+        .logo:hover {
+            transform: scale(1.05);
+        }
+
+        .nav-links {
+            list-style: none;
+            display: flex;
+            gap: 8px;
+        }
+
+        .nav-links a {
+            text-decoration: none;
+            color: var(--text-dark);
+            font-weight: 600;
+            font-size: 1rem;
+            position: relative;
+            transition: var(--transition);
+            padding: 10px 20px;
+            border-radius: 12px;
+        }
+
+        .nav-links a:hover,
+        .nav-links a.active {
+            color: var(--primary);
+            background: rgba(99, 102, 241, 0.1);
+        }
+
+        .hamburger {
+            display: none;
+            cursor: pointer;
+            flex-direction: column;
+            gap: 5px;
+            padding: 8px;
+        }
+
+        .hamburger div {
+            width: 28px;
+            height: 3px;
+            background: var(--primary);
+            border-radius: 3px;
+            transition: var(--transition);
+        }
+
+        /* Progress Bar */
+        #progress-bar {
+            position: fixed;
+            top: 80px;
+            left: 0;
+            height: 4px;
+            background: linear-gradient(90deg, var(--primary), var(--secondary), var(--accent));
+            width: 0%;
+            z-index: 1001;
+            transition: width 0.1s linear;
+        }
+
+        /* --- HERO SECTION --- */
+        #home {
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            background: linear-gradient(135deg, #0f172a 0%, #1e293b 100%);
+            position: relative;
+            overflow: hidden;
+            padding-top: 80px;
+        }
+
+        /* Animated gradient background */
+        #home::before {
+            content: '';
+            position: absolute;
+            width: 200%;
+            height: 200%;
+            background: 
+                radial-gradient(circle at 20% 50%, rgba(99, 102, 241, 0.15) 0%, transparent 50%),
+                radial-gradient(circle at 80% 80%, rgba(139, 92, 246, 0.15) 0%, transparent 50%),
+                radial-gradient(circle at 40% 20%, rgba(6, 182, 212, 0.1) 0%, transparent 50%);
+            animation: gradientMove 20s ease infinite;
+            z-index: 1;
+        }
+
+        @keyframes gradientMove {
+            0%, 100% { transform: translate(0, 0) rotate(0deg); }
+            33% { transform: translate(-5%, -5%) rotate(120deg); }
+            66% { transform: translate(5%, 5%) rotate(240deg); }
+        }
+
+        /* Floating geometric shapes */
+        .hero-shapes {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            top: 0;
+            left: 0;
+            z-index: 2;
+            pointer-events: none;
+        }
+
+        .shape {
+            position: absolute;
+            border-radius: 50%;
+            opacity: 0.1;
+            animation: floatShape 20s infinite ease-in-out;
+        }
+
+        .shape:nth-child(1) {
+            width: 300px;
+            height: 300px;
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            top: 10%;
+            left: 10%;
+            animation-delay: 0s;
+        }
+
+        .shape:nth-child(2) {
+            width: 200px;
+            height: 200px;
+            background: linear-gradient(135deg, var(--secondary), var(--accent));
+            top: 60%;
+            right: 10%;
+            animation-delay: 3s;
+        }
+
+        .shape:nth-child(3) {
+            width: 150px;
+            height: 150px;
+            background: linear-gradient(135deg, var(--accent), var(--primary));
+            bottom: 20%;
+            left: 20%;
+            animation-delay: 6s;
+        }
+
+        @keyframes floatShape {
+            0%, 100% { transform: translate(0, 0) scale(1); }
+            33% { transform: translate(30px, -30px) scale(1.1); }
+            66% { transform: translate(-30px, 30px) scale(0.9); }
+        }
+
+        /* Grid pattern overlay */
+        #home::after {
+            content: '';
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            background-image: 
+                linear-gradient(rgba(99, 102, 241, 0.05) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(99, 102, 241, 0.05) 1px, transparent 1px);
+            background-size: 50px 50px;
+            z-index: 2;
+            animation: gridMove 20s linear infinite;
+        }
+
+        @keyframes gridMove {
+            0% { transform: translate(0, 0); }
+            100% { transform: translate(50px, 50px); }
+        }
+
+        .home-content {
+            max-width: 1000px;
+            position: relative;
+            z-index: 3;
+        }
+
+        .hero-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            padding: 8px 20px;
+            background: rgba(99, 102, 241, 0.1);
+            border: 1px solid rgba(99, 102, 241, 0.2);
+            border-radius: 100px;
+            color: var(--primary);
+            font-size: 0.9rem;
+            font-weight: 600;
+            margin-bottom: 32px;
+            backdrop-filter: blur(10px);
+            animation: slideDown 1s ease-out;
+        }
+
+        .hero-badge i {
+            animation: pulse 2s infinite;
+        }
+
+        @keyframes pulse {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.2); }
+        }
+
+        .profile-container {
+            position: relative;
+            display: inline-block;
+            margin-bottom: 40px;
+            animation: slideDown 1s ease-out 0.2s both;
+        }
+
+        .profile-image {
+            width: 180px;
+            height: 180px;
+            border-radius: 50%;
+            object-fit: cover;
+            border: 4px solid rgba(255, 255, 255, 0.1);
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+            position: relative;
+            z-index: 2;
+        }
+
+        .profile-ring {
+            position: absolute;
+            top: -10px;
+            left: -10px;
+            width: calc(100% + 20px);
+            height: calc(100% + 20px);
+            border-radius: 50%;
+            border: 3px solid transparent;
+            background: linear-gradient(135deg, var(--primary), var(--secondary), var(--accent)) border-box;
+            -webkit-mask: linear-gradient(#fff 0 0) padding-box, linear-gradient(#fff 0 0);
+            -webkit-mask-composite: xor;
+            mask-composite: exclude;
+            animation: rotate 3s linear infinite;
+        }
+
+        @keyframes rotate {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+
+        .home-content h1 {
+            font-size: clamp(2.5rem, 6vw, 4.5rem);
+            margin-bottom: 24px;
+            color: white;
+            font-weight: 800;
+            letter-spacing: -0.02em;
+            animation: slideDown 1s ease-out 0.4s both;
+        }
+
+        .home-content h1 .gradient-text {
+            background: linear-gradient(135deg, #60efff, #0061ff, #60efff);
+            background-size: 200% auto;
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            animation: shine 3s linear infinite;
+        }
+
+        @keyframes shine {
+            to { background-position: 200% center; }
+        }
+
+        .home-content .subtitle {
+            font-size: clamp(1.2rem, 3vw, 1.8rem);
+            color: rgba(255, 255, 255, 0.7);
+            margin-bottom: 20px;
+            font-weight: 500;
+            animation: slideDown 1s ease-out 0.6s both;
+        }
+
+        .home-content p {
+            font-size: clamp(1rem, 2vw, 1.2rem);
+            color: rgba(255, 255, 255, 0.6);
+            margin-bottom: 48px;
+            max-width: 700px;
+            margin-left: auto;
+            margin-right: auto;
+            line-height: 1.8;
+            animation: slideDown 1s ease-out 0.8s both;
+        }
+
+        .hero-buttons {
+            display: flex;
+            gap: 20px;
+            justify-content: center;
+            flex-wrap: wrap;
+            animation: slideDown 1s ease-out 1s both;
+        }
+
+        .btn-primary {
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            color: white;
+            box-shadow: 0 20px 60px rgba(99, 102, 241, 0.3);
+        }
+
+        .btn-secondary {
+            background: rgba(255, 255, 255, 0.1);
+            color: white;
+            border: 2px solid rgba(255, 255, 255, 0.2);
+            backdrop-filter: blur(10px);
+        }
+
+        .btn-secondary:hover {
+            background: rgba(255, 255, 255, 0.2);
+            border-color: rgba(255, 255, 255, 0.3);
+        }
+
+        @keyframes slideDown {
+            from {
+                opacity: 0;
+                transform: translateY(-30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .hero-stats {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+            gap: 40px;
+            margin-top: 80px;
+            animation: slideUp 1s ease-out 1.2s both;
+        }
+
+        @keyframes slideUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .stat-item {
+            text-align: center;
+        }
+
+        .stat-number {
+            font-size: 3rem;
+            font-weight: 800;
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            font-family: var(--font-title);
+        }
+
+        .stat-label {
+            color: rgba(255, 255, 255, 0.6);
+            font-size: 0.95rem;
+            font-weight: 500;
+            margin-top: 8px;
+        }
+
+        .scroll-indicator {
+            position: absolute;
+            bottom: 40px;
+            left: 50%;
+            transform: translateX(-50%);
+            z-index: 3;
+            animation: bounce 2s infinite;
+        }
+
+        .scroll-indicator i {
+            color: rgba(255, 255, 255, 0.5);
+            font-size: 2rem;
+        }
+
+        @keyframes bounce {
+            0%, 100% { transform: translateX(-50%) translateY(0); }
+            50% { transform: translateX(-50%) translateY(10px); }
+        }
+
+        /* --- QUEM SOU EU SECTION --- */
+        #quem-sou-eu {
+            background: white;
+        }
+
+        #quem-sou-eu .container {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 80px;
+            align-items: center;
+        }
+
+        .text-content p {
+            color: var(--text-light);
+            font-size: 1.1rem;
+            line-height: 1.8;
+            margin-bottom: 24px;
+        }
+
+        .visual-content {
+            background: linear-gradient(135deg, rgba(99, 102, 241, 0.05), rgba(139, 92, 246, 0.05));
+            padding: 48px;
+            border-radius: var(--border-radius);
+            border: 1px solid rgba(99, 102, 241, 0.1);
+        }
+
+        .visual-content h3 {
+            margin-bottom: 40px;
+            font-size: 1.8rem;
+            color: var(--text-dark);
+        }
+
+        .superpower {
+            display: flex;
+            align-items: center;
+            gap: 20px;
+            margin-bottom: 24px;
+            padding: 20px;
+            border-radius: var(--border-radius-sm);
+            background: white;
+            transition: var(--transition);
+            border: 1px solid rgba(0, 0, 0, 0.05);
+        }
+
+        .superpower:hover {
+            transform: translateX(10px);
+            box-shadow: var(--shadow);
+            border-color: rgba(99, 102, 241, 0.2);
+        }
+
+        .superpower i {
+            font-size: 2.5rem;
+            color: var(--primary);
+            min-width: 40px;
+        }
+
+        .superpower strong {
+            display: block;
+            color: var(--text-dark);
+            font-size: 1.1rem;
+            margin-bottom: 4px;
+        }
+
+        /* --- COACH SECTION --- */
+        #coach {
+            background: linear-gradient(135deg, rgba(99, 102, 241, 0.03), rgba(139, 92, 246, 0.03));
+        }
+
+        #coach .container {
+            max-width: 1000px;
+            text-align: center;
+        }
+
+        #coach > .container > p {
+            color: var(--text-light);
+            font-size: 1.1rem;
+            line-height: 1.8;
+            max-width: 800px;
+            margin: 0 auto 60px;
+        }
+
+        .testimonials {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 32px;
+            margin-bottom: 60px;
+        }
+
+        .testimonial {
+            background: white;
+            padding: 40px;
+            border-radius: var(--border-radius);
+            box-shadow: var(--shadow-sm);
+            transition: var(--transition);
+            border: 1px solid rgba(0, 0, 0, 0.05);
+        }
+
+        .testimonial:hover {
+            transform: translateY(-10px);
+            box-shadow: var(--shadow);
+        }
+
+        .testimonial p {
+            font-style: italic;
+            color: var(--text-light);
+            font-size: 1.05rem;
+            line-height: 1.8;
+            margin-bottom: 20px;
+        }
+
+        .testimonial strong {
+            color: var(--text-dark);
+            font-weight: 600;
+        }
+
+        /* --- AVENTURAS SECTION --- */
+        #aventuras {
+            background: white;
+        }
+
+        #aventuras > .container > p {
+            text-align: center;
+            color: var(--text-light);
+            font-size: 1.1rem;
+            max-width: 800px;
+            margin: -40px auto 60px;
+        }
+
+        .aventuras-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+            gap: 32px;
+        }
+
+        .aventura-card {
+            background: white;
+            border-radius: var(--border-radius);
+            box-shadow: var(--shadow-sm);
+            padding: 40px;
+            text-align: center;
+            cursor: pointer;
+            transition: var(--transition);
+            border: 1px solid rgba(0, 0, 0, 0.05);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .aventura-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 4px;
+            background: linear-gradient(90deg, var(--primary), var(--secondary));
+            transform: scaleX(0);
+            transition: transform 0.4s ease;
+        }
+
+        .aventura-card:hover::before {
+            transform: scaleX(1);
+        }
+
+        .aventura-card:hover {
+            transform: translateY(-10px);
+            box-shadow: var(--shadow);
+            border-color: rgba(99, 102, 241, 0.2);
+        }
+
+        .aventura-card i {
+            font-size: 3.5rem;
+            margin-bottom: 24px;
+            color: var(--primary);
+            transition: var(--transition);
+        }
+
+        .aventura-card:hover i {
+            transform: scale(1.1) rotate(5deg);
+        }
+
+        .aventura-card h3 {
+            font-size: 1.5rem;
+            margin-bottom: 12px;
+            color: var(--text-dark);
+        }
+
+        .aventura-card p {
+            color: var(--text-light);
+            font-weight: 500;
+            font-size: 1rem;
+            line-height: 1.6;
+        }
+
+        /* --- JORNADA SECTION --- */
+        #jornada {
+            background: linear-gradient(135deg, rgba(99, 102, 241, 0.03), rgba(139, 92, 246, 0.03));
+        }
+
+        .timeline {
+            position: relative;
+            max-width: 1000px;
+            margin: 0 auto;
+        }
+
+        .timeline::after {
+            content: '';
+            position: absolute;
+            width: 4px;
+            background: linear-gradient(180deg, var(--primary), var(--secondary));
+            top: 0;
+            bottom: 0;
+            left: 50%;
+            margin-left: -2px;
+            border-radius: 2px;
+        }
+
+        .timeline-item {
+            padding: 15px 50px;
+            position: relative;
+            background: inherit;
+            width: 50%;
+        }
+
+        .timeline-item.left {
+            left: 0;
+            padding-right: 80px;
+        }
+
+        .timeline-item.right {
+            left: 50%;
+            padding-left: 80px;
+        }
+
+        .timeline-item::after {
+            content: '';
+            position: absolute;
+            width: 20px;
+            height: 20px;
+            right: -10px;
+            background: white;
+            border: 4px solid var(--primary);
+            top: 30px;
+            border-radius: 50%;
+            z-index: 1;
+            box-shadow: var(--shadow-sm);
+        }
+
+        .timeline-item.right::after {
+            left: -10px;
+        }
+
+        .timeline-content {
+            padding: 32px;
+            background: white;
+            position: relative;
+            border-radius: var(--border-radius-sm);
+            box-shadow: var(--shadow-sm);
+            border: 1px solid rgba(0, 0, 0, 0.05);
+            transition: var(--transition);
+        }
+
+        .timeline-content:hover {
+            transform: translateY(-5px);
+            box-shadow: var(--shadow);
+        }
+
+        .timeline-content h3 {
+            font-size: 1.3rem;
+            color: var(--primary);
+            margin-bottom: 12px;
+        }
+
+        .timeline-content p {
+            font-style: italic;
+            font-size: 1.05rem;
+            color: var(--text-light);
+            line-height: 1.6;
+        }
+
+        /* --- CONTATO SECTION --- */
+        #contato {
+            background: white;
+        }
+
+        #contato .container {
+            max-width: 800px;
+            text-align: center;
+        }
+
+        #contato > .container > p {
+            color: var(--text-light);
+            font-size: 1.1rem;
+            line-height: 1.8;
+            margin-bottom: 50px;
+        }
+
+        #contato-form {
+            display: flex;
+            flex-direction: column;
+            gap: 24px;
+        }
+
+        .form-group input,
+        .form-group textarea {
+            width: 100%;
+            padding: 18px 24px;
+            border-radius: var(--border-radius-sm);
+            border: 2px solid rgba(0, 0, 0, 0.1);
+            font-family: var(--font-body);
+            font-size: 1rem;
+            background: white;
+            transition: var(--transition);
+            color: var(--text-dark);
+        }
+
+        .form-group input:focus,
+        .form-group textarea:focus {
+            outline: none;
+            border-color: var(--primary);
+            box-shadow: 0 0 0 4px rgba(99, 102, 241, 0.1);
+        }
+
+        .form-group input::placeholder,
+        .form-group textarea::placeholder {
+            color: var(--text-lighter);
+        }
+
+        .social-links {
+            margin-top: 60px;
+            display: flex;
+            justify-content: center;
+            gap: 24px;
+        }
+
+        .social-links a {
+            width: 56px;
+            height: 56px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 50%;
+            background: linear-gradient(135deg, rgba(99, 102, 241, 0.1), rgba(139, 92, 246, 0.1));
+            color: var(--primary);
+            font-size: 1.5rem;
+            transition: var(--transition);
+            border: 2px solid transparent;
+        }
+
+        .social-links a:hover {
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            color: white;
+            transform: translateY(-5px);
+            box-shadow: var(--shadow-color);
+        }
+
+        /* --- FOOTER --- */
+        footer {
+            background: var(--bg-dark);
+            color: rgba(255, 255, 255, 0.7);
+            text-align: center;
+            padding: 40px 0;
+        }
+
+        /* --- MODAL STYLES --- */
+        .modal {
+            display: none;
+            position: fixed;
+            z-index: 2000;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            overflow: auto;
+            background: rgba(0, 0, 0, 0.8);
+            backdrop-filter: blur(10px);
+        }
+
+        .modal-content {
+            background: white;
+            margin: 5% auto;
+            padding: 50px;
+            border-radius: var(--border-radius);
+            width: 90%;
+            max-width: 800px;
+            position: relative;
+            animation: modalSlide 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        .modal-content h3 {
+            color: var(--primary);
+            margin-top: 0;
+            font-size: 2rem;
+        }
+
+        .modal-content p {
+            color: var(--text-light);
+            line-height: 1.8;
+            font-size: 1.05rem;
+        }
+
+        .close-btn {
+            color: var(--text-lighter);
+            position: absolute;
+            top: 20px;
+            right: 30px;
+            font-size: 32px;
+            font-weight: bold;
+            cursor: pointer;
+            transition: var(--transition);
+        }
+
+        .close-btn:hover {
+            color: var(--text-dark);
+            transform: scale(1.1);
+        }
+
+        @keyframes modalSlide {
+            from {
+                transform: translateY(-50px);
+                opacity: 0;
+            }
+            to {
+                transform: translateY(0);
+                opacity: 1;
+            }
+        }
+
+        /* Scroll to Top Button */
+        .scroll-top {
+            position: fixed;
+            bottom: 32px;
+            right: 32px;
+            width: 56px;
+            height: 56px;
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 1.5rem;
+            cursor: pointer;
+            opacity: 0;
+            transform: translateY(20px);
+            transition: var(--transition);
+            z-index: 1000;
+            box-shadow: var(--shadow-color);
+        }
+
+        .scroll-top.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .scroll-top:hover {
+            transform: scale(1.1);
+            box-shadow: 0 30px 80px rgba(99, 102, 241, 0.4);
+        }
+
+        /* --- RESPONSIVE STYLES --- */
+        @media (max-width: 1024px) {
+            #quem-sou-eu .container {
+                grid-template-columns: 1fr;
+                gap: 60px;
+            }
+
+            .visual-content {
+                order: -1;
+            }
+        }
+
+        @media (max-width: 768px) {
+            section {
+                padding: 80px 0;
+            }
+
+            h2 {
+                margin-bottom: 60px;
+            }
+
+            .nav-links {
+                position: fixed;
+                top: 80px;
+                left: -100%;
+                width: 100%;
+                height: calc(100vh - 80px);
+                background: rgba(255, 255, 255, 0.98);
+                backdrop-filter: blur(20px);
+                flex-direction: column;
+                align-items: center;
+                justify-content: center;
+                gap: 32px;
+                transition: left 0.3s ease;
+            }
+
+            .nav-links.active {
+                left: 0;
+            }
+
+            .hamburger {
+                display: flex;
+            }
+
+            .hamburger.active .bar1 {
+                transform: rotate(-45deg) translate(-7px, 6px);
+            }
+
+            .hamburger.active .bar2 {
+                opacity: 0;
+            }
+
+            .hamburger.active .bar3 {
+                transform: rotate(45deg) translate(-7px, -6px);
+            }
+
+            .hero-stats {
+                grid-template-columns: repeat(2, 1fr);
+                gap: 32px;
+            }
+
+            .timeline::after {
+                left: 30px;
+            }
+
+            .timeline-item {
+                width: 100%;
+                padding-left: 70px;
+                padding-right: 20px;
+            }
+
+            .timeline-item.left,
+            .timeline-item.right {
+                left: 0%;
+            }
+
+            .timeline-item::after {
+                left: 20px;
+            }
+
+            .aventuras-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .hero-buttons {
+                flex-direction: column;
+            }
+
+            .btn {
+                width: 100%;
+                justify-content: center;
+            }
+        }
+
+        /* Custom Scrollbar */
+        ::-webkit-scrollbar {
+            width: 10px;
+        }
+
+        ::-webkit-scrollbar-track {
+            background: rgba(0, 0, 0, 0.05);
+        }
+
+        ::-webkit-scrollbar-thumb {
+            background: linear-gradient(180deg, var(--primary), var(--secondary));
+            border-radius: 5px;
+        }
+
+        ::-webkit-scrollbar-thumb:hover {
+            background: var(--primary-dark);
+        }
+
+        /* Selection Style */
+        ::selection {
+            background: var(--primary);
+            color: white;
+        }
+    </style>
+</head>
+
+<body>
+
+    <!-- Scroll to Top Button -->
+    <div class="scroll-top" id="scrollTop">
+        <i class="fas fa-arrow-up"></i>
+    </div>
+
+    <header id="main-nav">
+        <div class="container">
+            <a href="#home" class="logo">F.B.B.</a>
+            <nav>
+                <ul class="nav-links">
+                    <li><a href="#quem-sou-eu">Quem Sou Eu</a></li>
+                    <li><a href="#coach">Meu Lado Coach</a></li>
+                    <li><a href="#aventuras">Aventuras</a></li>
+                    <li><a href="#jornada">Jornada</a></li>
+                    <li><a href="#contato">Conecte-se</a></li>
+                </ul>
+            </nav>
+            <div class="hamburger">
+                <div class="bar1"></div>
+                <div class="bar2"></div>
+                <div class="bar3"></div>
+            </div>
+        </div>
+        <div id="progress-bar"></div>
+    </header>
+
+    <main>
+
+        <!-- HOME SECTION -->
+        <section id="home">
+            <div class="hero-shapes">
+                <div class="shape"></div>
+                <div class="shape"></div>
+                <div class="shape"></div>
+            </div>
+            
+            <div class="container home-content">
+                <div class="hero-badge">
+                    <i class="fas fa-bolt"></i>
+                    <span>Inovação · Tecnologia · Transformação</span>
+                </div>
+                
+                <div class="profile-container">
+                    <div class="profile-ring"></div>
+                    <img src="./fernando.jpeg" alt="Fernando Brisola Batista" class="profile-image">
+                </div>
+                
+                <h1>Fernando Brisola Batista</h1>
+                <p class="subtitle">Onde a <span class="gradient-text">Tecnologia e a Inovação</span> viram uma grande Diversão!</p>
+                <p>Engenheiro, empreendedor e tech guru que transforma ideias complexas em soluções incríveis. Mais de 25 anos criando o futuro, uma linha de código por vez.</p>
+                
+                <div class="hero-buttons">
+                    <a href="#aventuras" class="btn btn-primary">
+                        Conheça Minhas Aventuras
+                        <i class="fas fa-arrow-right"></i>
+                    </a>
+                    <a href="#contato" class="btn btn-secondary">
+                        Vamos Conversar
+                        <i class="fas fa-comment"></i>
+                    </a>
+                </div>
+
+                <div class="hero-stats">
+                    <div class="stat-item">
+                        <div class="stat-number">25+</div>
+                        <div class="stat-label">Anos de Tecnologia</div>
+                    </div>
+                    <div class="stat-item">
+                        <div class="stat-number">1000+</div>
+                        <div class="stat-label">Horas de Palestras</div>
+                    </div>
+                    <div class="stat-item">
+                        <div class="stat-number">10+</div>
+                        <div class="stat-label">Projetos Inovadores</div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="scroll-indicator">
+                <i class="fas fa-chevron-down"></i>
+            </div>
+        </section>
+
+        <!-- QUEM SOU EU SECTION -->
+        <section id="quem-sou-eu">
+            <div class="container fade-in">
+                <div class="text-content">
+                    <h2>Desvendando o Fernando!</h2>
+                    <p>Pensa em alguém que respira inovação, fica pilhado com um bom desafio e acredita que a vida é uma
+                        grande aventura a ser explorada. Sou formado em Engenharia Eletrônica pelo ITA e tenho um MBA
+                        pelo Insper (pra botar ordem na casa, ou melhor, nos projetos!).</p>
+                    <p>Já tive a honra de dar mais de 1000 horas de palestras e cursos sobre empreendedorismo, marketing
+                        e vendas. Se você me conhece, sabe que sou ligado no 220! Um engenheiro que virou
+                        gente (e coach!), um marketeiro que pensa fora da caixa e um tech guru que ama pessoas.</p>
+                </div>
+                <div class="visual-content">
+                    <h3>Meus Superpoderes</h3>
+                    <div class="superpower">
+                        <i class="fa-solid fa-rocket"></i>
+                        <div>
+                            <strong>Engenharia (ITA)</strong>
+                            A base para transformar ideias complexas em realidade.
+                        </div>
+                    </div>
+                    <div class="superpower">
+                        <i class="fa-solid fa-chart-line"></i>
+                        <div>
+                            <strong>MBA (Insper)</strong>
+                            A estratégia para fazer os projetos decolarem.
+                        </div>
+                    </div>
+                    <div class="superpower">
+                        <i class="fa-solid fa-microphone-lines"></i>
+                        <div>
+                            <strong>+1000h de Palestras</strong>
+                            Espalhando conhecimento e boas vibrações!
+                        </div>
+                    </div>
+                    <div class="superpower">
+                        <i class="fa-solid fa-database"></i>
+                        <div>
+                            <strong>+25 anos de Tecnologia</strong>
+                            Desenvolvimento desde ferramentas simples até aplicações de missão crítica e IA.
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- COACH SECTION -->
+        <section id="coach">
+            <div class="container fade-in">
+                <h2>Sua Vida em Modo Turbo!</h2>
+                <p>Também sou Coach Integral Sistêmico pela FEBRACIS, a maior instituição de coaching do planeta!
+                    Minha missão é ajudar as pessoas a dar um UP na vida, seja nos negócios, nos relacionamentos ou naquela meta
+                    que parece impossível. Com uma metodologia que mistura neurociência, PNL e inteligência emocional, a
+                    gente vai alinhar seu propósito de vida com seus objetivos e fazer as coisas acontecerem.</p>
+                <div class="testimonials">
+                    <div class="testimonial">
+                        <p>"O Fernando tem uma energia incrível! Ele me ajudou a ver meus projetos com outros olhos e a
+                            agir."</p>
+                        <strong>G.S. - Empreendedor Satisfeito</strong>
+                    </div>
+                    <div class="testimonial">
+                        <p>"As sessões de coaching foram um divisor de águas na minha carreira. Recomendo de olhos
+                            fechados!"</p>
+                        <strong>B.M. - Profissional Realizada</strong>
+                    </div>
+                </div>
+                <a href="#contato" class="btn btn-primary">Vem comigo que o sucesso é contagiante!</a>
+            </div>
+        </section>
+
+        <!-- AVENTURAS SECTION -->
+        <section id="aventuras">
+            <div class="container fade-in">
+                <h2>Onde a Criatividade Ganha Asas!</h2>
+                <p>Apaixonado por criar, inovar e ver ideias saindo do papel. Sou um eterno explorador de oportunidades. Clique nos cards para conhecer algumas das minhas ideias transformadas em projetos de sucesso:</p>
+                <div class="aventuras-grid">
+                    <!-- Cards will be populated by JavaScript -->
+                </div>
+            </div>
+        </section>
+
+        <!-- JORNADA SECTION -->
+        <section id="jornada">
+            <div class="container fade-in">
+                <h2>O Roteiro da Inovação!</h2>
+                <div class="timeline">
+                    <!-- Timeline will be populated by JavaScript -->
+                </div>
+            </div>
+        </section>
+
+        <!-- CONTATO SECTION -->
+        <section id="contato">
+            <div class="container fade-in">
+                <h2>Bora Bater um Papo?</h2>
+                <p>Gosto de um bom papo, de trocar ideias e fazer networking! Se você se identificou com alguma das
+                    minhas aventuras ou quer bater um papo sobre tecnologia, empreendedorismo ou coaching, me manda uma
+                    mensagem!</p>
+                <form id="contato-form" action="#" method="POST">
+                    <div class="form-group">
+                        <input type="text" name="name" placeholder="Seu nome" required>
+                    </div>
+                    <div class="form-group">
+                        <input type="email" name="email" placeholder="Seu melhor email" required>
+                    </div>
+                    <div class="form-group">
+                        <textarea name="message" rows="5" placeholder="Sua mensagem para o maluco aqui!"
+                            required></textarea>
+                    </div>
+                    <button type="submit" class="btn btn-primary">
+                        Mande sua mensagem e vamos transformar o mundo!
+                        <i class="fas fa-paper-plane"></i>
+                    </button>
+                </form>
+                <div class="social-links">
+                    <a href="https://www.linkedin.com/in/fbrisola/" target="_blank" aria-label="LinkedIn"><i class="fab fa-linkedin"></i></a>
+                    <a href="https://github.com/fbrisola/" target="_blank" aria-label="GitHub"><i class="fab fa-github"></i></a>
+                    <a href="https://www.instagram.com/fernandobrisolabatista/" target="_blank" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
+                    <a href="mailto:fbrisola@gmail.com" aria-label="Email"><i class="fas fa-envelope"></i></a>
+                </div>
+            </div>
+        </section>
+
+    </main>
+
+    <footer>
+        <div class="container">
+            <p>&copy; 2024 Fernando Brisola Batista. Criado com tecnologia, coração e boa vibe.</p>
+        </div>
+    </footer>
+
+    <!-- MODAL STRUCTURE -->
+    <div id="aventuraModal" class="modal">
+        <div class="modal-content">
+            <span class="close-btn">&times;</span>
+            <div id="modalBody"></div>
+        </div>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+
+            // --- SCROLL TO TOP FUNCTIONALITY ---
+            const scrollTopBtn = document.getElementById('scrollTop');
+            
+            window.addEventListener('scroll', () => {
+                if (window.pageYOffset > 300) {
+                    scrollTopBtn.classList.add('visible');
+                } else {
+                    scrollTopBtn.classList.remove('visible');
+                }
+
+                // Nav background on scroll
+                const nav = document.getElementById('main-nav');
+                if (window.pageYOffset > 50) {
+                    nav.classList.add('scrolled');
+                } else {
+                    nav.classList.remove('scrolled');
+                }
+            });
+
+            scrollTopBtn.addEventListener('click', () => {
+                window.scrollTo({
+                    top: 0,
+                    behavior: 'smooth'
+                });
+            });
+
+            // --- DATA ---
+            const aventuras = [
+                { id: 'fbb', icon: 'fa-pills', title: 'FBB Solution', subtitle: 'O Farmacêutico Descolado que Aumenta Suas Vendas!', content: 'Em 2018, fundei a FBB Solution, uma empresa que revolucionou o jeito de fazer negócios na indústria farmacêutica. Sabe aqueles consultores que realmente entendem do assunto? Somos nós! Com o diretor comercial mais experiente do mercado, com mais de 50 anos de experiência em vendas no setor, a gente ajudou empresas a <strong>turbinar suas vendas</strong>, <strong>reduzir custos fixos</strong> e <strong>maximizar a demanda</strong>. De dermatologia a oncologia, passando por saúde da mulher e sistemas respiratórios, a FBB foi sucesso! Nosso super diretor comercial se aposentou e agora a FBB Solution está em uma nova fase de inovação e impacto!' },
+                { id: 'maturi', icon: 'fa-user-graduate', title: 'Maturi', subtitle: 'A Revolução da Longevidade no Trabalho!', content: 'Já pensou em como a experiência de vida pode ser um superpoder no mercado de trabalho? A Maturi está provando isso! De 2015 a 2019, estive envolvido com a MaturiJobs, onde criei e ministrei o <strong>Curso de Empreendedorismo "Startup 50+"</strong>, mostrando que a idade é só um número quando se tem motivação, conhecimento e vontade de realizar! A Maturi ajuda empresas a abraçarem a diversidade de idade e a encontrarem os melhores profissionais 50+. Porque a vida começa aos 50... e continua com tudo!' },
+                { id: 'dentalsmart', icon: 'fa-tooth', title: 'DentalSmart', subtitle: 'Sorrisos Perfeitos, Gestão Sem Estresse!', content: 'Quem disse que gerenciar uma clínica odontológica precisa ser complicado? Com a DentalSmart, a gente ajuda os dentistas a focarem no que realmente importa: o sorriso dos seus pacientes! É uma <strong>plataforma super intuitiva</strong> que organiza sua agenda ilimitada (chega de papel!), cadastro de pacientes, documentos,  anamneses inteligentes e muito mais. Quer fazer orçamentos digitais e ter o histórico clínico na palma da mão? A gente tem! E o melhor: tem plano pra todo mundo, do Essencial ao Premium, para deixar a sua clínica brilhando e seus pacientes felizes!' },
+                { id: 'farmgate', icon: 'fa-tractor', title: 'FarmGate', subtitle: 'Descomplicando o Algodão com Tecnologia!', content: 'Já imaginou um mercado de algodão mais fácil e seguro? Eu desenvolvi a FarmGate pra isso! É uma plataforma super moderna que <strong>conecta produtores, indústrias, traders e corretores de um jeito que todo mundo ganha</strong>. Menos burocracia, mais transparência, mais segurança, mais rapidez e zero dor de cabeça. A gente garante que o algodão chegue do campo à indústria de forma descomplicada, segura e eficiente. Chega de "rolo" com o algodão!' },
+                { id: 'logos', icon: 'fa-magic-wand-sparkles', title: 'Agência Logos', subtitle: 'Serviços de Marketing Digital Turbinado por IA!', content: 'No mundo digital de hoje, ter uma presença online incrível não é mais luxo, é necessidade! Na Agência Logos, a gente transforma seus desafios online em oportunidades de ouro. Seu site tá com teia de aranha? Ninguém te encontra no Google? Suas redes sociais estão no modo "fantasma"? A gente resolve! Combinamos a expertise humana com a inteligência artificial para criar estratégias personalizadas que realmente <strong>alavancam suas vendas</strong> e <strong>automatizam seu crescimento</strong>. Otimização de IA para negócios, chatbots inteligentes, criação de conteúdo super personalizado, e muito mais. Prepare-se para ver seu ROI decolar!' },
+                { id: 'mydna', icon: 'fa-dna', title: 'MyDNA', subtitle: 'Conectando Propósito, Alavancando Empresas com IA!', content: 'Sou CTO e CMO na MyDNA, um ecossistema de RH que está mudando o jogo na América Latina desde 2016. Nossa missão é simples, mas poderosa: ajudar pessoas a encontrarem seu propósito de vida na carreira e empresas a crescerem desenvolvendo seus colaboradores. Com a ajuda da <strong>tecnologia e da IA</strong>, a gente faz a ponte perfeita entre talentos e empresas, acompanhando toda a jornada profissional. Já impactamos milhões de pessoas e milhares de empresas! Venha descobrir seu DNA profissional!' },
+            ];
+
+            const jornada = [
+                { side: 'left', company: 'P&G (1994-2000)', quote: 'Onde eu relancei a linha Pantene e virei o expert do shampoo!' },
+                { side: 'right', company: 'Microsoft (2000-2001)', quote: 'Mergulhei no mundo do CRM e das ferramentas para a Microsoft Brasil.' },
+                { side: 'left', company: 'BM&FBOVESPA (2006-2015)', quote: 'Uma maratona de aprendizado no mercado de capitais!' },
+                { side: 'right', company: 'Universo das Startups (2015-2019)', quote: 'Empreendedor, Mentor e CTO de várias startups, e mais aquele empurrãozinho para os empreendedores 50+.' },
+                { side: 'left', company: 'Banco Safra (2019-2021)', quote: 'Liderei a criação do banco digital AgZero do zero. Uma aventura!' },
+                { side: 'right', company: 'MyDNA (2022-presente)', quote: 'CTO e CMO, conectando propósito e carreira com inteligência artificial.' },
+            ];
+
+            // --- POPULATE DYNAMIC CONTENT ---
+            const aventurasGrid = document.querySelector('.aventuras-grid');
+            aventuras.forEach(aventura => {
+                const card = document.createElement('div');
+                card.className = 'aventura-card';
+                card.dataset.id = aventura.id;
+                card.innerHTML = `
+                <i class="fas ${aventura.icon}"></i>
+                <h3>${aventura.title}</h3>
+                <p>${aventura.subtitle}</p>
+            `;
+                aventurasGrid.appendChild(card);
+            });
+
+            const timelineContainer = document.querySelector('.timeline');
+            jornada.forEach(item => {
+                const timelineItem = document.createElement('div');
+                timelineItem.className = `timeline-item ${item.side}`;
+                timelineItem.innerHTML = `
+                <div class="timeline-content">
+                    <h3>${item.company}</h3>
+                    <p>"${item.quote}"</p>
+                </div>
+            `;
+                timelineContainer.appendChild(timelineItem);
+            });
+
+            // --- INTERACTIVITY ---
+            // Hamburger Menu
+            const hamburger = document.querySelector('.hamburger');
+            const navLinks = document.querySelector('.nav-links');
+            hamburger.addEventListener('click', () => {
+                hamburger.classList.toggle('active');
+                navLinks.classList.toggle('active');
+            });
+            navLinks.addEventListener('click', () => {
+                hamburger.classList.remove('active');
+                navLinks.classList.remove('active');
+            });
+
+            // Modal Logic
+            const modal = document.getElementById('aventuraModal');
+            const modalBody = document.getElementById('modalBody');
+            const closeBtn = document.querySelector('.close-btn');
+            aventurasGrid.addEventListener('click', e => {
+                const card = e.target.closest('.aventura-card');
+                if (card) {
+                    const aventuraData = aventuras.find(a => a.id === card.dataset.id);
+                    modalBody.innerHTML = `
+                    <h3>${aventuraData.title}</h3>
+                    <p>${aventuraData.content}</p>
+                `;
+                    modal.style.display = 'block';
+                }
+            });
+            closeBtn.onclick = () => modal.style.display = 'none';
+            window.onclick = e => {
+                if (e.target == modal) {
+                    modal.style.display = 'none';
+                }
+            };
+
+            // Fade-in on Scroll
+            const faders = document.querySelectorAll('.fade-in');
+            const appearOptions = { threshold: 0.1, rootMargin: "0px 0px -50px 0px" };
+            const appearOnScroll = new IntersectionObserver(function (entries, observer) {
+                entries.forEach(entry => {
+                    if (!entry.isIntersecting) return;
+                    entry.target.classList.add('visible');
+                    observer.unobserve(entry.target);
+                });
+            }, appearOptions);
+            faders.forEach(fader => appearOnScroll.observe(fader));
+
+            // Progress Bar on Scroll
+            const progressBar = document.getElementById('progress-bar');
+            window.addEventListener('scroll', () => {
+                const scrollTop = document.documentElement.scrollTop;
+                const scrollHeight = document.documentElement.scrollHeight - document.documentElement.clientHeight;
+                const scrolled = (scrollTop / scrollHeight) * 100;
+                progressBar.style.width = scrolled + '%';
+            });
+
+            // Active Nav Link on Scroll
+            const sections = document.querySelectorAll('section');
+            const navLi = document.querySelectorAll('.nav-links li a');
+            window.addEventListener('scroll', () => {
+                let current = '';
+                sections.forEach(section => {
+                    const sectionTop = section.offsetTop;
+                    if (pageYOffset >= sectionTop - 80) {
+                        current = section.getAttribute('id');
+                    }
+                });
+
+                navLi.forEach(a => {
+                    a.classList.remove('active');
+                    if (a.getAttribute('href').substring(1) === current) {
+                        a.classList.add('active');
+                    }
+                });
+            });
+        });
+    </script>
+</body>
+
+</html>
