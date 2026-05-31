@@ -20,6 +20,7 @@ jobs:
           SSH_PRIVATE_KEY: ${{ secrets.SSH_PRIVATE_KEY_DEPLOY }}
           REMOTE_HOST: ${{ secrets.SSH_HOST }}
           REMOTE_USER: ${{ secrets.SSH_USERNAME }}
+          REMOTE_PORT: "22022"
           SOURCE: ./
           TARGET: ${{ secrets.SSH_TARGET }}
           # Sobrescreve arquivos enviados, mas não apaga o que existe só no servidor (sem --delete)
