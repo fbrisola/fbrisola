@@ -1,0 +1,1145 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Mentoria IA — Agentes e Orquestração com Fernando</title>
+<link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=JetBrains+Mono:wght@400;500;700&family=Instrument+Sans:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg: #0a0a08;
+    --surface: #111110;
+    --surface2: #1a1a18;
+    --border: #2a2a26;
+    --accent: #c8f060;
+    --accent2: #f0a040;
+    --text: #e8e8e0;
+    --muted: #888880;
+    --danger: #ff6b4a;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    background: var(--bg);
+    color: var(--text);
+    font-family: 'Instrument Sans', sans-serif;
+    line-height: 1.6;
+    overflow-x: hidden;
+  }
+
+  /* NOISE TEXTURE */
+  body::before {
+    content: '';
+    position: fixed;
+    inset: 0;
+    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.04'/%3E%3C/svg%3E");
+    pointer-events: none;
+    z-index: 1000;
+    opacity: 0.6;
+  }
+
+  /* GRID BACKGROUND */
+  .grid-bg {
+    position: fixed;
+    inset: 0;
+    background-image: 
+      linear-gradient(var(--border) 1px, transparent 1px),
+      linear-gradient(90deg, var(--border) 1px, transparent 1px);
+    background-size: 60px 60px;
+    opacity: 0.3;
+    pointer-events: none;
+  }
+
+  /* NAV */
+  nav {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    z-index: 100;
+    padding: 20px 40px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-bottom: 1px solid var(--border);
+    background: rgba(10,10,8,0.85);
+    backdrop-filter: blur(12px);
+  }
+
+  .nav-logo {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 13px;
+    color: var(--accent);
+    letter-spacing: 0.05em;
+  }
+
+  .nav-logo span { color: var(--muted); }
+
+  .nav-cta {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 12px;
+    color: var(--bg);
+    background: var(--accent);
+    padding: 10px 20px;
+    text-decoration: none;
+    letter-spacing: 0.05em;
+    font-weight: 700;
+    transition: all 0.2s;
+  }
+
+  .nav-cta:hover { background: #d4f870; transform: translateY(-1px); }
+
+  /* HERO */
+  .hero {
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    padding: 140px 40px 80px;
+    max-width: 1100px;
+    margin: 0 auto;
+    position: relative;
+  }
+
+  .hero-tag {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 11px;
+    color: var(--accent);
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    margin-bottom: 32px;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    opacity: 0;
+    animation: fadeUp 0.8s 0.2s forwards;
+  }
+
+  .hero-tag::before {
+    content: '';
+    width: 32px;
+    height: 1px;
+    background: var(--accent);
+  }
+
+  .hero h1 {
+    font-family: 'DM Serif Display', serif;
+    font-size: clamp(52px, 8vw, 96px);
+    line-height: 1.0;
+    letter-spacing: -0.02em;
+    margin-bottom: 16px;
+    opacity: 0;
+    animation: fadeUp 0.8s 0.4s forwards;
+  }
+
+  .hero h1 em {
+    font-style: italic;
+    color: var(--accent);
+  }
+
+  .hero-sub {
+    font-family: 'DM Serif Display', serif;
+    font-size: clamp(28px, 4vw, 48px);
+    color: var(--muted);
+    line-height: 1.1;
+    margin-bottom: 48px;
+    opacity: 0;
+    animation: fadeUp 0.8s 0.6s forwards;
+  }
+
+  .hero-desc {
+    font-size: 18px;
+    color: var(--muted);
+    max-width: 560px;
+    line-height: 1.7;
+    margin-bottom: 56px;
+    opacity: 0;
+    animation: fadeUp 0.8s 0.8s forwards;
+  }
+
+  .hero-desc strong { color: var(--text); font-weight: 600; }
+
+  .hero-actions {
+    display: flex;
+    gap: 16px;
+    align-items: center;
+    flex-wrap: wrap;
+    opacity: 0;
+    animation: fadeUp 0.8s 1.0s forwards;
+  }
+
+  .btn-primary {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 13px;
+    font-weight: 700;
+    color: var(--bg);
+    background: var(--accent);
+    padding: 18px 36px;
+    text-decoration: none;
+    letter-spacing: 0.05em;
+    transition: all 0.2s;
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+  }
+
+  .btn-primary:hover { background: #d4f870; transform: translateY(-2px); box-shadow: 0 8px 32px rgba(200,240,96,0.25); }
+
+  .btn-secondary {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 12px;
+    color: var(--muted);
+    text-decoration: none;
+    letter-spacing: 0.05em;
+    padding: 18px 0;
+    border-bottom: 1px solid var(--border);
+    transition: all 0.2s;
+  }
+
+  .btn-secondary:hover { color: var(--text); border-color: var(--text); }
+
+  /* STATS BAR */
+  .stats-bar {
+    border-top: 1px solid var(--border);
+    border-bottom: 1px solid var(--border);
+    padding: 32px 40px;
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    max-width: 1100px;
+    margin: 0 auto;
+    gap: 0;
+  }
+
+  .stat {
+    padding: 0 40px;
+    border-right: 1px solid var(--border);
+  }
+
+  .stat:first-child { padding-left: 0; }
+  .stat:last-child { border-right: none; }
+
+  .stat-num {
+    font-family: 'DM Serif Display', serif;
+    font-size: 42px;
+    color: var(--accent);
+    line-height: 1;
+    margin-bottom: 8px;
+  }
+
+  .stat-label {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 11px;
+    color: var(--muted);
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+  }
+
+  /* SECTIONS */
+  section {
+    max-width: 1100px;
+    margin: 0 auto;
+    padding: 100px 40px;
+  }
+
+  .section-tag {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 11px;
+    color: var(--accent);
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    margin-bottom: 24px;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+  }
+
+  .section-tag::before {
+    content: '';
+    width: 20px;
+    height: 1px;
+    background: var(--accent);
+  }
+
+  .section-title {
+    font-family: 'DM Serif Display', serif;
+    font-size: clamp(36px, 5vw, 56px);
+    line-height: 1.1;
+    margin-bottom: 24px;
+  }
+
+  .section-title em { font-style: italic; color: var(--accent); }
+
+  /* MANIFESTO */
+  .manifesto {
+    border-top: 1px solid var(--border);
+    padding-top: 100px;
+  }
+
+  .manifesto-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 80px;
+    align-items: start;
+    margin-top: 60px;
+  }
+
+  .manifesto-text {
+    font-size: 20px;
+    color: var(--muted);
+    line-height: 1.8;
+  }
+
+  .manifesto-text strong { color: var(--text); font-weight: 600; }
+
+  .manifesto-text p + p { margin-top: 24px; }
+
+  .manifesto-quote {
+    border-left: 2px solid var(--accent);
+    padding: 32px 40px;
+    background: var(--surface);
+  }
+
+  .manifesto-quote blockquote {
+    font-family: 'DM Serif Display', serif;
+    font-size: 28px;
+    font-style: italic;
+    line-height: 1.4;
+    color: var(--text);
+    margin-bottom: 24px;
+  }
+
+  .manifesto-quote cite {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 12px;
+    color: var(--accent);
+    letter-spacing: 0.08em;
+    font-style: normal;
+  }
+
+  /* FOR WHO */
+  .forwhom {
+    border-top: 1px solid var(--border);
+  }
+
+  .forwhom-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 2px;
+    margin-top: 60px;
+  }
+
+  .forwhom-card {
+    background: var(--surface);
+    padding: 40px;
+    position: relative;
+    overflow: hidden;
+    transition: background 0.3s;
+  }
+
+  .forwhom-card:hover { background: var(--surface2); }
+
+  .forwhom-card::before {
+    content: attr(data-icon);
+    position: absolute;
+    top: 24px;
+    right: 24px;
+    font-size: 32px;
+    opacity: 0.4;
+  }
+
+  .forwhom-card h3 {
+    font-family: 'DM Serif Display', serif;
+    font-size: 22px;
+    margin-bottom: 12px;
+  }
+
+  .forwhom-card p {
+    font-size: 15px;
+    color: var(--muted);
+    line-height: 1.6;
+  }
+
+  /* NOT FOR */
+  .notfor {
+    background: var(--surface);
+    padding: 32px 40px;
+    border-left: 2px solid var(--danger);
+    margin-top: 32px;
+    display: flex;
+    gap: 20px;
+    align-items: flex-start;
+  }
+
+  .notfor-icon {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 11px;
+    color: var(--danger);
+    letter-spacing: 0.1em;
+    white-space: nowrap;
+    padding-top: 2px;
+  }
+
+  .notfor p {
+    font-size: 15px;
+    color: var(--muted);
+    line-height: 1.6;
+  }
+
+  .notfor strong { color: var(--text); }
+
+  /* CURRICULUM */
+  .curriculum {
+    border-top: 1px solid var(--border);
+  }
+
+  .curriculum-list {
+    margin-top: 60px;
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+  }
+
+  .session {
+    display: grid;
+    grid-template-columns: 80px 1fr auto;
+    gap: 0;
+    background: var(--surface);
+    cursor: default;
+    transition: background 0.2s;
+    overflow: hidden;
+  }
+
+  .session:hover { background: var(--surface2); }
+
+  .session-num {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 13px;
+    color: var(--accent);
+    padding: 32px;
+    border-right: 1px solid var(--border);
+    display: flex;
+    align-items: flex-start;
+    font-weight: 700;
+  }
+
+  .session-body {
+    padding: 32px 40px;
+  }
+
+  .session-title {
+    font-family: 'DM Serif Display', serif;
+    font-size: 22px;
+    margin-bottom: 10px;
+  }
+
+  .session-desc {
+    font-size: 15px;
+    color: var(--muted);
+    line-height: 1.6;
+  }
+
+  .session-deliverable {
+    padding: 32px;
+    display: flex;
+    align-items: flex-start;
+    min-width: 220px;
+  }
+
+  .deliverable-tag {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 11px;
+    color: var(--accent);
+    background: rgba(200,240,96,0.08);
+    border: 1px solid rgba(200,240,96,0.2);
+    padding: 6px 12px;
+    letter-spacing: 0.06em;
+    white-space: nowrap;
+  }
+
+  /* MENTOR */
+  .mentor {
+    border-top: 1px solid var(--border);
+  }
+
+  .mentor-grid {
+    display: grid;
+    grid-template-columns: 1fr 1.4fr;
+    gap: 80px;
+    align-items: start;
+    margin-top: 60px;
+  }
+
+  .mentor-card {
+    background: var(--surface);
+    padding: 48px;
+    position: relative;
+  }
+
+  .mentor-initial {
+    width: 80px;
+    height: 80px;
+    background: var(--accent);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-family: 'DM Serif Display', serif;
+    font-size: 36px;
+    color: var(--bg);
+    margin-bottom: 32px;
+  }
+
+  .mentor-name {
+    font-family: 'DM Serif Display', serif;
+    font-size: 32px;
+    margin-bottom: 8px;
+  }
+
+  .mentor-role {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 12px;
+    color: var(--accent);
+    letter-spacing: 0.08em;
+    margin-bottom: 32px;
+  }
+
+  .mentor-badges {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+  }
+
+  .badge {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 12px;
+    color: var(--muted);
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
+
+  .badge::before {
+    content: '→';
+    color: var(--accent);
+  }
+
+  .mentor-story {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+  }
+
+  .mentor-story p {
+    font-size: 17px;
+    color: var(--muted);
+    line-height: 1.8;
+  }
+
+  .mentor-story p strong { color: var(--text); font-weight: 600; }
+
+  .mentor-highlight {
+    background: var(--surface);
+    border-left: 2px solid var(--accent2);
+    padding: 24px 32px;
+    font-family: 'DM Serif Display', serif;
+    font-size: 22px;
+    font-style: italic;
+    color: var(--text);
+    line-height: 1.4;
+  }
+
+  /* FORMAT */
+  .format {
+    border-top: 1px solid var(--border);
+  }
+
+  .format-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 2px;
+    margin-top: 60px;
+  }
+
+  .format-item {
+    background: var(--surface);
+    padding: 40px;
+  }
+
+  .format-icon {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 11px;
+    color: var(--accent);
+    letter-spacing: 0.1em;
+    margin-bottom: 16px;
+  }
+
+  .format-item h3 {
+    font-family: 'DM Serif Display', serif;
+    font-size: 24px;
+    margin-bottom: 12px;
+  }
+
+  .format-item p {
+    font-size: 15px;
+    color: var(--muted);
+    line-height: 1.6;
+  }
+
+  /* PRICING */
+  .pricing {
+    border-top: 1px solid var(--border);
+  }
+
+  .pricing-card {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    margin-top: 60px;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    overflow: hidden;
+  }
+
+  .pricing-left {
+    padding: 60px;
+    border-right: 1px solid var(--border);
+  }
+
+  .pricing-amount {
+    font-family: 'DM Serif Display', serif;
+    font-size: 72px;
+    color: var(--accent);
+    line-height: 1;
+    margin-bottom: 8px;
+  }
+
+  .pricing-period {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 13px;
+    color: var(--muted);
+    letter-spacing: 0.06em;
+    margin-bottom: 40px;
+  }
+
+  .pricing-includes {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+  }
+
+  .pricing-item {
+    font-size: 15px;
+    color: var(--muted);
+    display: flex;
+    align-items: center;
+    gap: 12px;
+  }
+
+  .pricing-item::before {
+    content: '✓';
+    color: var(--accent);
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 13px;
+    font-weight: 700;
+  }
+
+  .pricing-right {
+    padding: 60px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+  }
+
+  .urgency-block {
+    margin-bottom: 40px;
+  }
+
+  .urgency-title {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 11px;
+    color: var(--accent2);
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    margin-bottom: 16px;
+  }
+
+  .urgency-text {
+    font-family: 'DM Serif Display', serif;
+    font-size: 28px;
+    line-height: 1.3;
+    margin-bottom: 16px;
+  }
+
+  .urgency-sub {
+    font-size: 15px;
+    color: var(--muted);
+    line-height: 1.6;
+  }
+
+  .spots-bar {
+    margin-bottom: 40px;
+  }
+
+  .spots-label {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 11px;
+    color: var(--muted);
+    letter-spacing: 0.08em;
+    margin-bottom: 10px;
+    display: flex;
+    justify-content: space-between;
+  }
+
+  .spots-track {
+    height: 4px;
+    background: var(--border);
+    position: relative;
+  }
+
+  .spots-fill {
+    position: absolute;
+    left: 0;
+    top: 0;
+    height: 100%;
+    width: 25%;
+    background: var(--accent);
+  }
+
+  .btn-cta {
+    display: block;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 14px;
+    font-weight: 700;
+    color: var(--bg);
+    background: var(--accent);
+    padding: 22px 36px;
+    text-decoration: none;
+    letter-spacing: 0.06em;
+    text-align: center;
+    transition: all 0.2s;
+  }
+
+  .btn-cta:hover { background: #d4f870; transform: translateY(-2px); box-shadow: 0 8px 32px rgba(200,240,96,0.3); }
+
+  .btn-note {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 11px;
+    color: var(--muted);
+    text-align: center;
+    margin-top: 12px;
+    letter-spacing: 0.05em;
+  }
+
+  /* FOOTER CTA */
+  .footer-cta {
+    border-top: 1px solid var(--border);
+    padding: 100px 40px;
+    text-align: center;
+    max-width: 1100px;
+    margin: 0 auto;
+  }
+
+  .footer-cta h2 {
+    font-family: 'DM Serif Display', serif;
+    font-size: clamp(40px, 6vw, 72px);
+    line-height: 1.1;
+    margin-bottom: 24px;
+  }
+
+  .footer-cta h2 em { font-style: italic; color: var(--accent); }
+
+  .footer-cta p {
+    font-size: 18px;
+    color: var(--muted);
+    max-width: 500px;
+    margin: 0 auto 48px;
+    line-height: 1.7;
+  }
+
+  footer {
+    border-top: 1px solid var(--border);
+    padding: 32px 40px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    max-width: 1100px;
+    margin: 0 auto;
+  }
+
+  footer p {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 12px;
+    color: var(--muted);
+    letter-spacing: 0.05em;
+  }
+
+  /* ANIMATIONS */
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(24px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+
+  .reveal {
+    opacity: 0;
+    transform: translateY(20px);
+    transition: opacity 0.7s ease, transform 0.7s ease;
+  }
+
+  .reveal.visible {
+    opacity: 1;
+    transform: translateY(0);
+  }
+
+  /* TERMINAL BLINK */
+  .blink {
+    animation: blink 1.2s step-end infinite;
+  }
+
+  @keyframes blink {
+    0%, 100% { opacity: 1; }
+    50% { opacity: 0; }
+  }
+
+  /* RESPONSIVE */
+  @media (max-width: 768px) {
+    nav { padding: 16px 20px; }
+    .hero { padding: 120px 20px 60px; }
+    .stats-bar { grid-template-columns: 1fr 1fr; padding: 24px 20px; gap: 24px; }
+    .stat { padding: 0; border: none; }
+    section { padding: 60px 20px; }
+    .manifesto-grid { grid-template-columns: 1fr; gap: 40px; }
+    .forwhom-grid { grid-template-columns: 1fr; }
+    .session { grid-template-columns: 60px 1fr; }
+    .session-deliverable { display: none; }
+    .mentor-grid { grid-template-columns: 1fr; gap: 40px; }
+    .format-grid { grid-template-columns: 1fr; }
+    .pricing-card { grid-template-columns: 1fr; }
+    .pricing-left { border-right: none; border-bottom: 1px solid var(--border); }
+    footer { flex-direction: column; gap: 12px; text-align: center; }
+  }
+</style>
+</head>
+<body>
+
+<div class="grid-bg"></div>
+
+<!-- NAV -->
+<nav>
+  <div class="nav-logo">mentoria<span>/</span>IA <span>— Fernando</span></div>
+  <a href="#inscricao" class="nav-cta">Quero uma vaga →</a>
+</nav>
+
+<!-- HERO -->
+<div class="hero">
+  <div class="hero-tag">Grupo fechado · Junho 2026 · 8–12 vagas</div>
+  <h1>A IA acelera<br><em>o que você</em><br>já sabe.</h1>
+  <div class="hero-sub">Não substitui a sua experiência.</div>
+  <p class="hero-desc">
+    Mentoria prática e intensiva em <strong>agentes autônomos, orquestração e MCP</strong>. 
+    Para profissionais sênior que já têm base e querem dar o salto real.
+  </p>
+  <div class="hero-actions">
+    <a href="#inscricao" class="btn-primary">
+      Garantir minha vaga
+      <span>→</span>
+    </a>
+    <a href="#programa" class="btn-secondary">Ver o programa completo</a>
+  </div>
+</div>
+
+<!-- STATS BAR -->
+<div class="stats-bar reveal">
+  <div class="stat">
+    <div class="stat-num">5</div>
+    <div class="stat-label">Encontros ao vivo</div>
+  </div>
+  <div class="stat">
+    <div class="stat-num">2h</div>
+    <div class="stat-label">Por sessão</div>
+  </div>
+  <div class="stat">
+    <div class="stat-num">12</div>
+    <div class="stat-label">Vagas máximas</div>
+  </div>
+  <div class="stat">
+    <div class="stat-num">100%</div>
+    <div class="stat-label">Mão na massa</div>
+  </div>
+</div>
+
+<!-- MANIFESTO -->
+<section class="manifesto">
+  <div class="section-tag">Por que essa mentoria existe</div>
+  <h2 class="section-title">O mercado está cheio de<br><em>conteúdo superficial</em>.</h2>
+
+  <div class="manifesto-grid reveal">
+    <div class="manifesto-text">
+      <p>
+        Existem centenas de cursos ensinando o básico de IA. Prompts, ChatGPT, ferramentas novas toda semana. <strong>Isso não é o que muda o jogo.</strong>
+      </p>
+      <p>
+        O que muda o jogo é saber construir agentes que trabalham por você. Mas antes de qualquer técnica, existe uma pergunta mais importante: <strong>o que você quer construir? Qual problema quer resolver?</strong>
+      </p>
+      <p>
+        O <em>"o quê"</em> é seu — vem da sua experiência, do seu contexto, do problema que só você conhece de verdade. O <em>"como"</em> a IA ajuda. Essa mentoria existe para conectar essas duas coisas: a clareza do que você quer realizar com a capacidade técnica de construir agentes que realizam.
+      </p>
+    </div>
+    <div class="manifesto-quote">
+      <blockquote>
+        "A IA não expande o que você não sabe. Ela acelera o que você já sabe."
+      </blockquote>
+      <cite>— Fernando · Engenheiro ITA · Criador do Kai</cite>
+    </div>
+  </div>
+</section>
+
+<!-- FOR WHO -->
+<section class="forwhom">
+  <div class="section-tag">Para quem é</div>
+  <h2 class="section-title">Profissional sênior que<br><em>quer ir além</em> do básico.</h2>
+
+  <div class="forwhom-grid reveal">
+    <div class="forwhom-card" data-icon="⚙️">
+      <h3>Gestor ou líder técnico</h3>
+      <p>Que quer automatizar processos reais, reduzir fricção operacional e criar sistemas inteligentes sem depender de terceiros.</p>
+    </div>
+    <div class="forwhom-card" data-icon="🚀">
+      <h3>Empreendedor ou fundador</h3>
+      <p>Que enxerga IA como alavanca de negócio e quer integrar agentes autônomos no seu produto ou operação.</p>
+    </div>
+    <div class="forwhom-card" data-icon="📊">
+      <h3>Especialista de dados ou projetos</h3>
+      <p>Com base em analytics, BI ou ML que quer evoluir para construção e orquestração de agentes de IA generativa.</p>
+    </div>
+    <div class="forwhom-card" data-icon="💼">
+      <h3>Consultor ou profissional autônomo</h3>
+      <p>Que quer oferecer soluções de IA para seus clientes e precisa de profundidade técnica para entregar com segurança.</p>
+    </div>
+  </div>
+
+  <div class="notfor reveal">
+    <div class="notfor-icon">// O QUE IMPORTA</div>
+    <p>
+      Não é necessário ser desenvolvedor. O mais importante é <strong>saber o que você quer realizar</strong> — qual problema quer resolver, o que quer construir, onde a IA pode mudar o seu resultado. O <em>"o quê"</em> é seu. O <em>"como"</em>, a gente constrói junto.
+    </p>
+  </div>
+</section>
+
+<!-- CURRICULUM -->
+<section class="curriculum" id="programa">
+  <div class="section-tag">O programa</div>
+  <h2 class="section-title">Cinco encontros.<br><em>Cinco entregas concretas.</em></h2>
+
+  <div class="curriculum-list reveal">
+    <div class="session">
+      <div class="session-num">01</div>
+      <div class="session-body">
+        <div class="session-title">Fundamentos de Agentes na Prática</div>
+        <div class="session-desc">O que é um agente de IA de verdade — arquitetura, raciocínio, memória, ferramentas. Diferença entre automação simples e agência real. Seu primeiro agente funcionando do zero.</div>
+      </div>
+      <div class="session-deliverable">
+        <div class="deliverable-tag">→ 1º agente rodando</div>
+      </div>
+    </div>
+
+    <div class="session">
+      <div class="session-num">02</div>
+      <div class="session-body">
+        <div class="session-title">MCP e Conectores — Agentes no Mundo Real</div>
+        <div class="session-desc">Model Context Protocol na prática. Como conectar agentes a sistemas reais: email, CRM, backlog, APIs externas. Implementação com Python e Node.js sem dependência de frameworks de terceiros.</div>
+      </div>
+      <div class="session-deliverable">
+        <div class="deliverable-tag">→ Conector funcionando</div>
+      </div>
+    </div>
+
+    <div class="session">
+      <div class="session-num">03</div>
+      <div class="session-body">
+        <div class="session-title">Orquestração — Múltiplos Agentes Trabalhando Juntos</div>
+        <div class="session-desc">Como fazer agentes colaborarem em fluxo. Agente orquestrador, agentes especialistas, passagem de contexto, tratamento de erro. O modelo do Kai explicado e replicado.</div>
+      </div>
+      <div class="session-deliverable">
+        <div class="deliverable-tag">→ Fluxo orquestrado</div>
+      </div>
+    </div>
+
+    <div class="session">
+      <div class="session-num">04</div>
+      <div class="session-body">
+        <div class="session-title">Aplicação no Seu Contexto</div>
+        <div class="session-desc">Cada participante traz seu caso real. Mapeamento de oportunidades, diagnóstico de viabilidade, plano de implementação personalizado. A teoria encontra a sua realidade.</div>
+      </div>
+      <div class="session-deliverable">
+        <div class="deliverable-tag">→ Plano individual</div>
+      </div>
+    </div>
+
+    <div class="session">
+      <div class="session-num">05</div>
+      <div class="session-body">
+        <div class="session-title">Build ao Vivo + Demonstrações</div>
+        <div class="session-desc">Cada participante demonstra o que construiu. Revisão técnica, feedback, próximos passos. Encerramento com abertura do canal de consultoria pós-mentoria.</div>
+      </div>
+      <div class="session-deliverable">
+        <div class="deliverable-tag">→ Sua solução ao vivo</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- MENTOR -->
+<section class="mentor">
+  <div class="section-tag">Quem vai te mentorar</div>
+  <h2 class="section-title">Construído na prática.<br><em>Não na teoria.</em></h2>
+
+  <div class="mentor-grid reveal">
+    <div class="mentor-card">
+      <div class="mentor-initial">F</div>
+      <div class="mentor-name">Fernando</div>
+      <div class="mentor-role">// Engenheiro · CTO · Criador do Kai</div>
+      <div class="mentor-badges">
+        <div class="badge">Engenheiro formado pelo ITA</div>
+        <div class="badge">CTO e CMO na Agência Logos</div>
+        <div class="badge">Fundador da AssessIA</div>
+        <div class="badge">Criador do Kai — agente orquestrador ao vivo</div>
+        <div class="badge">Implementações próprias em Python e Node.js</div>
+        <div class="badge">Palestrante no MaturiDay SP 2026</div>
+      </div>
+    </div>
+
+    <div class="mentor-story">
+      <p>
+        Comecei a usar IA muito antes de virar moda. Não como ferramenta de produtividade — como <strong>infraestrutura de negócio</strong>. E entendi cedo o que a maioria ainda não entendeu.
+      </p>
+      <div class="mentor-highlight">
+        "A IA não é para quem não sabe fazer. É para quem já sabe fazer e quer fazer dez vezes mais."
+      </div>
+      <p>
+        Tenho uma trajetória paralela como empreendedor e desenvolvedor autônomo há décadas. O ITA me deu base matemática e pensamento sistêmico. As grandes empresas me deram escala. A IA me deu alavancagem sobre tudo isso.
+      </p>
+      <p>
+        Em eventos recentes, demonstrei o Kai ao vivo — um assistente com time de agentes especialistas que executa tarefas complexas em tempo real: monta currículos, cria conteúdo, acessa sistemas e backlogs de projetos. <strong>As perguntas duraram mais de 3 horas depois de cada apresentação.</strong>
+      </p>
+      <p>
+        Esse é o nível de profundidade que você vai encontrar nessa mentoria.
+      </p>
+    </div>
+  </div>
+</section>
+
+<!-- FORMAT -->
+<section class="format">
+  <div class="section-tag">Como funciona</div>
+  <h2 class="section-title">Simples, denso<br><em>e focado em resultado.</em></h2>
+
+  <div class="format-grid reveal">
+    <div class="format-item">
+      <div class="format-icon">// 01_ENCONTROS</div>
+      <h3>5 sessões ao vivo</h3>
+      <p>Online, 2 horas cada. Grupo pequeno — máximo 12 pessoas — para garantir atenção real e troca de qualidade. Sem palco, sem apresentação corporativa.</p>
+    </div>
+    <div class="format-item">
+      <div class="format-icon">// 02_GRAVAÇÕES</div>
+      <h3>Tudo gravado</h3>
+      <p>Todos os encontros ficam disponíveis para você assistir novamente. IA gera muita informação — reveja quantas vezes precisar.</p>
+    </div>
+    <div class="format-item">
+      <div class="format-icon">// 03_CONTINUIDADE</div>
+      <h3>Consultoria pós-mentoria</h3>
+      <p>Canal de acesso para dúvidas reais que aparecem na aplicação. Porque as perguntas difíceis surgem quando você começa a usar de verdade.</p>
+    </div>
+  </div>
+</section>
+
+<!-- PRICING -->
+<section class="pricing" id="inscricao">
+  <div class="section-tag">Investimento</div>
+  <h2 class="section-title">Grupo fechado.<br><em>Vagas limitadas por design.</em></h2>
+
+  <div class="pricing-card reveal">
+    <div class="pricing-left">
+      <div class="pricing-amount">R$1.500</div>
+      <div class="pricing-period">// por pessoa · pagamento único</div>
+      <div class="pricing-includes">
+        <div class="pricing-item">5 encontros ao vivo de 2h cada</div>
+        <div class="pricing-item">Gravações de todas as sessões</div>
+        <div class="pricing-item">Implementações em Python e Node.js</div>
+        <div class="pricing-item">Projeto prático no seu contexto real</div>
+        <div class="pricing-item">Canal de consultoria pós-mentoria</div>
+        <div class="pricing-item">Grupo máximo de 12 pessoas</div>
+      </div>
+    </div>
+    <div class="pricing-right">
+      <div class="urgency-block">
+        <div class="urgency-title">⚡ Início: final de junho de 2026</div>
+        <div class="urgency-text">Quando a turma fechar, fecha.</div>
+        <div class="urgency-sub">Esta turma tem no máximo 12 pessoas. Quando as vagas preencherem, o grupo começa — sem exceção. Próxima turma sem data definida.</div>
+      </div>
+
+      <!-- =============================================
+           VAGAS: atualize os dois valores abaixo
+           PREENCHIDAS: número atual de confirmados
+           TOTAL: sempre 12
+           Atualize também a largura do spots-fill:
+           largura % = (preenchidas / total) * 100
+           Ex: 3/12 = 25%, 6/12 = 50%, 9/12 = 75%
+      ============================================= -->
+      <div class="spots-bar">
+        <div class="spots-label">
+          <span>Vagas preenchidas</span>
+          <span id="spots-count">3 de 12</span> <!-- ← EDITE AQUI -->
+        </div>
+        <div class="spots-track">
+          <div class="spots-fill" style="width: 25%"></div> <!-- ← EDITE A LARGURA AQUI (25% = 3/12) -->
+        </div>
+      </div>
+
+      <div>
+        <a href="https://wa.me/5511992913413?text=Ol%C3%A1%20Fernando%2C%20tenho%20interesse%20na%20mentoria%20de%20IA." class="btn-cta" target="_blank">
+          Quero garantir minha vaga →
+        </a>
+        <div class="btn-note">// Você será respondido pessoalmente</div>
+      </div>
+
+      <!-- LISTA DE ESPERA: aparece quando turma fechar -->
+      <!-- Para ativar: remova o display:none abaixo e oculte o btn-cta acima -->
+      <div style="display:none; margin-top: 16px;">
+        <a href="https://wa.me/5511992913413?text=Ol%C3%A1%20Fernando%2C%20a%20turma%20fechou%20mas%20quero%20entrar%20na%20lista%20da%20pr%C3%B3xima." class="btn-cta" target="_blank" style="background: var(--surface2); color: var(--text); border: 1px solid var(--border);">
+          Entrar na lista da próxima turma →
+        </a>
+        <div class="btn-note">// Você tem prioridade na próxima abertura</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER CTA -->
+<div class="footer-cta reveal">
+  <h2>Só erra quem faz.<br><em>Comece a errar.</em></h2>
+  <p>Quem age agora sai na frente. Quem espera o momento perfeito, espera para sempre.</p>
+  <a href="https://wa.me/5511992913413?text=Ol%C3%A1%20Fernando%2C%20tenho%20interesse%20na%20mentoria%20de%20IA." class="btn-primary" target="_blank">
+    Garantir minha vaga agora →
+  </a>
+</div>
+
+<footer>
+  <p>© 2026 Fernando · Mentoria IA</p>
+  <p>// Grupo fechado · 8–12 pessoas · Junho 2026</p>
+</footer>
+
+<script>
+  // Reveal on scroll
+  const reveals = document.querySelectorAll('.reveal');
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(el => {
+      if (el.isIntersecting) {
+        el.target.classList.add('visible');
+      }
+    });
+  }, { threshold: 0.1 });
+  reveals.forEach(el => observer.observe(el));
+</script>
+</body>
+</html>

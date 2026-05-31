@@ -1,0 +1,366 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Mentoria IA Aplicada — Agentes, Automação e Orquestração com Fernando Brisola</title>
+<meta name="description" content="Mentoria prática para profissionais experientes que querem usar IA no mundo real: agentes, automação, orquestração e aplicações concretas no trabalho e nos negócios." />
+<meta property="og:title" content="Mentoria IA Aplicada — Fernando Brisola" />
+<meta property="og:description" content="Aprenda a construir agentes de IA que executam tarefas reais, automatizam trabalho e ampliam sua capacidade de produção." />
+<meta property="og:type" content="website" />
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=JetBrains+Mono:wght@400;500;700&family=Instrument+Sans:wght@400;500;600;700&display=swap" rel="stylesheet" />
+<style>
+:root {
+  --bg:#080807; --surface:#121211; --surface2:#1b1b19; --surface3:#232321;
+  --border:#2f2f2b; --border2:#45453f; --accent:#c8f060; --accent2:#f0a040;
+  --blue:#3b82f6; --pink:#f04f9a; --green:#22c55e; --danger:#ff6259;
+  --text:#efefe7; --muted:#9a9a90; --soft:#c8c8bc; --black:#080807;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{background:var(--bg);color:var(--text);font-family:'Instrument Sans',sans-serif;line-height:1.6;overflow-x:hidden}
+body:before{content:'';position:fixed;inset:0;pointer-events:none;z-index:999;background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.82' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.04'/%3E%3C/svg%3E");opacity:.7}
+.grid-bg{position:fixed;inset:0;background-image:linear-gradient(var(--border) 1px,transparent 1px),linear-gradient(90deg,var(--border) 1px,transparent 1px);background-size:64px 64px;opacity:.22;pointer-events:none}
+a{color:inherit}
+nav{position:fixed;z-index:100;top:0;left:0;right:0;display:flex;align-items:center;justify-content:space-between;padding:18px 40px;border-bottom:1px solid var(--border);background:rgba(8,8,7,.86);backdrop-filter:blur(14px)}
+.nav-logo{font-family:'JetBrains Mono',monospace;font-size:13px;color:var(--accent);font-weight:700;letter-spacing:.04em}
+.nav-logo span{color:var(--muted);font-weight:500}
+.nav-links{display:flex;gap:24px;align-items:center}
+.nav-links a{font-family:'JetBrains Mono',monospace;font-size:11px;color:var(--muted);text-decoration:none;letter-spacing:.05em}
+.nav-links a:hover{color:var(--text)}
+.nav-cta,.btn-primary,.btn-cta{font-family:'JetBrains Mono',monospace;font-size:12px;color:var(--black);background:var(--accent);padding:12px 20px;text-decoration:none;font-weight:800;letter-spacing:.05em;display:inline-flex;gap:10px;align-items:center;justify-content:center;transition:.2s}
+.nav-cta:hover,.btn-primary:hover,.btn-cta:hover{background:#d7fa7a;transform:translateY(-2px);box-shadow:0 12px 34px rgba(200,240,96,.22)}
+.hero{min-height:100vh;display:grid;grid-template-columns:1.05fr .95fr;gap:64px;align-items:center;max-width:1240px;margin:0 auto;padding:132px 40px 76px;position:relative}
+.hero-tag,.section-tag{font-family:'JetBrains Mono',monospace;font-size:11px;color:var(--accent);letter-spacing:.14em;text-transform:uppercase;display:flex;gap:12px;align-items:center;margin-bottom:24px}
+.hero-tag:before,.section-tag:before{content:'';width:28px;height:1px;background:var(--accent)}
+h1{font-family:'DM Serif Display',serif;font-size:clamp(54px,7vw,98px);line-height:.98;letter-spacing:-.035em;margin-bottom:26px}
+h1 em,.section-title em,.footer-cta em{font-style:italic;color:var(--accent)}
+.hero-lead{font-size:21px;line-height:1.55;color:var(--soft);max-width:650px;margin-bottom:20px}
+.hero-desc{font-size:17px;color:var(--muted);max-width:620px;line-height:1.75;margin-bottom:38px}
+.hero-desc strong,.hero-lead strong{color:var(--text)}
+.hero-actions{display:flex;gap:16px;align-items:center;flex-wrap:wrap;margin-bottom:28px}
+.btn-primary{font-size:13px;padding:18px 30px}
+.btn-secondary{font-family:'JetBrains Mono',monospace;font-size:12px;color:var(--muted);text-decoration:none;border-bottom:1px solid var(--border2);padding:16px 0;letter-spacing:.05em}
+.btn-secondary:hover{color:var(--text);border-color:var(--text)}
+.trust-row{display:flex;gap:12px;flex-wrap:wrap}
+.trust-pill{font-family:'JetBrains Mono',monospace;font-size:11px;color:var(--muted);border:1px solid var(--border);background:rgba(255,255,255,.02);padding:8px 11px}
+.product-shot{position:relative;background:linear-gradient(180deg,rgba(255,255,255,.05),rgba(255,255,255,.01));border:1px solid var(--border2);padding:14px;box-shadow:0 24px 80px rgba(0,0,0,.42);transform:rotate(-1.2deg)}
+.product-shot:before{content:'KAI / OPERATION CONSOLE';position:absolute;top:-31px;left:0;font-family:'JetBrains Mono',monospace;font-size:11px;color:var(--accent);letter-spacing:.09em}
+.product-shot img{display:block;width:100%;border:1px solid var(--border);filter:saturate(.95) contrast(1.08)}
+.product-caption{font-size:13px;color:var(--muted);line-height:1.5;margin-top:14px}
+.product-caption strong{color:var(--text)}
+.stats-bar{border-top:1px solid var(--border);border-bottom:1px solid var(--border);padding:30px 40px;display:grid;grid-template-columns:repeat(4,1fr);max-width:1240px;margin:0 auto;gap:0}
+.stat{padding:0 34px;border-right:1px solid var(--border)}.stat:first-child{padding-left:0}.stat:last-child{border-right:0}
+.stat-num{font-family:'DM Serif Display',serif;font-size:44px;color:var(--accent);line-height:1;margin-bottom:8px}.stat-label{font-family:'JetBrains Mono',monospace;font-size:11px;color:var(--muted);letter-spacing:.08em;text-transform:uppercase}
+section{max-width:1240px;margin:0 auto;padding:92px 40px;border-top:1px solid var(--border)}
+.section-title{font-family:'DM Serif Display',serif;font-size:clamp(38px,5vw,62px);line-height:1.08;letter-spacing:-.015em;margin-bottom:22px}
+.section-lead{font-size:19px;color:var(--muted);max-width:760px;line-height:1.7;margin-bottom:54px}
+.problem-grid,.outcomes-grid,.forwhom-grid,.format-grid,.proof-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:2px}
+.card{background:var(--surface);padding:34px;border:1px solid transparent;transition:.2s;min-height:190px}
+.card:hover{background:var(--surface2);border-color:var(--border2)}
+.card-kicker{font-family:'JetBrains Mono',monospace;font-size:11px;color:var(--accent);letter-spacing:.09em;text-transform:uppercase;margin-bottom:18px}
+.card h3{font-family:'DM Serif Display',serif;font-size:25px;line-height:1.15;margin-bottom:14px}
+.card p{font-size:15px;color:var(--muted);line-height:1.65}
+.card strong{color:var(--text)}
+.manifesto-wrap{display:grid;grid-template-columns:1fr .82fr;gap:70px;align-items:start}
+.manifesto-text{font-size:20px;color:var(--muted);line-height:1.78}.manifesto-text p+p{margin-top:24px}.manifesto-text strong{color:var(--text)}
+.quote{background:var(--surface);border-left:2px solid var(--accent);padding:36px 40px;position:sticky;top:104px}
+.quote blockquote{font-family:'DM Serif Display',serif;font-size:32px;line-height:1.32;font-style:italic;margin-bottom:24px}.quote cite{font-family:'JetBrains Mono',monospace;font-size:12px;color:var(--accent);font-style:normal;letter-spacing:.08em}
+.notfor{margin-top:28px;background:var(--surface);border-left:2px solid var(--danger);padding:28px 34px;display:flex;gap:20px}
+.notfor div{font-family:'JetBrains Mono',monospace;font-size:11px;color:var(--danger);letter-spacing:.1em;white-space:nowrap}
+.notfor p{font-size:15px;color:var(--muted)}.notfor strong{color:var(--text)}
+.curriculum-list{display:flex;flex-direction:column;gap:2px}
+.session{display:grid;grid-template-columns:78px 1fr 260px;background:var(--surface)}
+.session-num{font-family:'JetBrains Mono',monospace;font-size:13px;color:var(--accent);padding:30px;border-right:1px solid var(--border);font-weight:800}
+.session-body{padding:30px 36px}.session-title{font-family:'DM Serif Display',serif;font-size:25px;margin-bottom:9px}.session-desc{font-size:15px;color:var(--muted);line-height:1.65}
+.session-deliverable{padding:30px;display:flex;align-items:flex-start;border-left:1px solid var(--border)}
+.deliverable-tag{font-family:'JetBrains Mono',monospace;font-size:11px;color:var(--accent);background:rgba(200,240,96,.08);border:1px solid rgba(200,240,96,.22);padding:7px 11px;letter-spacing:.05em}
+.demo{display:grid;grid-template-columns:.85fr 1.15fr;gap:54px;align-items:center}
+.demo-list{display:flex;flex-direction:column;gap:16px;margin-top:28px}
+.demo-item{display:flex;gap:14px;color:var(--muted);font-size:16px;line-height:1.55}.demo-item:before{content:'→';font-family:'JetBrains Mono',monospace;color:var(--accent);font-weight:800}
+.demo-shot{background:var(--surface);border:1px solid var(--border2);padding:12px;box-shadow:0 20px 70px rgba(0,0,0,.38)}.demo-shot img{width:100%;display:block;border:1px solid var(--border)}
+.mentor-grid{display:grid;grid-template-columns:.8fr 1.2fr;gap:70px;align-items:start}
+.mentor-card{background:var(--surface);padding:42px}.mentor-initial{width:76px;height:76px;background:var(--accent);color:var(--black);display:flex;align-items:center;justify-content:center;font-family:'DM Serif Display',serif;font-size:36px;margin-bottom:28px}
+.mentor-name{font-family:'DM Serif Display',serif;font-size:34px;margin-bottom:8px}.mentor-role{font-family:'JetBrains Mono',monospace;font-size:12px;color:var(--accent);letter-spacing:.08em;margin-bottom:26px}
+.badges{display:flex;flex-direction:column;gap:9px}.badge{font-family:'JetBrains Mono',monospace;font-size:12px;color:var(--muted);display:flex;gap:10px;align-items:flex-start}.badge:before{content:'→';color:var(--accent)}
+.story{display:flex;flex-direction:column;gap:20px}.story p{font-size:17px;color:var(--muted);line-height:1.8}.story strong{color:var(--text)}.highlight{background:var(--surface);border-left:2px solid var(--accent2);padding:25px 32px;font-family:'DM Serif Display',serif;font-size:25px;line-height:1.35;font-style:italic}
+.pricing-card{background:var(--surface);border:1px solid var(--border2);display:grid;grid-template-columns:.9fr 1.1fr;overflow:hidden}
+.pricing-left{padding:54px;border-right:1px solid var(--border)}.pricing-amount{font-family:'DM Serif Display',serif;font-size:74px;color:var(--accent);line-height:1;margin-bottom:8px}.pricing-period{font-family:'JetBrains Mono',monospace;font-size:12px;color:var(--muted);letter-spacing:.06em;margin-bottom:22px}
+.founder-price{font-size:15px;color:var(--soft);margin-bottom:32px;line-height:1.6}.founder-price strong{color:var(--text)}
+.pricing-includes{display:flex;flex-direction:column;gap:12px}.pricing-item{font-size:15px;color:var(--muted);display:flex;gap:12px;align-items:flex-start}.pricing-item:before{content:'✓';font-family:'JetBrains Mono',monospace;color:var(--accent);font-weight:800}
+.pricing-right{padding:54px;display:flex;flex-direction:column;justify-content:space-between}.urgency-title{font-family:'JetBrains Mono',monospace;font-size:11px;color:var(--accent2);letter-spacing:.1em;text-transform:uppercase;margin-bottom:14px}.urgency-text{font-family:'DM Serif Display',serif;font-size:31px;line-height:1.25;margin-bottom:14px}.urgency-sub{font-size:15px;color:var(--muted);line-height:1.65;margin-bottom:32px}
+.spots-label{font-family:'JetBrains Mono',monospace;font-size:11px;color:var(--muted);letter-spacing:.08em;display:flex;justify-content:space-between;margin-bottom:10px}.spots-track{height:5px;background:var(--border);position:relative;margin-bottom:32px}.spots-fill{position:absolute;inset:0 auto 0 0;width:25%;background:var(--accent)}.btn-cta{width:100%;font-size:14px;padding:22px 28px}.btn-note{font-family:'JetBrains Mono',monospace;font-size:11px;color:var(--muted);text-align:center;margin-top:12px;letter-spacing:.05em}
+.faq-list{display:grid;grid-template-columns:1fr 1fr;gap:2px}.faq{background:var(--surface);padding:30px}.faq h3{font-family:'DM Serif Display',serif;font-size:23px;margin-bottom:10px}.faq p{font-size:15px;color:var(--muted);line-height:1.65}
+.footer-cta{max-width:1240px;margin:0 auto;text-align:center;padding:100px 40px;border-top:1px solid var(--border)}.footer-cta h2{font-family:'DM Serif Display',serif;font-size:clamp(42px,6vw,76px);line-height:1.08;margin-bottom:24px}.footer-cta p{font-size:18px;color:var(--muted);max-width:610px;margin:0 auto 42px;line-height:1.7}
+footer{max-width:1240px;margin:0 auto;border-top:1px solid var(--border);padding:32px 40px;display:flex;justify-content:space-between;gap:16px}footer p{font-family:'JetBrains Mono',monospace;font-size:12px;color:var(--muted);letter-spacing:.05em}
+.reveal{opacity:0;transform:translateY(24px);transition:opacity .7s ease,transform .7s ease}.reveal.visible{opacity:1;transform:translateY(0)}
+@media(max-width:980px){.hero,.manifesto-wrap,.demo,.mentor-grid,.pricing-card{grid-template-columns:1fr}.hero{gap:46px}.quote{position:static}.problem-grid,.outcomes-grid,.forwhom-grid,.format-grid,.proof-grid,.faq-list{grid-template-columns:1fr 1fr}.session{grid-template-columns:70px 1fr}.session-deliverable{display:none}.pricing-left{border-right:0;border-bottom:1px solid var(--border)}.nav-links a:not(.nav-cta){display:none}}
+@media(max-width:680px){nav{padding:14px 18px}.nav-logo{font-size:12px}.nav-cta{padding:10px 13px;font-size:11px}.hero{padding:112px 20px 58px}section{padding:64px 20px}.stats-bar{grid-template-columns:1fr 1fr;padding:24px 20px;gap:22px}.stat{padding:0;border-right:0}.problem-grid,.outcomes-grid,.forwhom-grid,.format-grid,.proof-grid,.faq-list{grid-template-columns:1fr}.card{padding:28px}.session{grid-template-columns:1fr}.session-num{border-right:0;border-bottom:1px solid var(--border);padding:18px 24px}.session-body{padding:24px}.notfor{flex-direction:column}.pricing-left,.pricing-right{padding:34px 24px}.pricing-amount{font-size:58px}footer{flex-direction:column;text-align:center;padding:28px 20px}}
+
+/* Enhanced proof and FAQ */
+#prova-real .card h3{font-size:27px}
+#prova-real .card p{font-size:15.5px}
+#faq .faq-list{grid-template-columns:1fr 1fr;gap:12px}
+#faq .faq{border:1px solid var(--border);background:linear-gradient(180deg,rgba(255,255,255,.035),rgba(255,255,255,.012));padding:34px}
+#faq .faq h3{font-size:25px;line-height:1.18;margin-bottom:14px;color:var(--text)}
+#faq .faq p{font-size:15.5px;line-height:1.72;color:var(--muted)}
+@media(max-width:980px){#faq .faq-list{grid-template-columns:1fr}}
+
+</style>
+</head>
+<body>
+<div class="grid-bg"></div>
+<nav>
+  <div class="nav-logo">mentoria<span>/</span>IA <span>— Fernando Brisola</span></div>
+  <div class="nav-links">
+    <a href="#programa">Programa</a><a href="#kai">Kai</a><a href="#prova-real">Prova real</a><a href="#faq">FAQ</a><a href="#inscricao" class="nav-cta">Quero uma vaga →</a>
+  </div>
+</nav>
+
+<header class="hero">
+  <div>
+    <div class="hero-tag">Grupo fechado · Junho 2026 · 8–12 pessoas</div>
+    <h1>IA aplicada para quem precisa <em>produzir mais</em>, não só entender ferramentas.</h1>
+    <p class="hero-lead"><strong>Aprenda a construir agentes de IA que executam tarefas reais</strong>, automatizam trabalho e ampliam drasticamente sua capacidade de produção.</p>
+    <p class="hero-desc">Uma mentoria prática para profissionais experientes, gestores, consultores e empreendedores que querem sair do uso básico do ChatGPT e começar a aplicar IA no mundo real: agentes, automação, conectores, orquestração e projetos concretos.</p>
+    <div class="hero-actions">
+      <a href="#inscricao" class="btn-primary">Quero participar da turma →</a>
+      <a href="#programa" class="btn-secondary">Ver o programa completo</a>
+    </div>
+    <div class="trust-row">
+      <span class="trust-pill">Engenheiro ITA</span><span class="trust-pill">CTO</span><span class="trust-pill">Criador do Kai</span><span class="trust-pill">Palestrante MaturiDay SP 2026</span>
+    </div>
+  </div>
+  <div class="product-shot reveal">
+    <img src="kanban.png" alt="Tela do Kai com dashboard, kanban e gestão de agentes de IA" />
+    <p class="product-caption"><strong>Este não é um exemplo teórico.</strong> O Kai é meu orquestrador real: ele usa um ecossistema de agentes, ferramentas, conectores e fluxos para organizar demandas, prioridades e execução assistida por IA.</p>
+  </div>
+</header>
+
+<div class="stats-bar reveal">
+  <div class="stat"><div class="stat-num">5</div><div class="stat-label">Encontros ao vivo</div></div>
+  <div class="stat"><div class="stat-num">2h</div><div class="stat-label">Por sessão</div></div>
+  <div class="stat"><div class="stat-num">8–12</div><div class="stat-label">Pessoas por grupo</div></div>
+  <div class="stat"><div class="stat-num">1</div><div class="stat-label">Projeto real por aluno</div></div>
+</div>
+
+<section>
+  <div class="section-tag">O problema real</div>
+  <h2 class="section-title">A maioria ainda está usando IA como brinquedo. <em>Isso não cria vantagem.</em></h2>
+  <p class="section-lead">O mercado está cheio de cursos de prompt, listas de ferramentas e demonstrações impressionantes. Isso pode ser útil, mas não resolve o problema principal: transformar IA em execução, rotina, processo e resultado.</p>
+  <div class="problem-grid reveal">
+    <div class="card"><div class="card-kicker">01 / Hype</div><h3>Ferramenta muda toda semana.</h3><p>Quem aprende só ferramenta fica refém da próxima novidade. O que importa é entender o modelo mental por trás da aplicação.</p></div>
+    <div class="card"><div class="card-kicker">02 / Superficialidade</div><h3>Prompt sozinho não sustenta operação.</h3><p>Prompt ajuda. Mas agentes, contexto, conectores, validação e fluxo de trabalho é que mudam o nível de produtividade.</p></div>
+    <div class="card"><div class="card-kicker">03 / Execução</div><h3>O gargalo não é a IA. É clareza.</h3><p>A IA acelera quem sabe o que quer construir. Sem objetivo claro, ela só produz volume, ruído e dispersão.</p></div>
+  </div>
+</section>
+
+<section>
+  <div class="section-tag">A tese</div>
+  <div class="manifesto-wrap reveal">
+    <div>
+      <h2 class="section-title">A IA acelera <em>o que você já sabe</em>.</h2>
+      <div class="manifesto-text">
+        <p>Ela não substitui sua experiência. Ela amplia sua capacidade de executar, testar, criar, analisar e decidir.</p>
+        <p>O <strong>“o quê”</strong> vem de você: seu contexto, seu repertório, seus problemas reais. O <strong>“como”</strong> a gente constrói com IA: agentes, automações, conectores e orquestração.</p>
+        <p>Essa mentoria existe para conectar essas duas coisas: clareza estratégica e construção prática.</p>
+      </div>
+    </div>
+    <div class="quote"><blockquote>“A IA não é para quem não sabe fazer. É para quem já sabe fazer e quer fazer dez vezes mais.”</blockquote><cite>— Fernando Brisola</cite></div>
+  </div>
+</section>
+
+<section>
+  <div class="section-tag">Resultados esperados</div>
+  <h2 class="section-title">Você não sai apenas com conhecimento. <em>Sai com construção.</em></h2>
+  <div class="outcomes-grid reveal">
+    <div class="card"><div class="card-kicker">Resultado 01</div><h3>Seu primeiro agente funcionando</h3><p>Um agente prático, criado do zero, com objetivo claro e uso real no seu contexto.</p></div>
+    <div class="card"><div class="card-kicker">Resultado 02</div><h3>Automação conectada ao mundo real</h3><p>Você entende como conectar IA a sistemas, APIs, documentos, planilhas, emails, tarefas e fluxos de trabalho.</p></div>
+    <div class="card"><div class="card-kicker">Resultado 03</div><h3>Plano individual de aplicação</h3><p>Você mapeia onde IA pode gerar mais impacto na sua rotina, empresa, produto ou serviço.</p></div>
+  </div>
+</section>
+
+<section>
+  <div class="section-tag">Para quem é</div>
+  <h2 class="section-title">Profissionais experientes que querem <em>ir além do uso básico</em>.</h2>
+  <div class="forwhom-grid reveal">
+    <div class="card"><div class="card-kicker">Gestores</div><h3>Líderes e gestores</h3><p>Que querem automatizar processos, ganhar velocidade e entender como aplicar IA na operação.</p></div>
+    <div class="card"><div class="card-kicker">Negócios</div><h3>Empreendedores e fundadores</h3><p>Que enxergam IA como alavanca de negócio e querem integrar agentes ao produto, atendimento ou operação.</p></div>
+    <div class="card"><div class="card-kicker">Especialistas</div><h3>Consultores e profissionais autônomos</h3><p>Que querem usar IA para entregar mais valor aos clientes com profundidade e segurança.</p></div>
+  </div>
+  <div class="notfor reveal"><div>// IMPORTANTE</div><p>Não é necessário ser desenvolvedor. Mas você precisa ter maturidade profissional, clareza de contexto e vontade de colocar a mão na massa. <strong>Não é uma mentoria para curiosos passivos.</strong></p></div>
+</section>
+
+<section id="programa">
+  <div class="section-tag">O programa</div>
+  <h2 class="section-title">Cinco encontros. <em>Cinco entregas concretas.</em></h2>
+  <p class="section-lead">A trilha começa acessível, mas não fica superficial. O objetivo é fazer você entender, construir e aplicar.</p>
+  <div class="curriculum-list reveal">
+    <div class="session"><div class="session-num">01</div><div class="session-body"><div class="session-title">Fundamentos de agentes na prática</div><div class="session-desc">O que é um agente de IA de verdade, diferença entre chatbot, automação e agente, raciocínio, memória, ferramentas e primeiro agente funcional.</div></div><div class="session-deliverable"><div class="deliverable-tag">→ 1º agente rodando</div></div></div>
+    <div class="session"><div class="session-num">02</div><div class="session-body"><div class="session-title">Conectores e MCP sem mistério</div><div class="session-desc">Como fazer agentes acessarem informações e sistemas reais: documentos, planilhas, APIs, email, CRM, backlog e bases de conhecimento.</div></div><div class="session-deliverable"><div class="deliverable-tag">→ Conector funcional</div></div></div>
+    <div class="session"><div class="session-num">03</div><div class="session-body"><div class="session-title">Orquestração de múltiplos agentes</div><div class="session-desc">Como dividir tarefas entre agentes especialistas, coordenar fluxos, passar contexto, registrar decisões e reduzir erros.</div></div><div class="session-deliverable"><div class="deliverable-tag">→ Fluxo orquestrado</div></div></div>
+    <div class="session"><div class="session-num">04</div><div class="session-body"><div class="session-title">Aplicação no seu contexto real</div><div class="session-desc">Cada participante traz um caso real. Mapeamos viabilidade, impacto, complexidade, riscos e plano de implementação.</div></div><div class="session-deliverable"><div class="deliverable-tag">→ Plano individual</div></div></div>
+    <div class="session"><div class="session-num">05</div><div class="session-body"><div class="session-title">Build ao vivo, demonstrações e próximos passos</div><div class="session-desc">Revisão dos projetos, feedback, ajustes, melhorias e caminho para continuar evoluindo depois da mentoria.</div></div><div class="session-deliverable"><div class="deliverable-tag">→ Solução demonstrada</div></div></div>
+  </div>
+</section>
+
+<section id="kai">
+  <div class="demo reveal">
+    <div>
+      <div class="section-tag">Bastidor real</div>
+      <h2 class="section-title">Você vai ver IA sendo usada em operação real. <em>Não em slide bonito.</em></h2>
+      <p class="section-lead" style="margin-bottom:0">O Kai é o meu orquestrador de IA. Ele usa um ecossistema de agentes, ferramentas, conectores e fluxos para organizar demandas, prioridades, projetos, aprovações e execução assistida. É o tipo de sistema que mostra a diferença entre “usar IA” e “operar com IA”.</p>
+      <div class="demo-list">
+        <div class="demo-item">Dashboard com demandas, urgências, progresso e atividade recente.</div>
+        <div class="demo-item">Kanban para acompanhar tarefas reais por empresa, prioridade e status.</div>
+        <div class="demo-item">Time de agentes especialistas para marketing, frontend, QA, dados, automações e exploração de codebases.</div>
+        <div class="demo-item">Modelo de orquestração para decompor demandas e direcionar execução.</div>
+      </div>
+    </div>
+    <div class="demo-shot"><img src="agentes.png" alt="Kai: orquestrador usando dashboard, kanban e time de agentes" /></div>
+  </div>
+</section>
+
+
+<section id="prova-real">
+  <div class="section-tag">Prova real</div>
+  <h2 class="section-title">Não é teoria sobre IA. <em>É o que já mudou no meu trabalho.</em></h2>
+  <p class="section-lead">A prova social mais forte aqui não é uma frase bonita de depoimento. É a aplicação diária: menos gente, mais entrega, mais demandas em paralelo e IA operando como parte real da execução.</p>
+
+  <div class="proof-grid reveal">
+    <div class="card">
+      <div class="card-kicker">01 / Produção real</div>
+      <h3>Um time 90% menor produzindo mais.</h3>
+      <p>Nos últimos anos, vi na prática uma operação de desenvolvimento ser reduzida para cerca de <strong>10% do tamanho original</strong> e, ainda assim, produzir muito mais com apoio intenso de IA, automação e novos fluxos de trabalho.</p>
+    </div>
+    <div class="card">
+      <div class="card-kicker">02 / Orquestração diária</div>
+      <h3>Dezenas de demandas em empresas diferentes.</h3>
+      <p>O Kai ajuda a organizar, priorizar e acompanhar demandas reais de múltiplos contextos, usando agentes, tarefas, fluxos, prioridades e execução assistida por IA.</p>
+    </div>
+    <div class="card">
+      <div class="card-kicker">03 / IA demonstrada ao vivo</div>
+      <h3>Quando as pessoas veem funcionando, entendem.</h3>
+      <p>Nas palestras, eu não falo apenas sobre IA. Eu demonstro IA em ação: agentes, orquestração, execução, organização de tarefas e aplicações reais. É isso que gerou as conversas e perguntas que deram origem a esta mentoria.</p>
+    </div>
+  </div>
+
+  <div class="notfor reveal" style="border-left-color:var(--accent2);margin-top:30px">
+    <div style="color:var(--accent2)">// O PONTO</div>
+    <p>O objetivo da mentoria não é vender uma visão futurista. É mostrar como IA já pode mudar a forma como trabalho é planejado, distribuído, executado e acompanhado. <strong>Esse é o tipo de aplicação que separa curiosidade de vantagem real.</strong></p>
+  </div>
+</section>
+
+
+<section>
+  <div class="section-tag">Quem vai te mentorar</div>
+  <h2 class="section-title">Construído na prática. <em>Não na teoria.</em></h2>
+  <div class="mentor-grid reveal">
+    <div class="mentor-card">
+      <div class="mentor-initial">F</div><div class="mentor-name">Fernando Brisola</div><div class="mentor-role">// Engenheiro · CTO · Criador do Kai</div>
+      <div class="badges">
+        <div class="badge">Engenheiro formado pelo ITA</div><div class="badge">CTO com atuação prática em produto, tecnologia e automação</div><div class="badge">Criador do Kai — orquestrador próprio que usa agentes, ferramentas e conectores</div><div class="badge">Implementações próprias em Python, Node.js e automações reais</div><div class="badge">Palestrante</div>
+      </div>
+    </div>
+    <div class="story">
+      <p>Uso IA como <strong>infraestrutura de trabalho e negócio</strong>, não apenas como ferramenta de produtividade. Isso muda completamente o nível da conversa.</p>
+      <div class="highlight">“O valor não está em pedir uma resposta melhor. Está em desenhar um sistema que trabalha melhor.”</div>
+      <p>Minha base combina engenharia, liderança técnica, produto, automação, IA aplicada e construção real. A mentoria nasce desse cruzamento: estratégia suficiente para saber o que construir e prática suficiente para construir de verdade.</p>
+      <p>Em eventos recentes, demonstrei o meu orquestrador e ecossistema ao vivo. O interesse foi imediato porque as pessoas perceberam uma coisa: IA deixa de ser abstrata quando você vê um sistema trabalhando.</p>
+    </div>
+  </div>
+</section>
+
+<section>
+  <div class="section-tag">Como funciona</div>
+  <h2 class="section-title">Simples, denso e <em>focado em execução</em>.</h2>
+  <div class="format-grid reveal">
+    <div class="card"><div class="card-kicker">01 / Ao vivo</div><h3>5 sessões online</h3><p>Encontros de 2 horas, com grupo pequeno, troca real e espaço para perguntas difíceis.</p></div>
+    <div class="card"><div class="card-kicker">02 / Gravações</div><h3>Tudo gravado</h3><p>Você pode rever os encontros, revisar conceitos e voltar nos exemplos práticos.</p></div>
+    <div class="card"><div class="card-kicker">03 / Continuidade</div><h3>Canal pós-mentoria</h3><p>Porque as melhores perguntas aparecem quando você começa a aplicar no mundo real.</p></div>
+  </div>
+</section>
+
+<section id="inscricao">
+  <div class="section-tag">Investimento</div>
+  <h2 class="section-title">Grupo fechado. <em>Vagas limitadas por design.</em></h2>
+  <div class="pricing-card reveal">
+    <div class="pricing-left">
+      <div class="pricing-amount">R$1.500</div>
+      <div class="pricing-period">// por pessoa · pagamento único</div>
+      <p class="founder-price"><strong>Investimento individual para participação em grupo fechado.</strong> Cada turma terá entre 8 e 12 pessoas para preservar profundidade, troca e acompanhamento real.</p>
+      <div class="pricing-includes">
+        <div class="pricing-item">5 encontros ao vivo de 2h cada</div><div class="pricing-item">Gravações de todas as sessões</div><div class="pricing-item">Construção prática de agentes e conectores</div><div class="pricing-item">Projeto aplicado ao seu contexto real</div><div class="pricing-item">Canal de consultoria pós-mentoria</div><div class="pricing-item">Grupo máximo de 12 pessoas</div>
+      </div>
+    </div>
+    <div class="pricing-right">
+      <div>
+        <div class="urgency-title">⚡ Início: final de junho de 2026</div>
+        <div class="urgency-text">Quando a turma fechar, fecha.</div>
+        <div class="urgency-sub">A turma só acontece com grupo mínimo de 8 pessoas e fecha com no máximo 12. O formato é pequeno de propósito: profundidade, troca e acompanhamento real. Se você quer apenas assistir conteúdo passivamente, essa não é a melhor escolha.</div>
+        <div class="spots-label"><span>Vagas preenchidas</span><span>3 de 12</span></div><div class="spots-track"><div class="spots-fill" style="width:25%"></div></div><div class="btn-note" style="text-align:left;margin-top:10px">// Turma confirmada a partir de 8 participantes</div>
+      </div>
+      <div>
+        <a href="https://wa.me/5511992913413?text=Ol%C3%A1%20Fernando%2C%20tenho%20interesse%20na%20mentoria%20de%20IA." class="btn-cta" target="_blank" rel="noopener">Quero participar da turma →</a>
+        <div class="btn-note">// Você será respondido pessoalmente</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+<section id="faq">
+  <div class="section-tag">Perguntas comuns</div>
+  <h2 class="section-title">Antes de entrar, <em>alinhe expectativas</em>.</h2>
+  <p class="section-lead">Esta não é uma mentoria para consumo passivo de conteúdo. É para quem quer entender IA com profundidade suficiente para aplicar, construir e tomar melhores decisões.</p>
+
+  <div class="faq-list reveal">
+    <div class="faq">
+      <h3>Isso é técnico demais para mim?</h3>
+      <p>A mentoria não foi criada para iniciantes absolutos em tecnologia, mas também não exige que você seja desenvolvedor sênior. O mais importante é maturidade profissional, clareza de problemas reais e disposição para construir. A parte técnica pode ser aprendida. O difícil é enxergar onde IA realmente gera valor.</p>
+    </div>
+
+    <div class="faq">
+      <h3>Isso é só mais um curso de IA?</h3>
+      <p>Não. O mercado está cheio de conteúdo sobre prompts, ferramentas e hacks rápidos. A proposta aqui é diferente: usar IA para construir sistemas, agentes e automações aplicadas ao mundo real. A ideia não é consumir IA. É aprender a operar com IA.</p>
+    </div>
+
+    <div class="faq">
+      <h3>Vou conseguir aplicar isso no meu contexto?</h3>
+      <p>Essa é a prioridade da mentoria. Cada participante trabalha em cima da própria realidade: empresa, rotina, operação, produto ou processo. O objetivo não é assistir demonstrações bonitas. É identificar onde IA pode ampliar capacidade e execução no seu cenário.</p>
+    </div>
+
+    <div class="faq">
+      <h3>Preciso saber programar?</h3>
+      <p>Não obrigatoriamente. Quem já tem base técnica acelera mais rápido. Mas profissionais sem background de desenvolvimento também conseguem acompanhar, desde que tenham contexto, lógica e disposição para construir. O foco principal não é escrever código. É entender como estruturar sistemas inteligentes que resolvem problemas reais.</p>
+    </div>
+
+    <div class="faq">
+      <h3>Por que o grupo é limitado a 12 pessoas?</h3>
+      <p>Porque profundidade exige proximidade. Com muita gente, vira apresentação. Com grupo pequeno, existe troca real, análise de contexto e construção prática. A proposta não é escalar audiência. É acelerar capacidade.</p>
+    </div>
+
+    <div class="faq">
+      <h3>Por que você decidiu abrir essa mentoria?</h3>
+      <p>Dando palestras e fazendo demonstrações do orquestrador, uma coisa ficou muito clara: existe muita gente querendo entender IA de verdade — sem hype, sem superficialidade e sem teoria vazia. A mentoria nasceu dessa demanda.</p>
+    </div>
+  </div>
+</section>
+
+
+<div class="footer-cta">
+  <h2>A vantagem agora não é usar IA. <em>É saber construir com ela.</em></h2>
+  <p>Daqui a pouco, usar IA será básico. A diferença estará em quem sabe transformar IA em sistema, processo, agente e resultado.</p>
+  <a href="https://wa.me/5511992913413?text=Ol%C3%A1%20Fernando%2C%20tenho%20interesse%20na%20mentoria%20de%20IA." class="btn-primary" target="_blank" rel="noopener">Quero participar da turma →</a>
+</div>
+
+<footer><p>© 2026 Fernando Brisola · Mentoria IA Aplicada</p><p>// Grupo fechado · 8–12 pessoas · Junho 2026</p></footer>
+<script>
+const reveals=document.querySelectorAll('.reveal');
+const observer=new IntersectionObserver(entries=>{entries.forEach(entry=>{if(entry.isIntersecting)entry.target.classList.add('visible')})},{threshold:.12});
+reveals.forEach(el=>observer.observe(el));
+</script>
+</body>
+</html>

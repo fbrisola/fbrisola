@@ -1,1432 +1,1313 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
-
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
-    <!-- SEO Meta Tags -->
-    <title>Fernando Brisola Batista - O Mago da Inovação e da Boa Vibe!</title>
-    <meta name="description"
-        content="Conheça Fernando Brisola Batista, engenheiro, empreendedor, tech guru e coach que une tecnologia e coração para transformar sonhos em realidade.">
-    <meta name="keywords"
-        content="Fernando Brisola Batista, coach, empreendedor, tecnologia, inovação, marketing digital, desenvolvimento pessoal, FBB Solution, FarmGate, DentalSmart, Agência Logos, MyDNA, Maturi">
-    <meta name="author" content="Fernando Brisola Batista">
-
-    <!-- Google Fonts -->
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Outfit:wght@400;500;600;700&display=swap"
-        rel="stylesheet">
-
-    <!-- Font Awesome for Icons -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-
-    <style>
-        /* --- GLOBAL STYLES & VARIABLES --- */
-        :root {
-            --primary-gradient: linear-gradient(135deg, #2563eb 0%, #1e40af 100%);
-            --secondary-gradient: linear-gradient(135deg, #7c3aed 0%, #5b21b6 100%);
-            --accent-gradient: linear-gradient(135deg, #06b6d4 0%, #0891b2 100%);
-            --success-gradient: linear-gradient(135deg, #10b981 0%, #059669 100%);
-            --warning-gradient: linear-gradient(135deg, #f59e0b 0%, #d97706 100%);
-            --bg-gradient: linear-gradient(135deg, #1e293b 0%, #334155 25%, #475569 50%, #64748b 75%, #94a3b8 100%);
-            --bg-light: #f8fafc;
-            --bg-white: #ffffff;
-            --text-dark: #1e293b;
-            --text-light: #64748b;
-            --font-title: 'Outfit', sans-serif;
-            --font-body: 'Inter', sans-serif;
-            --shadow: 0 20px 40px rgba(0, 0, 0, 0.08);
-            --shadow-hover: 0 30px 60px rgba(0, 0, 0, 0.12);
-            --border-radius: 16px;
-            --border-radius-small: 12px;
-        }
-
-        *,
-        *::before,
-        *::after {
-            box-sizing: border-box;
-            margin: 0;
-            padding: 0;
-        }
-
-        html {
-            scroll-behavior: smooth;
-            font-size: 16px;
-        }
-
-        body {
-            font-family: var(--font-body);
-            color: var(--text-dark);
-            background: var(--bg-light);
-            line-height: 1.7;
-            overflow-x: hidden;
-            position: relative;
-        }
-
-        /* Animated Background */
-        body::before {
-            content: '';
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: var(--bg-gradient);
-            background-size: 400% 400%;
-            animation: gradientShift 20s ease infinite;
-            opacity: 0.02;
-            z-index: -1;
-        }
-
-        @keyframes gradientShift {
-            0% { background-position: 0% 50%; }
-            50% { background-position: 100% 50%; }
-            100% { background-position: 0% 50%; }
-        }
-
-        .container {
-            max-width: 1200px;
-            margin: 0 auto;
-            padding: 0 20px;
-        }
-
-        section {
-            padding: 120px 0;
-            overflow: hidden;
-            position: relative;
-        }
-
-        section:nth-of-type(even) {
-            background: linear-gradient(135deg, rgba(255,255,255,0.9) 0%, rgba(248,249,255,0.9) 100%);
-            backdrop-filter: blur(10px);
-        }
-
-        h1, h2, h3 {
-            font-family: var(--font-title);
-            font-weight: 700;
-            color: var(--text-dark);
-            line-height: 1.1;
-            margin-bottom: 20px;
-        }
-
-        h2 {
-            font-size: 3rem;
-            text-align: center;
-            margin-bottom: 80px;
-            position: relative;
-            background: var(--primary-gradient);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            background-clip: text;
-        }
-
-        h2::after {
-            content: '';
-            display: block;
-            width: 80px;
-            height: 6px;
-            background: var(--secondary-gradient);
-            border-radius: 3px;
-            margin: 20px auto 0;
-            animation: pulse 2s infinite;
-        }
-
-        @keyframes pulse {
-            0%, 100% { transform: scaleX(1); }
-            50% { transform: scaleX(1.2); }
-        }
-
-        .btn {
-            display: inline-block;
-            padding: 18px 35px;
-            background: var(--primary-gradient);
-            color: white;
-            border-radius: 12px;
-            text-decoration: none;
-            font-weight: 600;
-            font-size: 1.1rem;
-            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-            border: none;
-            cursor: pointer;
-            position: relative;
-            overflow: hidden;
-            box-shadow: var(--shadow);
-        }
-
-        .btn::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: -100%;
-            width: 100%;
-            height: 100%;
-            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.3), transparent);
-            transition: left 0.5s;
-        }
-
-        .btn:hover {
-            transform: translateY(-5px) scale(1.05);
-            box-shadow: var(--shadow-hover);
-        }
-
-        .btn:hover::before {
-            left: 100%;
-        }
-
-        /* Fade-in Animation on Scroll */
-        .fade-in {
-            opacity: 0;
-            transform: translateY(50px);
-            transition: all 0.8s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-        }
-
-        .fade-in.visible {
-            opacity: 1;
-            transform: translateY(0);
-        }
-
-        /* Floating Animation */
-        .floating {
-            animation: floating 3s ease-in-out infinite;
-        }
-
-        @keyframes floating {
-            0%, 100% { transform: translateY(0px); }
-            50% { transform: translateY(-20px); }
-        }
-
-        /* --- HEADER & NAVIGATION --- */
-        #main-nav {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            z-index: 1000;
-            background: rgba(255, 255, 255, 0.95);
-            backdrop-filter: blur(20px);
-            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
-            transition: all 0.3s ease;
-        }
-
-        #main-nav .container {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            height: 80px;
-        }
-
-        .logo {
-            font-family: var(--font-title);
-            font-size: 2rem;
-            font-weight: 700;
-            background: var(--primary-gradient);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            background-clip: text;
-            text-decoration: none;
-            transition: transform 0.3s ease;
-        }
-
-        .logo:hover {
-            transform: scale(1.1);
-        }
-
-        .nav-links {
-            list-style: none;
-            display: flex;
-            gap: 40px;
-        }
-
-        .nav-links a {
-            text-decoration: none;
-            color: var(--text-dark);
-            font-weight: 600;
-            font-size: 1.1rem;
-            position: relative;
-            transition: all 0.3s ease;
-            padding: 10px 20px;
-            border-radius: 8px;
-        }
-
-        .nav-links a::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: var(--secondary-gradient);
-            border-radius: 8px;
-            opacity: 0;
-            transition: opacity 0.3s ease;
-            z-index: -1;
-        }
-
-        .nav-links a:hover,
-        .nav-links a.active {
-            color: white;
-        }
-
-        .nav-links a:hover::before,
-        .nav-links a.active::before {
-            opacity: 1;
-        }
-
-        .hamburger {
-            display: none;
-            cursor: pointer;
-            flex-direction: column;
-            gap: 6px;
-        }
-
-        .hamburger div {
-            width: 30px;
-            height: 4px;
-            background: var(--primary-gradient);
-            border-radius: 5px;
-            transition: all 0.3s ease;
-        }
-
-        /* Progress Bar */
-        #progress-bar {
-            position: fixed;
-            top: 80px;
-            left: 0;
-            height: 6px;
-            background: var(--accent-gradient);
-            width: 0%;
-            z-index: 1001;
-            transition: width 0.1s linear;
-            border-radius: 0 3px 3px 0;
-        }
-
-        /* --- HOME SECTION --- */
-        #home {
-            height: 100vh;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            text-align: center;
-            background: linear-gradient(135deg, rgba(37, 99, 235, 0.05) 0%, rgba(30, 64, 175, 0.05) 100%);
-            position: relative;
-            overflow: hidden;
-        }
-
-        #home::before {
-            content: '';
-            position: absolute;
-            top: -50%;
-            left: -50%;
-            width: 200%;
-            height: 200%;
-            background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><defs><pattern id="grain" width="100" height="100" patternUnits="userSpaceOnUse"><circle cx="25" cy="25" r="1" fill="%232563eb" opacity="0.05"/><circle cx="75" cy="75" r="1" fill="%237c3aed" opacity="0.05"/><circle cx="50" cy="10" r="0.5" fill="%2306b6d4" opacity="0.05"/></pattern></defs><rect width="100" height="100" fill="url(%23grain)"/></svg>');
-            animation: float 20s linear infinite;
-            z-index: -1;
-        }
-
-        @keyframes float {
-            0% { transform: translate(0, 0) rotate(0deg); }
-            100% { transform: translate(-50%, -50%) rotate(360deg); }
-        }
-
-        .home-content {
-            max-width: 900px;
-            position: relative;
-            z-index: 2;
-        }
-
-        .home-content img {
-            width: 180px;
-            height: 180px;
-            border-radius: 50%;
-            object-fit: cover;
-            margin-bottom: 30px;
-            border: 8px solid transparent;
-            background: var(--primary-gradient) padding-box, var(--secondary-gradient) border-box;
-            box-shadow: var(--shadow);
-            animation: floating 4s ease-in-out infinite;
-        }
-
-        .home-content h1 {
-            font-size: 3rem;
-            margin-bottom: 20px;
-            background: var(--primary-gradient);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            background-clip: text;
-            animation: slideInUp 1s ease-out;
-        }
-
-        .home-content .subtitle {
-            font-size: 1.5rem;
-            color: var(--text-light);
-            margin-bottom: 20px;
-            font-weight: 500;
-            animation: slideInUp 1s ease-out 0.2s both;
-        }
-
-        .home-content p {
-            font-size: 1.3rem;
-            color: var(--text-light);
-            margin-bottom: 40px;
-            animation: slideInUp 1s ease-out 0.4s both;
-        }
-
-        .home-content .btn {
-            animation: slideInUp 1s ease-out 0.6s both;
-        }
-
-        @keyframes slideInUp {
-            from {
-                opacity: 0;
-                transform: translateY(50px);
-            }
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
-        }
-
-        /* --- QUEM SOU EU SECTION --- */
-        #quem-sou-eu .container {
-            display: flex;
-            align-items: center;
-            gap: 80px;
-        }
-
-        #quem-sou-eu .text-content,
-        #quem-sou-eu .visual-content {
-            flex: 1;
-        }
-
-        .visual-content {
-            text-align: center;
-            background: rgba(255, 255, 255, 0.9);
-            padding: 50px;
-            border-radius: var(--border-radius);
-            box-shadow: var(--shadow);
-            backdrop-filter: blur(10px);
-            border: 1px solid rgba(255, 255, 255, 0.2);
-        }
-
-        .visual-content h3 {
-            margin-bottom: 40px;
-            font-size: 2rem;
-            background: var(--secondary-gradient);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            background-clip: text;
-        }
-
-        .superpower {
-            display: flex;
-            align-items: center;
-            gap: 25px;
-            margin-bottom: 30px;
-            text-align: left;
-            padding: 20px;
-            border-radius: var(--border-radius-small);
-            background: rgba(255, 255, 255, 0.5);
-            transition: all 0.3s ease;
-        }
-
-        .superpower:hover {
-            transform: translateX(10px);
-            background: rgba(255, 255, 255, 0.8);
-            box-shadow: var(--shadow);
-        }
-
-        .superpower i {
-            font-size: 3rem;
-            background: var(--accent-gradient);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            background-clip: text;
-        }
-
-        /* --- COACH SECTION --- */
-        #coach .container {
-            max-width: 1000px;
-            text-align: center;
-        }
-
-        .testimonials {
-            display: flex;
-            gap: 40px;
-            margin-top: 60px;
-            margin-bottom: 60px;
-        }
-
-        .testimonial {
-            background: rgba(255, 255, 255, 0.9);
-            padding: 40px;
-            border-radius: var(--border-radius);
-            box-shadow: var(--shadow);
-            flex: 1;
-            backdrop-filter: blur(10px);
-            border: 1px solid rgba(255, 255, 255, 0.2);
-            transition: all 0.3s ease;
-        }
-
-        .testimonial:hover {
-            transform: translateY(-10px);
-            box-shadow: var(--shadow-hover);
-        }
-
-        .testimonial img {
-            width: 80px;
-            height: 80px;
-            border-radius: 50%;
-            margin-bottom: 20px;
-            border: 4px solid transparent;
-            background: var(--success-gradient) padding-box, var(--warning-gradient) border-box;
-        }
-
-        .testimonial p {
-            font-style: italic;
-            color: var(--text-light);
-            font-size: 1.1rem;
-        }
-
-        /* --- AVENTURAS SECTION --- */
-        .aventuras-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
-            gap: 40px;
-        }
-
-        .aventura-card {
-            background: rgba(255, 255, 255, 0.9);
-            border-radius: var(--border-radius);
-            box-shadow: var(--shadow);
-            padding: 40px;
-            text-align: center;
-            cursor: pointer;
-            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-            backdrop-filter: blur(10px);
-            border: 1px solid rgba(255, 255, 255, 0.2);
-            position: relative;
-            overflow: hidden;
-        }
-
-        .aventura-card::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: -100%;
-            width: 100%;
-            height: 100%;
-            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.3), transparent);
-            transition: left 0.5s;
-        }
-
-        .aventura-card:hover {
-            transform: translateY(-15px) scale(1.02);
-            box-shadow: var(--shadow-hover);
-        }
-
-        .aventura-card:hover::before {
-            left: 100%;
-        }
-
-        .aventura-card i {
-            font-size: 4rem;
-            margin-bottom: 25px;
-            background: var(--primary-gradient);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            background-clip: text;
-            transition: transform 0.3s ease;
-        }
-
-        .aventura-card:hover i {
-            transform: scale(1.2) rotate(10deg);
-        }
-
-        .aventura-card h3 {
-            font-size: 1.6rem;
-            margin-bottom: 15px;
-        }
-
-        .aventura-card p {
-            color: var(--text-light);
-            font-weight: 500;
-            font-size: 1.1rem;
-        }
-
-        /* --- JORNADA SECTION --- */
-        .timeline {
-            position: relative;
-            max-width: 1000px;
-            margin: 0 auto;
-        }
-
-        .timeline::after {
-            content: '';
-            position: absolute;
-            width: 6px;
-            background: var(--primary-gradient);
-            top: 0;
-            bottom: 0;
-            left: 50%;
-            margin-left: -3px;
-            border-radius: 3px;
-        }
-
-        .timeline-item {
-            padding: 15px 50px;
-            position: relative;
-            background: inherit;
-            width: 50%;
-        }
-
-        .timeline-item.left {
-            left: 0;
-            padding-right: 80px;
-        }
-
-        .timeline-item.right {
-            left: 50%;
-            padding-left: 80px;
-        }
-
-        .timeline-item::after {
-            content: '';
-            position: absolute;
-            width: 25px;
-            height: 25px;
-            right: -12.5px;
-            background: var(--secondary-gradient);
-            border: 4px solid white;
-            top: 30px;
-            border-radius: 50%;
-            z-index: 1;
-            box-shadow: var(--shadow);
-        }
-
-        .timeline-item.right::after {
-            left: -12.5px;
-        }
-
-        .timeline-content {
-            padding: 30px;
-            background: rgba(255, 255, 255, 0.9);
-            position: relative;
-            border-radius: var(--border-radius);
-            box-shadow: var(--shadow);
-            backdrop-filter: blur(10px);
-            border: 1px solid rgba(255, 255, 255, 0.2);
-            transition: all 0.3s ease;
-        }
-
-        .timeline-content:hover {
-            transform: translateY(-5px);
-            box-shadow: var(--shadow-hover);
-        }
-
-        .timeline-content h3 {
-            font-size: 1.4rem;
-            background: var(--accent-gradient);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            background-clip: text;
-        }
-
-        .timeline-content p {
-            font-style: italic;
-            font-size: 1.1rem;
-        }
-
-        /* --- CONTATO SECTION --- */
-        #contato .container {
-            max-width: 800px;
-            text-align: center;
-        }
-
-        #contato-form {
-            display: flex;
-            flex-direction: column;
-            gap: 25px;
-            margin-top: 50px;
-        }
-
-        .form-group input,
-        .form-group textarea {
-            width: 100%;
-            padding: 20px;
-            border-radius: var(--border-radius-small);
-            border: 2px solid transparent;
-            font-family: var(--font-body);
-            font-size: 1.1rem;
-            background: rgba(255, 255, 255, 0.9);
-            backdrop-filter: blur(10px);
-            transition: all 0.3s ease;
-        }
-
-        .form-group input:focus,
-        .form-group textarea:focus {
-            outline: none;
-            border-color: transparent;
-            background: var(--primary-gradient);
-            color: white;
-            box-shadow: var(--shadow);
-        }
-
-        .form-group input::placeholder,
-        .form-group textarea::placeholder {
-            color: var(--text-light);
-            transition: color 0.3s ease;
-        }
-
-        .form-group input:focus::placeholder,
-        .form-group textarea:focus::placeholder {
-            color: rgba(255, 255, 255, 0.8);
-        }
-
-        .social-links {
-            margin-top: 50px;
-        }
-
-        .social-links a {
-            font-size: 3rem;
-            color: var(--text-dark);
-            margin: 0 20px;
-            transition: all 0.3s ease;
-            display: inline-block;
-        }
-
-        .social-links a:hover {
-            background: var(--secondary-gradient);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            background-clip: text;
-            transform: scale(1.3) rotate(10deg);
-        }
-
-        /* --- FOOTER --- */
-        footer {
-            background: var(--primary-gradient);
-            color: white;
-            text-align: center;
-            padding: 30px 0;
-            position: relative;
-            overflow: hidden;
-        }
-
-        footer::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><defs><pattern id="footerGrain" width="100" height="100" patternUnits="userSpaceOnUse"><circle cx="25" cy="25" r="1" fill="white" opacity="0.1"/><circle cx="75" cy="75" r="1" fill="white" opacity="0.1"/></pattern></defs><rect width="100" height="100" fill="url(%23footerGrain)"/></svg>');
-            animation: float 15s linear infinite;
-        }
-
-        footer .container {
-            position: relative;
-            z-index: 2;
-        }
-
-        /* --- MODAL STYLES --- */
-        .modal {
-            display: none;
-            position: fixed;
-            z-index: 2000;
-            left: 0;
-            top: 0;
-            width: 100%;
-            height: 100%;
-            overflow: auto;
-            background: rgba(0, 0, 0, 0.8);
-            backdrop-filter: blur(10px);
-        }
-
-        .modal-content {
-            background: rgba(255, 255, 255, 0.95);
-            margin: 5% auto;
-            padding: 50px;
-            border-radius: var(--border-radius);
-            width: 90%;
-            max-width: 800px;
-            position: relative;
-            animation: slideDown 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-            backdrop-filter: blur(20px);
-            border: 1px solid rgba(255, 255, 255, 0.2);
-        }
-
-        .modal-content h3 {
-            background: var(--primary-gradient);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            background-clip: text;
-            margin-top: 0;
-            font-size: 2rem;
-        }
-
-        .close-btn {
-            color: var(--text-light);
-            position: absolute;
-            top: 20px;
-            right: 30px;
-            font-size: 35px;
-            font-weight: bold;
-            cursor: pointer;
-            transition: all 0.3s ease;
-        }
-
-        .close-btn:hover {
-            color: var(--text-dark);
-            transform: scale(1.2);
-        }
-
-        @keyframes slideDown {
-            from {
-                transform: translateY(-100px);
-                opacity: 0;
-            }
-            to {
-                transform: translateY(0);
-                opacity: 1;
-            }
-        }
-
-        /* --- RESPONSIVE STYLES --- */
-        @media (max-width: 768px) {
-            h1 {
-                font-size: 2.5rem;
-            }
-
-            h2 {
-                font-size: 2.2rem;
-            }
-
-            section {
-                padding: 80px 0;
-            }
-
-            .nav-links {
-                position: fixed;
-                top: 80px;
-                left: -100%;
-                width: 100%;
-                height: calc(100vh - 80px);
-                background: rgba(255, 255, 255, 0.95);
-                backdrop-filter: blur(20px);
-                flex-direction: column;
-                align-items: center;
-                justify-content: center;
-                gap: 40px;
-                transition: left 0.3s ease-in-out;
-            }
-
-            .nav-links.active {
-                left: 0;
-            }
-
-            .nav-links li {
-                margin-left: 0;
-            }
-
-            .hamburger {
-                display: flex;
-            }
-
-            .hamburger.active .bar1 {
-                transform: rotate(-45deg) translate(-8px, 6px);
-            }
-
-            .hamburger.active .bar2 {
-                opacity: 0;
-            }
-
-            .hamburger.active .bar3 {
-                transform: rotate(45deg) translate(-8px, -6px);
-            }
-
-            #quem-sou-eu .container {
-                flex-direction: column;
-            }
-
-            .testimonials {
-                flex-direction: column;
-            }
-
-            .timeline::after {
-                left: 31px;
-            }
-
-            .timeline-item {
-                width: 100%;
-                padding-left: 80px;
-                padding-right: 25px;
-            }
-
-            .timeline-item.left,
-            .timeline-item.right {
-                left: 0%;
-            }
-
-            .timeline-item::after {
-                left: 21px;
-            }
-
-            .aventuras-grid {
-                grid-template-columns: 1fr;
-            }
-        }
-
-        /* --- EXTRA ANIMATIONS & EFFECTS --- */
-        
-        /* Floating Particles */
-        .particles {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            pointer-events: none;
-            z-index: 1;
-        }
-
-        .particle {
-            position: absolute;
-            width: 6px;
-            height: 6px;
-            background: var(--accent-gradient);
-            border-radius: 50%;
-            animation: floatParticle 20s linear infinite;
-            opacity: 0.3;
-        }
-
-        @keyframes floatParticle {
-            0% {
-                transform: translateY(100vh) rotate(0deg);
-                opacity: 0;
-            }
-            10% {
-                opacity: 0.3;
-            }
-            90% {
-                opacity: 0.3;
-            }
-            100% {
-                transform: translateY(-100px) rotate(360deg);
-                opacity: 0;
-            }
-        }
-
-        /* Rainbow Text */
-        .rainbow-text {
-            background: var(--primary-gradient);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            background-clip: text;
-        }
-
-        /* Neon Glow */
-        .neon {
-            color: var(--text-dark);
-            font-weight: 600;
-        }
-
-        /* Magnetic Effect */
-        .magnetic {
-            transition: transform 0.3s ease;
-        }
-
-        .magnetic:hover {
-            transform: scale(1.05);
-        }
-
-        /* Bounce Animation */
-        .bounce {
-            animation: bounce 2s infinite;
-        }
-
-        @keyframes bounce {
-            0%, 20%, 50%, 80%, 100% {
-                transform: translateY(0);
-            }
-            40% {
-                transform: translateY(-5px);
-            }
-            60% {
-                transform: translateY(-3px);
-            }
-        }
-
-        /* Shake Animation */
-        .shake {
-            animation: shake 0.5s ease-in-out;
-        }
-
-        @keyframes shake {
-            0%, 100% { transform: translateX(0); }
-            25% { transform: translateX(-3px); }
-            75% { transform: translateX(3px); }
-        }
-
-        /* Sparkle Effect */
-        .sparkle {
-            position: relative;
-        }
-
-        .sparkle::before,
-        .sparkle::after {
-            content: '⚡';
-            position: absolute;
-            font-size: 1.2rem;
-            opacity: 0;
-            animation: sparkle 2s ease-in-out infinite;
-        }
-
-        .sparkle::before {
-            top: -8px;
-            left: -8px;
-            animation-delay: 0s;
-        }
-
-        .sparkle::after {
-            bottom: -8px;
-            right: -8px;
-            animation-delay: 1s;
-        }
-
-        @keyframes sparkle {
-            0%, 100% { opacity: 0; transform: scale(0) rotate(0deg); }
-            50% { opacity: 1; transform: scale(1) rotate(180deg); }
-        }
-
-        /* Scroll to Top Button */
-        .scroll-indicator {
-            position: fixed;
-            bottom: 30px;
-            right: 30px;
-            width: 50px;
-            height: 50px;
-            background: var(--primary-gradient);
-            border-radius: 12px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            color: white;
-            font-size: 1.5rem;
-            cursor: pointer;
-            opacity: 0;
-            transform: translateY(20px);
-            transition: all 0.3s ease;
-            z-index: 1000;
-            box-shadow: var(--shadow);
-        }
-
-        .scroll-indicator.visible {
-            opacity: 1;
-            transform: translateY(0);
-        }
-
-        .scroll-indicator:hover {
-            transform: scale(1.1);
-            box-shadow: var(--shadow-hover);
-        }
-
-        /* Custom Scrollbar */
-        ::-webkit-scrollbar {
-            width: 12px;
-        }
-
-        ::-webkit-scrollbar-track {
-            background: rgba(255, 255, 255, 0.1);
-            border-radius: 6px;
-        }
-
-        ::-webkit-scrollbar-thumb {
-            background: var(--primary-gradient);
-            border-radius: 6px;
-        }
-
-        ::-webkit-scrollbar-thumb:hover {
-            background: var(--secondary-gradient);
-        }
-
-        /* Selection Style */
-        ::selection {
-            background: var(--primary-gradient);
-            color: white;
-        }
-
-        /* Focus Styles */
-        *:focus {
-            outline: 2px solid var(--accent-gradient);
-            outline-offset: 2px;
-        }
-
-        /* Print Styles */
-        @media print {
-            .particles,
-            .scroll-indicator,
-            .nav-links,
-            #progress-bar {
-                display: none !important;
-            }
-        }
-    </style>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Fernando Brisola Batista — CTO · CMO · Estrategista de IA</title>
+<meta name="description" content="Fernando Brisola Batista. Engenheiro ITA, MBA Insper, 25+ anos em tecnologia. Fundador da Agência Logos, AssessIA e plataformas de IA. Transformo inteligência artificial em resultado real.">
+<meta property="og:title" content="Fernando Brisola Batista — CTO · CMO · Estrategista de IA">
+<meta property="og:description" content="Engenheiro ITA, MBA Insper, 25+ anos. Fundador da Agência Logos e AssessIA. IA aplicada a resultados reais.">
+<meta property="og:image" content="https://fbrisola.com.br/fernando.png">
+<meta property="og:url" content="https://fbrisola.com.br">
+<meta name="twitter:card" content="summary_large_image">
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,400;0,9..144,600;0,9..144,700;1,9..144,300;1,9..144,400;1,9..144,600&family=Figtree:wght@300;400;500;600;700&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+
+:root{
+  --bg:#07080F;
+  --bg2:#0C0F1A;
+  --bg3:#111627;
+  --gold:#C4952A;
+  --gold-l:#DCA940;
+  --gold-dim:rgba(196,149,42,.12);
+  --gold-b:rgba(196,149,42,.25);
+  --blue:#3B7BE8;
+  --text:#EDE9DF;
+  --text2:#9AA8BF;
+  --text3:#4E5D75;
+  --border:rgba(255,255,255,.06);
+  --border2:rgba(255,255,255,.10);
+  --r:14px;
+  --fd:'Fraunces',Georgia,serif;
+  --fb:'Figtree',system-ui,sans-serif;
+  --fm:'Space Mono',monospace;
+}
+
+html{scroll-behavior:smooth}
+
+body{
+  background:var(--bg);
+  color:var(--text);
+  font-family:var(--fb);
+  font-size:16px;
+  line-height:1.7;
+  overflow-x:hidden;
+}
+
+/* ─── NAV ─── */
+.site-nav{
+  position:fixed;top:0;left:0;right:0;z-index:1000;
+  padding:1.25rem 2.5rem;
+  display:flex;align-items:center;justify-content:space-between;
+  transition:background .4s,border-color .4s;
+  border-bottom:1px solid transparent;
+}
+.site-nav.scrolled{
+  background:rgba(7,8,15,.95);
+  border-bottom-color:var(--border);
+}
+.nav-logo{
+  font-family:var(--fd);font-size:1.5rem;font-weight:700;
+  color:var(--text);text-decoration:none;letter-spacing:-.02em;
+}
+.nav-logo span{color:var(--gold)}
+.nav-links{display:flex;gap:2rem;list-style:none;align-items:center}
+.nav-links a{
+  color:var(--text2);text-decoration:none;
+  font-size:.875rem;font-weight:500;letter-spacing:.02em;
+  transition:color .2s;
+}
+.nav-links a:hover{color:var(--text)}
+
+/* ─── DROPDOWN PLATAFORMAS ─── */
+.nav-dropdown{position:relative}
+.nav-dropdown-toggle{
+  display:flex;align-items:center;gap:.3rem;
+  color:var(--text2);font-size:.875rem;font-weight:500;letter-spacing:.02em;
+  cursor:pointer;transition:color .2s;user-select:none;
+  background:none;border:none;padding:0;font-family:var(--fb);
+}
+.nav-dropdown-toggle:hover{color:var(--text)}
+.nav-dropdown-toggle .caret{
+  font-size:.6rem;transition:transform .2s;display:inline-block;
+}
+.nav-dropdown:hover .caret,.nav-dropdown.open .caret{transform:rotate(180deg)}
+.nav-dropdown-menu{
+  position:absolute;top:calc(100% + .75rem);left:50%;
+  transform:translateX(-50%) translateY(-6px);
+  background:var(--bg2);border:1px solid var(--border2);
+  border-radius:var(--r);padding:.5rem 0;
+  min-width:210px;
+  opacity:0;visibility:hidden;
+  transition:opacity .2s,transform .2s,visibility .2s;
+  z-index:200;
+  box-shadow:0 16px 48px rgba(0,0,0,.5);
+}
+.nav-dropdown:hover .nav-dropdown-menu,
+.nav-dropdown.open .nav-dropdown-menu{
+  opacity:1;visibility:visible;
+  transform:translateX(-50%) translateY(0);
+}
+.nav-dropdown-menu a{
+  display:block;padding:.55rem 1.25rem;
+  color:var(--text2);text-decoration:none;
+  font-size:.85rem;font-weight:500;
+  transition:color .2s,background .2s;
+  white-space:nowrap;
+}
+.nav-dropdown-menu a:hover{color:var(--text);background:rgba(255,255,255,.05)}
+.nav-dropdown-menu .dd-divider{
+  height:1px;background:var(--border);margin:.4rem 0;
+}
+
+.nav-cta{
+  background:var(--gold);color:var(--bg);
+  padding:.6rem 1.4rem;border-radius:6px;
+  font-weight:700;font-size:.875rem;text-decoration:none;
+  transition:background .2s,transform .15s;
+}
+.nav-cta:hover{background:var(--gold-l);transform:translateY(-1px)}
+.hamburger{display:none;cursor:pointer;font-size:1.5rem;color:var(--text);background:none;border:none;line-height:1}
+
+/* ─── MOBILE MENU (painel fullscreen, fora do header) ─── */
+.mobile-menu{
+  display:none;
+}
+.mobile-menu-list{
+  list-style:none;display:flex;flex-direction:column;gap:1.5rem;
+}
+.mobile-menu-list a{
+  color:var(--text2);text-decoration:none;
+  font-size:1.25rem;font-weight:500;
+  transition:color .2s;
+}
+.mobile-menu-list a:hover{color:var(--text)}
+.mobile-menu .nav-dropdown-toggle{font-size:1.25rem;color:var(--text2)}
+.mobile-menu .nav-dropdown-menu{
+  position:static;transform:none;opacity:1;visibility:visible;
+  background:rgba(255,255,255,.04);border:1px solid var(--border);
+  border-radius:8px;margin-top:.5rem;padding:.5rem 0;
+  box-shadow:none;display:none;
+}
+.mobile-menu .nav-dropdown.open .nav-dropdown-menu{display:block}
+.mobile-menu .nav-dropdown-menu a{font-size:1.05rem;padding:.6rem 1.5rem;display:block}
+
+/* ─── FORM FEEDBACK ─── */
+.form-error{
+  display:none;text-align:center;padding:3rem 2rem;
+}
+.form-error.show{display:block}
+.fe-icon{font-size:3rem;margin-bottom:1rem}
+.fe-title{font-family:var(--fd);font-size:1.75rem;color:var(--text);margin-bottom:.5rem}
+.fe-text{color:var(--text2)}
+.fe-retry{
+  margin-top:1.25rem;background:transparent;color:var(--gold);
+  border:1px solid var(--gold-b);padding:.75rem 1.75rem;
+  border-radius:8px;font-family:var(--fb);font-size:.9rem;font-weight:600;
+  cursor:pointer;transition:all .2s;
+}
+.fe-retry:hover{background:var(--gold-dim)}
+
+/* ─── HERO ─── */
+.hero{
+  min-height:100vh;display:flex;align-items:center;
+  position:relative;overflow:hidden;
+  padding:8rem 2.5rem 4rem;
+}
+.hero-grid-bg{
+  position:absolute;inset:0;
+  background-image:
+    linear-gradient(rgba(59,123,232,.04) 1px,transparent 1px),
+    linear-gradient(90deg,rgba(59,123,232,.04) 1px,transparent 1px);
+  background-size:64px 64px;
+}
+.hero-glow{
+  position:absolute;inset:0;pointer-events:none;
+  background:
+    radial-gradient(ellipse 70% 60% at 65% 50%,rgba(59,123,232,.13) 0%,transparent 70%),
+    radial-gradient(ellipse 45% 45% at 15% 75%,rgba(196,149,42,.09) 0%,transparent 70%);
+}
+.hero-container{
+  max-width:1280px;margin:0 auto;width:100%;
+  display:grid;grid-template-columns:1fr 420px;
+  gap:4rem;align-items:center;position:relative;z-index:1;
+}
+.hero-eyebrow{display:flex;align-items:center;gap:.75rem;margin-bottom:1.5rem}
+.eyebrow-line{width:40px;height:1px;background:var(--gold)}
+.eyebrow-text{
+  font-family:var(--fm);font-size:.7rem;color:var(--gold);
+  letter-spacing:.14em;text-transform:uppercase;
+}
+.hero-title{
+  font-family:var(--fd);
+  font-size:clamp(2.4rem,4.5vw,4.25rem);
+  font-weight:300;line-height:1.08;
+  letter-spacing:-.03em;color:var(--text);
+  margin-bottom:1.5rem;
+}
+.hero-title em{font-style:italic;color:var(--gold-l)}
+.hero-title strong{font-weight:700}
+.hero-sub{
+  font-size:1.0625rem;color:var(--text2);
+  line-height:1.8;max-width:510px;margin-bottom:2.5rem;
+}
+.hero-ctas{display:flex;gap:1rem;flex-wrap:wrap}
+
+.btn-gold{
+  background:var(--gold);color:var(--bg);
+  padding:.875rem 2rem;border-radius:8px;
+  font-weight:700;font-size:.9375rem;text-decoration:none;
+  display:inline-flex;align-items:center;gap:.5rem;
+  transition:all .2s;
+}
+.btn-gold:hover{background:var(--gold-l);transform:translateY(-2px);box-shadow:0 8px 28px rgba(196,149,42,.32)}
+
+.btn-ghost{
+  background:transparent;color:var(--text);
+  padding:.875rem 2rem;border-radius:8px;
+  font-weight:600;font-size:.9375rem;text-decoration:none;
+  border:1px solid var(--border2);
+  display:inline-flex;align-items:center;gap:.5rem;
+  transition:all .2s;
+}
+.btn-ghost:hover{border-color:rgba(255,255,255,.25);background:rgba(255,255,255,.04);transform:translateY(-2px)}
+
+.hero-img-wrap{position:relative}
+.hero-img-deco{
+  position:absolute;inset:-14px;border-radius:28px;
+  border:1px solid var(--gold-b);pointer-events:none;z-index:-1;
+}
+.hero-img-frame{
+  position:relative;border-radius:20px;overflow:hidden;
+  aspect-ratio:3/4;max-height:520px;
+}
+.hero-img-frame::after{
+  content:'';position:absolute;inset:0;
+  background:linear-gradient(to bottom,transparent 50%,rgba(7,8,15,.75) 100%);
+  z-index:1;
+}
+.hero-img-frame img{width:100%;height:100%;object-fit:cover;object-position:top center;display:block}
+
+.hero-badge{
+  position:absolute;bottom:1.5rem;left:-2rem;
+  background:var(--bg2);border:1px solid var(--border2);
+  border-radius:12px;padding:.875rem 1.25rem;z-index:2;
+}
+.hero-badge-label{
+  font-family:var(--fm);font-size:.65rem;color:var(--gold);
+  text-transform:uppercase;letter-spacing:.1em;margin-bottom:.2rem;
+}
+.hero-badge-value{
+  font-family:var(--fd);font-size:1.625rem;
+  font-weight:700;color:var(--text);line-height:1;
+}
+
+/* ─── TRUST STRIP ─── */
+.trust{
+  background:var(--bg2);
+  border-top:1px solid var(--border);
+  border-bottom:1px solid var(--border);
+  padding:2rem 2.5rem;
+}
+.trust-inner{
+  max-width:1280px;margin:0 auto;
+  display:flex;align-items:center;justify-content:center;
+  gap:2.5rem;flex-wrap:wrap;
+}
+.trust-item{display:flex;flex-direction:column;align-items:center;gap:.2rem;text-align:center}
+.trust-value{
+  font-family:var(--fd);font-size:2rem;font-weight:700;
+  color:var(--gold);line-height:1;
+}
+.trust-label{
+  font-size:.7rem;color:var(--text3);font-weight:600;
+  letter-spacing:.06em;text-transform:uppercase;
+}
+.trust-div{width:1px;height:36px;background:var(--border2)}
+
+/* ─── SHARED SECTION ─── */
+.section{padding:6rem 2.5rem}
+.container{max-width:1280px;margin:0 auto}
+.s-eyebrow{display:flex;align-items:center;gap:.75rem;margin-bottom:1rem}
+.s-eyebrow-line{width:32px;height:1px;background:var(--gold)}
+.s-eyebrow-text{
+  font-family:var(--fm);font-size:.68rem;color:var(--gold);
+  text-transform:uppercase;letter-spacing:.15em;
+}
+.s-title{
+  font-family:var(--fd);
+  font-size:clamp(1.875rem,3.5vw,3.125rem);
+  font-weight:300;letter-spacing:-.03em;line-height:1.15;
+  color:var(--text);margin-bottom:1.25rem;
+}
+.s-title em{font-style:italic;color:var(--gold-l)}
+
+/* ─── SOBRE ─── */
+.about-grid{
+  display:grid;grid-template-columns:1fr 1fr;
+  gap:5rem;align-items:start;
+}
+.about-text p{
+  color:var(--text2);margin-bottom:1.25rem;
+  font-size:1.0625rem;line-height:1.85;
+}
+.about-text p strong{color:var(--text)}
+
+.about-cards{display:flex;flex-direction:column;gap:1.25rem}
+.a-card{
+  background:var(--bg2);border:1px solid var(--border);
+  border-radius:var(--r);padding:1.5rem;
+  transition:border-color .25s,transform .25s;
+}
+.a-card:hover{border-color:var(--gold-b);transform:translateX(4px)}
+.a-card-icon{font-size:1.375rem;margin-bottom:.625rem}
+.a-card-title{
+  font-family:var(--fd);font-size:1.0625rem;font-weight:600;
+  color:var(--text);margin-bottom:.3rem;
+}
+.a-card-desc{font-size:.875rem;color:var(--text2);line-height:1.65}
+
+/* ─── NEGÓCIOS ─── */
+.negocios{background:var(--bg2)}
+.biz-header{
+  display:flex;justify-content:space-between;align-items:flex-end;
+  margin-bottom:3.5rem;flex-wrap:wrap;gap:1.5rem;
+}
+.biz-grid{
+  display:grid;grid-template-columns:repeat(2,1fr);gap:1.5rem;
+}
+.biz-card{
+  background:var(--bg3);border:1px solid var(--border);
+  border-radius:20px;padding:2.5rem;
+  display:flex;flex-direction:column;
+  position:relative;overflow:hidden;
+  transition:all .3s;
+}
+.biz-card::after{
+  content:'';position:absolute;inset:0;
+  background:linear-gradient(135deg,transparent 55%,rgba(196,149,42,.05) 100%);
+  opacity:0;transition:opacity .3s;pointer-events:none;
+}
+.biz-card:hover{
+  border-color:var(--gold-b);
+  transform:translateY(-5px);
+  box-shadow:0 24px 64px rgba(0,0,0,.45);
+}
+.biz-card:hover::after{opacity:1}
+
+.biz-tag{
+  display:inline-flex;align-items:center;gap:.4rem;
+  background:var(--gold-dim);border:1px solid var(--gold-b);
+  color:var(--gold);font-family:var(--fm);font-size:.63rem;
+  letter-spacing:.12em;text-transform:uppercase;
+  padding:.3rem .8rem;border-radius:100px;
+  margin-bottom:1.5rem;width:fit-content;
+}
+.f-social svg,.channel-icon svg{width:16px;height:16px;display:block;flex-shrink:0}
+.biz-icon.gold,.biz-icon.blue,.biz-icon.green,.biz-icon.purple{display:none}
+
+.biz-name{
+  font-family:var(--fd);font-size:1.75rem;font-weight:600;
+  color:var(--text);margin-bottom:.4rem;letter-spacing:-.02em;
+}
+.biz-tagline{
+  font-size:.9375rem;color:var(--text2);
+  margin-bottom:1.25rem;line-height:1.65;
+}
+.biz-for{
+  font-family:var(--fm);font-size:.7rem;
+  color:var(--text3);text-transform:uppercase;
+  letter-spacing:.08em;margin-bottom:1.25rem;
+}
+.biz-features{
+  list-style:none;display:flex;flex-direction:column;
+  gap:.6rem;margin-bottom:2rem;
+}
+.biz-features li{
+  display:flex;align-items:flex-start;gap:.6rem;
+  font-size:.875rem;color:var(--text2);
+}
+.biz-features li::before{content:'—';color:var(--gold);font-weight:700;flex-shrink:0}
+.biz-cta{
+  margin-top:auto;
+  background:var(--gold);color:var(--bg);border:none;
+  padding:.875rem 1.5rem;border-radius:8px;
+  font-family:var(--fb);font-weight:700;font-size:.9rem;
+  cursor:pointer;text-decoration:none;
+  display:inline-flex;align-items:center;justify-content:center;gap:.5rem;
+  transition:all .2s;
+}
+.biz-cta:hover{background:var(--gold-l);transform:translateY(-1px);box-shadow:0 6px 20px rgba(196,149,42,.28)}
+
+/* ─── DIFERENCIAIS ─── */
+.dif-grid{
+  display:grid;grid-template-columns:repeat(3,1fr);
+  gap:1.5rem;margin-top:3.5rem;
+}
+.dif-card{
+  padding:2rem;border-radius:var(--r);
+  border:1px solid var(--border);background:var(--bg2);
+  transition:border-color .25s,transform .25s;
+}
+.dif-card:hover{border-color:var(--gold-b);transform:translateY(-3px)}
+.dif-num{
+  font-family:var(--fm);font-size:.68rem;
+  color:var(--gold);margin-bottom:1.25rem;letter-spacing:.1em;
+}
+.dif-title{
+  font-family:var(--fd);font-size:1.125rem;font-weight:600;
+  color:var(--text);margin-bottom:.625rem;line-height:1.3;
+}
+.dif-desc{font-size:.875rem;color:var(--text2);line-height:1.72}
+
+/* ─── TIMELINE ─── */
+.timeline-section{background:var(--bg2)}
+.timeline{position:relative;max-width:820px;margin:3.5rem auto 0}
+.timeline::before{
+  content:'';position:absolute;left:50%;top:0;bottom:0;
+  width:1px;
+  background:linear-gradient(to bottom,transparent,var(--border2) 8%,var(--border2) 92%,transparent);
+  transform:translateX(-50%);
+}
+.tl-item{
+  display:grid;grid-template-columns:1fr 44px 1fr;
+  gap:0;margin-bottom:3rem;align-items:start;
+}
+.tl-item:nth-child(odd) .tl-content{grid-column:1;text-align:right;padding-right:2rem}
+.tl-item:nth-child(odd) .tl-dot{grid-column:2;display:flex;justify-content:center;padding-top:.3rem}
+.tl-item:nth-child(odd) .tl-empty{grid-column:3}
+
+.tl-item:nth-child(even) .tl-empty{grid-column:1}
+.tl-item:nth-child(even) .tl-dot{grid-column:2;display:flex;justify-content:center;padding-top:.3rem}
+.tl-item:nth-child(even) .tl-content{grid-column:3;padding-left:2rem}
+
+.tl-dot-inner{
+  width:12px;height:12px;border-radius:50%;
+  background:var(--gold);border:3px solid var(--bg2);
+  box-shadow:0 0 0 1px var(--gold);
+}
+.tl-year{
+  font-family:var(--fm);font-size:.68rem;color:var(--gold);
+  text-transform:uppercase;letter-spacing:.1em;margin-bottom:.4rem;
+}
+.tl-title{
+  font-family:var(--fd);font-size:1.0625rem;font-weight:600;
+  color:var(--text);margin-bottom:.3rem;
+}
+.tl-desc{font-size:.8125rem;color:var(--text2);line-height:1.65}
+
+/* ─── TESTIMONIALS ─── */
+.test-grid{
+  display:grid;grid-template-columns:repeat(3,1fr);
+  gap:1.5rem;margin-top:3.5rem;
+}
+.test-card{
+  background:var(--bg2);border:1px solid var(--border);
+  border-radius:var(--r);padding:2rem;
+  transition:border-color .25s,transform .25s;
+}
+.test-card:hover{border-color:var(--gold-b);transform:translateY(-3px)}
+.test-quote{
+  font-family:var(--fd);font-size:2.75rem;
+  color:var(--gold);line-height:1;margin-bottom:.875rem;
+}
+.test-text{
+  font-size:.9375rem;color:var(--text2);
+  line-height:1.78;margin-bottom:1.5rem;font-style:italic;
+}
+.test-author{font-weight:700;font-size:.875rem;color:var(--text)}
+.test-role{font-size:.8rem;color:var(--text3)}
+
+/* ─── CONTACT ─── */
+.contact-section{background:var(--bg2)}
+.contact-grid{
+  display:grid;grid-template-columns:1fr 1fr;
+  gap:5rem;align-items:start;
+}
+.cform{display:flex;flex-direction:column;gap:1rem}
+.frow{display:grid;grid-template-columns:1fr 1fr;gap:1rem}
+.fg{display:flex;flex-direction:column;gap:.4rem}
+label{font-size:.8rem;font-weight:600;color:var(--text2);letter-spacing:.03em}
+input,select,textarea{
+  background:var(--bg3);border:1px solid var(--border2);
+  border-radius:8px;padding:.875rem 1rem;
+  color:var(--text);font-family:var(--fb);font-size:.9375rem;
+  outline:none;transition:border-color .2s;width:100%;
+  -webkit-appearance:none;appearance:none;
+}
+input::placeholder,textarea::placeholder{color:var(--text3)}
+input:focus,select:focus,textarea:focus{border-color:var(--gold)}
+select{
+  background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8'%3E%3Cpath d='M1 1l5 5 5-5' stroke='%23C4952A' stroke-width='1.5' fill='none' stroke-linecap='round'/%3E%3C/svg%3E");
+  background-repeat:no-repeat;background-position:right 1rem center;
+  padding-right:2.5rem;cursor:pointer;
+}
+select option{background:var(--bg3)}
+textarea{resize:vertical;min-height:120px}
+.form-btn{
+  background:var(--gold);color:var(--bg);border:none;
+  padding:1rem 2rem;border-radius:8px;
+  font-family:var(--fb);font-size:1rem;font-weight:700;
+  cursor:pointer;transition:all .2s;
+  display:flex;align-items:center;justify-content:center;gap:.5rem;
+}
+.form-btn:hover{background:var(--gold-l);transform:translateY(-2px);box-shadow:0 8px 24px rgba(196,149,42,.3)}
+.form-success{
+  display:none;text-align:center;padding:3rem 2rem;
+}
+.form-success.show{display:block}
+.fs-icon{font-size:3rem;margin-bottom:1rem}
+.fs-title{font-family:var(--fd);font-size:1.75rem;color:var(--text);margin-bottom:.5rem}
+.fs-text{color:var(--text2)}
+
+.contact-info-side{display:flex;flex-direction:column;gap:2rem}
+.ci-title{font-family:var(--fd);font-size:1.75rem;font-weight:600;color:var(--text);line-height:1.3}
+.ci-text{color:var(--text2);font-size:1rem;line-height:1.7;margin-top:.75rem}
+.channels{display:flex;flex-direction:column;gap:.875rem}
+.channel{
+  display:flex;align-items:center;gap:1rem;
+  padding:1rem 1.25rem;
+  background:var(--bg3);border-radius:10px;
+  border:1px solid var(--border);text-decoration:none;color:var(--text);
+  transition:all .2s;
+}
+.channel:hover{border-color:var(--gold-b);transform:translateX(5px)}
+.channel-icon{
+  width:40px;height:40px;border-radius:8px;
+  background:var(--gold-dim);display:flex;align-items:center;
+  justify-content:center;flex-shrink:0;color:var(--gold);
+}
+.channel-label{font-size:.72rem;color:var(--text3);text-transform:uppercase;letter-spacing:.07em}
+.channel-value{font-size:.9375rem;color:var(--text);font-weight:500}
+
+.cta-box{
+  padding:1.5rem;background:var(--gold-dim);
+  border:1px solid var(--gold-b);border-radius:var(--r);
+}
+.cta-box-title{
+  font-family:var(--fd);font-size:1.0625rem;font-weight:600;
+  color:var(--text);margin-bottom:.5rem;
+}
+.cta-box-text{font-size:.875rem;color:var(--text2);line-height:1.7}
+
+/* ─── FOOTER ─── */
+footer{
+  background:var(--bg);border-top:1px solid var(--border);
+  padding:3rem 2.5rem;text-align:center;
+}
+.f-logo{
+  font-family:var(--fd);font-size:1.75rem;font-weight:700;
+  color:var(--text);margin-bottom:.375rem;
+}
+.f-logo span{color:var(--gold)}
+.f-tagline{font-size:.875rem;color:var(--text3);margin-bottom:1.75rem}
+.f-socials{display:flex;gap:.875rem;justify-content:center;margin-bottom:1.75rem}
+.f-social{
+  width:40px;height:40px;border-radius:8px;
+  background:var(--bg2);border:1px solid var(--border);
+  display:flex;align-items:center;justify-content:center;
+  text-decoration:none;font-size:1rem;color:var(--text2);
+  transition:all .2s;
+}
+.f-social:hover{border-color:var(--gold-b);color:var(--gold)}
+.f-copy{font-size:.8rem;color:var(--text3)}
+
+/* ─── WHATSAPP FLOAT ─── */
+.wa-float{
+  position:fixed;bottom:2rem;right:2rem;z-index:900;
+  width:56px;height:56px;border-radius:50%;
+  background:#25D366;display:flex;align-items:center;justify-content:center;
+  text-decoration:none;font-size:1.625rem;
+  box-shadow:0 4px 24px rgba(37,211,102,.4);
+  transition:transform .2s,box-shadow .2s;
+}
+.wa-float:hover{transform:scale(1.1);box-shadow:0 8px 32px rgba(37,211,102,.5)}
+
+/* ─── ANIMATIONS ─── */
+.reveal{
+  opacity:0;transform:translateY(28px);
+  transition:opacity .65s ease,transform .65s ease;
+}
+.reveal.visible{opacity:1;transform:translateY(0)}
+.d1{transition-delay:.1s}.d2{transition-delay:.2s}.d3{transition-delay:.3s}.d4{transition-delay:.4s}
+
+/* ─── RESPONSIVE ─── */
+@media(max-width:1024px){
+  .hero-container{grid-template-columns:1fr}
+  .hero-img-wrap{display:none}
+  .about-grid{grid-template-columns:1fr;gap:3rem}
+  .biz-grid{grid-template-columns:1fr}
+  .dif-grid{grid-template-columns:repeat(2,1fr)}
+  .test-grid{grid-template-columns:1fr}
+  .contact-grid{grid-template-columns:1fr;gap:3rem}
+}
+
+@media(max-width:768px){
+  .nav-links,.nav-cta{display:none}
+  .site-nav{padding:1rem 1.5rem}
+  .hamburger{display:block}
+  .section{padding:4rem 1.5rem}
+  .trust{padding:1.5rem}
+  .trust-div{display:none}
+  .trust-inner{gap:1.25rem}
+  .dif-grid{grid-template-columns:1fr}
+  .frow{grid-template-columns:1fr}
+  .timeline::before{left:12px}
+  .tl-item{grid-template-columns:26px 1fr}
+  .tl-item:nth-child(odd) .tl-content,
+  .tl-item:nth-child(even) .tl-content{
+    grid-column:2;text-align:left;padding-right:0;padding-left:.875rem;
+  }
+  .tl-item:nth-child(odd) .tl-dot,
+  .tl-item:nth-child(even) .tl-dot{grid-column:1}
+  .tl-item:nth-child(odd) .tl-empty,
+  .tl-item:nth-child(even) .tl-empty{display:none}
+}
+
+body.menu-open{overflow:hidden}
+body.menu-open .site-nav{
+  z-index:10001;
+  background:rgba(7,8,15,.97);
+  border-bottom-color:var(--border);
+}
+body.menu-open .mobile-menu{
+  display:flex;
+  flex-direction:column;
+  position:fixed;
+  top:0;left:0;right:0;bottom:0;
+  width:100%;
+  height:100%;
+  min-height:100vh;
+  min-height:100dvh;
+  z-index:10000;
+  background:rgba(7,8,15,.98);
+  padding:5.5rem 1.5rem 2rem;
+  overflow-y:auto;
+  -webkit-overflow-scrolling:touch;
+}
+</style>
 </head>
-
 <body>
 
-    <!-- Floating Particles -->
-    <div class="particles" id="particles"></div>
+<!-- NAV -->
+<header class="site-nav" id="nav">
+  <a href="#home" class="nav-logo">F<span>.</span>B<span>.</span>B</a>
+  <ul class="nav-links" id="nav-links">
+    <li><a href="#sobre">Sobre</a></li>
+    <li><a href="#negocios">Negócios</a></li>
+    <li class="nav-dropdown" id="nav-plataformas">
+      <button class="nav-dropdown-toggle" aria-haspopup="true" aria-expanded="false">
+        Plataformas <span class="caret">▼</span>
+      </button>
+      <div class="nav-dropdown-menu" role="menu">
+        <a href="/mentoria" target="_blank" rel="noopener" role="menuitem">Mentoria IA</a>
+        <a href="https://aars.fbrisola.com.br/" target="_blank" rel="noopener" role="menuitem">Diagnóstico IA</a>
+        <div class="dd-divider"></div>
+        <a href="https://assessia.fbrisola.com.br" target="_blank" rel="noopener" role="menuitem">AssessIA</a>
+        <a href="https://unopag.fbrisola.com.br" target="_blank" rel="noopener" role="menuitem">UnoPag</a>
+        <a href="https://dental.fbrisola.com.br" target="_blank" rel="noopener" role="menuitem">DentalSmart</a>
+        <a href="https://farmgate.com.br" target="_blank" rel="noopener" role="menuitem">Farmgate</a>
+      </div>
+    </li>
+    <li><a href="#diferenciais">Diferenciais</a></li>
+    <li><a href="#trajetoria">Trajetória</a></li>
+    <li><a href="#contato">Contato</a></li>
+  </ul>
+  <a href="#contato" class="nav-cta">Trabalhe Comigo →</a>
+  <button class="hamburger" id="hamburger" aria-label="Menu">☰</button>
+</header>
 
-    <!-- Scroll to Top Button -->
-    <div class="scroll-indicator" id="scrollTop">
-        <i class="fas fa-arrow-up"></i>
+<!-- Mobile menu — painel fullscreen fora do header -->
+<nav class="mobile-menu" id="mobile-menu" aria-hidden="true">
+  <ul class="mobile-menu-list">
+    <li><a href="#sobre">Sobre</a></li>
+    <li><a href="#negocios">Negócios</a></li>
+    <li class="nav-dropdown" id="mobile-plataformas">
+      <button class="nav-dropdown-toggle" aria-haspopup="true" aria-expanded="false">
+        Plataformas <span class="caret">▼</span>
+      </button>
+      <div class="nav-dropdown-menu" role="menu">
+        <a href="/mentoria" target="_blank" rel="noopener" role="menuitem">Mentoria IA</a>
+        <a href="https://aars.fbrisola.com.br/" target="_blank" rel="noopener" role="menuitem">Diagnóstico IA</a>
+        <div class="dd-divider"></div>
+        <a href="https://assessia.fbrisola.com.br" target="_blank" rel="noopener" role="menuitem">AssessIA</a>
+        <a href="https://unopag.fbrisola.com.br" target="_blank" rel="noopener" role="menuitem">UnoPag</a>
+        <a href="https://dental.fbrisola.com.br" target="_blank" rel="noopener" role="menuitem">DentalSmart</a>
+        <a href="https://farmgate.com.br" target="_blank" rel="noopener" role="menuitem">Farmgate</a>
+      </div>
+    </li>
+    <li><a href="#diferenciais">Diferenciais</a></li>
+    <li><a href="#trajetoria">Trajetória</a></li>
+    <li><a href="#contato">Contato</a></li>
+  </ul>
+</nav>
+
+<!-- HERO -->
+<section class="hero" id="home">
+  <div class="hero-grid-bg"></div>
+  <div class="hero-glow"></div>
+  <div class="hero-container">
+    <div class="hero-content">
+      <div class="hero-eyebrow">
+        <div class="eyebrow-line"></div>
+        <span class="eyebrow-text">CTO · CMO · AI Specialist · Mentor · São Paulo</span>
+      </div>
+
+      <h1 class="hero-title">
+        Inteligência <em>artificial</em><br>
+        que gera <strong>resultado.</strong><br>
+        Não só tecnologia —<br>
+        <em>estratégia</em>.
+      </h1>
+
+      <p class="hero-sub">
+        Sou Fernando Brisola Batista. Engenheiro pelo ITA, MBA pelo Insper. Brand Manager na P&G, Customer Relationship Manager na Microsoft, Diretor de TI na BM&FBOVESPA e hoje CTO &amp; CMO da maior plataforma HRTech da América Latina. Mais de 30 anos de carreira construindo onde tecnologia e estratégia se encontram.
+      </p>
+
+      <div class="hero-ctas">
+        <a href="#negocios" class="btn-gold">Conheça Meus Negócios →</a>
+        <a href="#contato" class="btn-ghost">Vamos Conversar</a>
+      </div>
     </div>
 
-    <header id="main-nav">
-        <div class="container">
-            <a href="#home" class="logo magnetic">F.B.B.</a>
-            <nav>
-                <ul class="nav-links">
-                    <li><a href="#quem-sou-eu" class="magnetic">Quem Sou Eu</a></li>
-                    <li><a href="#coach" class="magnetic">Meu Lado Coach</a></li>
-                    <li><a href="#aventuras" class="magnetic">Aventuras</a></li>
-                    <li><a href="#jornada" class="magnetic">Jornada</a></li>
-                    <li><a href="#contato" class="magnetic">Conecte-se</a></li>
-                </ul>
-            </nav>
-            <div class="hamburger">
-                <div class="bar1"></div>
-                <div class="bar2"></div>
-                <div class="bar3"></div>
-            </div>
+    <div class="hero-img-wrap">
+      <div class="hero-img-deco"></div>
+      <div class="hero-img-frame">
+        <img src="https://fbrisola.com.br/fernando.png" alt="Fernando Brisola Batista">
+      </div>
+      <div class="hero-badge">
+        <div class="hero-badge-label">Anos em Tecnologia</div>
+        <div class="hero-badge-value">30<span style="color:var(--gold)">+</span></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- TRUST STRIP -->
+<div class="trust">
+  <div class="trust-inner">
+    <div class="trust-item">
+      <div class="trust-value" data-counter="30" data-suffix="+">0</div>
+      <div class="trust-label">Anos de Carreira</div>
+    </div>
+    <div class="trust-div"></div>
+    <div class="trust-item">
+      <div class="trust-value" data-counter="1000" data-suffix="+">0</div>
+      <div class="trust-label">Horas de Conteúdo</div>
+    </div>
+    <div class="trust-div"></div>
+    <div class="trust-item">
+      <div class="trust-value">3</div>
+      <div class="trust-label">Empresas Ativas</div>
+    </div>
+    <div class="trust-div"></div>
+    <div class="trust-item">
+      <div class="trust-value">ITA</div>
+      <div class="trust-label">Eng. Eletrônica</div>
+    </div>
+    <div class="trust-div"></div>
+    <div class="trust-item">
+      <div class="trust-value">Insper</div>
+      <div class="trust-label">MBA</div>
+    </div>
+    <div class="trust-div"></div>
+    <div class="trust-item">
+      <div class="trust-value">FEBRACIS</div>
+      <div class="trust-label">Coach Certificado</div>
+    </div>
+  </div>
+</div>
+
+<!-- SOBRE -->
+<section class="section" id="sobre">
+  <div class="container">
+    <div class="about-grid">
+      <div class="about-text reveal">
+        <div class="s-eyebrow">
+          <div class="s-eyebrow-line"></div>
+          <span class="s-eyebrow-text">Sobre Fernando</span>
         </div>
-        <div id="progress-bar"></div>
-    </header>
+        <h2 class="s-title">
+          Onde rigor de engenharia<br>
+          encontra <em>visão de negócios</em>
+        </h2>
 
-    <main>
+        <p>A maioria das pessoas escolhe um lado: ou é técnico, ou é estrategista. Eu escolhi os dois — e essa combinação rara é exatamente o que torna meu trabalho diferente.</p>
 
-        <!-- HOME SECTION -->
-        <section id="home">
-            <div class="container home-content fade-in">
-                <!-- Use uma foto sua aqui -->
-                <img src="./fernando.jpeg" alt="Foto de perfil de Fernando Brisola Batista">
-                <h1 class="rainbow-text">Fernando Brisola Batista</h1>
-                <p class="subtitle neon">Onde a Tecnologia e a Inovação viram uma grande Diversão!</p>
-                <p>Prepare-se para desvendar um universo onde a tecnologia, o empreendedorismo e a arte de
-                    viver bem se encontram.</p>
-                <a href="#aventuras" class="btn">Conheça Minhas Aventuras</a>
-            </div>
-        </section>
+        <p>Formado em <strong>Engenharia Eletrônica pelo ITA</strong> — a instituição de engenharia mais rigorosa do Brasil — aprendi a transformar problemas complexos em sistemas elegantes e eficientes. Depois do <strong>MBA pelo Insper</strong>, passei a aplicar esse mesmo rigor ao mundo dos negócios, onde o que importa de verdade é o resultado final.</p>
 
-        <!-- QUEM SOU EU SECTION -->
-        <section id="quem-sou-eu">
-            <div class="container fade-in">
-                <div class="text-content">
-                    <h2 class="sparkle">Desvendando o Fernando!</h2>
-                    <p>Pensa em alguém que respira inovação, fica pilhado com um bom desafio e acredita que a vida é uma
-                        grande aventura a ser explorada. Sou formado em Engenharia Eletrônica pelo ITA e tenho um MBA
-                        pelo Insper (pra botar ordem na casa, ou melhor, nos projetos!).</p>
-                    <p>Já tive a honra de dar mais de 1000 horas de palestras e cursos sobre empreendedorismo, marketing
-                        e vendas. Se você me conhece, sabe que sou ligado no 220! Um engenheiro que virou
-                        gente (e coach!), um marketeiro que pensa fora da caixa e um tech guru que ama pessoas.</p>
-                </div>
-                <div class="visual-content">
-                    <h3>Meus Superpoderes</h3>
-                    <div class="superpower magnetic">
-                        <i class="fa-solid fa-rocket bounce"></i>
-                        <div>
-                            <strong>Engenharia (ITA)</strong><br>
-                            A base para transformar ideias complexas em realidade.
-                        </div>
-                    </div>
-                    <div class="superpower magnetic">
-                        <i class="fa-solid fa-chart-line bounce"></i>
-                        <div>
-                            <strong>MBA (Insper)</strong><br>
-                            A estratégia para fazer os projetos decolarem.
-                        </div>
-                    </div>
-                    <div class="superpower magnetic">
-                        <i class="fa-solid fa-microphone-lines bounce"></i>
-                        <div>
-                            <strong>+1000h de Palestras</strong><br>
-                            Espalhando conhecimento e boas vibrações!
-                        </div>
-                    </div>
-                    <div class="superpower magnetic">
-                        <i class="fa-solid fa-database bounce"></i>
-                        <div>
-                            <strong>+25 anos de Tecnologia</strong><br>
-                            Desenvolvimento desde ferramentas simples até aplicações de missão crítica e IA.
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </section>
+        <p>São <strong>mais de 30 anos de carreira</strong> — começando como engenheiro eletrônico, passando por 5 anos e 8 meses como <strong>Brand Manager na P&G</strong> (Pantene, Head &amp; Shoulders) e <strong>Customer Relationship Manager na Microsoft</strong>, quase 9 anos na <strong>BM&FBOVESPA</strong> — de consultor a Diretor de TI — e uma sequência de ventures como CTO antes de chegar à liderança de tecnologia e marketing que exerce hoje. Esse percurso cruzando marketing de alto nível com engenharia de missão crítica é o que torna a perspectiva genuinamente rara.</p>
 
-        <!-- COACH SECTION -->
-        <section id="coach">
-            <div class="container fade-in">
-                <h2 class="sparkle">Sua Vida em Modo Turbo!</h2>
-                <p>Também sou Coach Integral Sistêmico pela FEBRACIS, a maior instituição de coaching do planeta!
-                    Minha missão é ajudar as pessoas a dar um UP na vida, seja nos negócios, nos relacionamentos ou naquela meta
-                    que parece impossível. Com uma metodologia que mistura neurociência, PNL e inteligência emocional, a
-                    gente vai alinhar seu propósito de vida com seus objetivos e fazer as coisas acontecerem.</p>
-                <div class="testimonials">
-                    <div class="testimonial">
-                        <p>"O Fernando tem uma energia incrível! Ele me ajudou a ver meus projetos com outros olhos e a
-                            agir."</p>
-                        <strong>G.S. - Empreendedor Satisfeito</strong>
-                    </div>
-                    <div class="testimonial">
-                        <p>"As sessões de coaching foram um divisor de águas na minha carreira. Recomendo de olhos
-                            fechados!"</p>
-                        <strong>B.M.- Profissional Realizada</strong>
-                    </div>
-                </div>
-                <a href="#contato" class="btn">Vem comigo que o sucesso é contagiante!</a>
-            </div>
-        </section>
+        <p>Hoje cofundei e lidero empresas centradas em <strong>IA e tecnologia de ponta</strong> — a <strong>MyDNA</strong>, plataforma HR Tech de soluções estratégicas de RH onde atuo como CTO; a <strong>Agência Logos</strong>, agência de marketing digital com IA; e a <strong>AssessIA</strong>, plataforma de avaliações comportamentais com IA. Além disso, mentoro profissionais e líderes que querem transformar IA em vantagem competitiva real.</p>
 
-        <!-- AVENTURAS SECTION -->
-        <section id="aventuras">
-            <div class="container fade-in">
-                <h2 class="sparkle">Onde a Criatividade Ganha Asas!</h2>
-                <p style="text-align:center; max-width: 800px; margin: -40px auto 60px;">Apaixonado por criar, inovar e
-                    ver ideias saindo do papel. Sou um eterno explorador de oportunidades. Clique nos cards para
-                    conhecer algumas das minhas ideias transformadas em projetos de sucesso:</p>
-                <div class="aventuras-grid">
-                    <!-- Cards will be dynamically populated or hardcoded -->
-                </div>
-            </div>
-        </section>
+        <p>Minha filosofia é simples: <strong>tecnologia sem estratégia é desperdício. Estratégia sem tecnologia é devaneio.</strong> O meu trabalho é unir os dois para gerar crescimento real, mensurável e sustentável.</p>
+      </div>
 
-        <!-- JORNADA SECTION -->
-        <section id="jornada">
-            <div class="container fade-in">
-                <h2 class="sparkle">O Roteiro da Inovação!</h2>
-                <div class="timeline">
-                    <!-- Timeline items will be dynamically populated or hardcoded -->
-                </div>
-            </div>
-        </section>
-
-        <!-- CONTATO SECTION -->
-        <section id="contato">
-            <div class="container fade-in">
-                <h2 class="sparkle">Bora Bater um Papo?</h2>
-                <p>Gosto de um bom papo, de trocar ideias e fazer networking! Se você se identificou com alguma das
-                    minhas aventuras ou quer bater um papo sobre tecnologia, empreendedorismo ou coaching, me manda uma
-                    mensagem!</p>
-                <form id="contato-form" action="#" method="POST">
-                    <div class="form-group">
-                        <input type="text" name="name" placeholder="Seu nome" required>
-                    </div>
-                    <div class="form-group">
-                        <input type="email" name="email" placeholder="Seu melhor email" required>
-                    </div>
-                    <div class="form-group">
-                        <textarea name="message" rows="5" placeholder="Sua mensagem para o maluco aqui!"
-                            required></textarea>
-                    </div>
-                    <button type="submit" class="btn">Mande sua mensagem e vamos transformar o mundo!</button>
-                </form>
-                <div class="social-links">
-                    <a href=https://www.linkedin.com/in/fbrisola/" target="_blank" aria-label="LinkedIn" class="magnetic"><i class="fab fa-linkedin"></i></a>
-                    <a href="https://github.com/fbrisola/" target="_blank" aria-label="GitHub" class="magnetic"><i class="fab fa-github"></i></a>
-                    <a href="https://www.instagram.com/fernandobrisolabatista/" target="_blank" aria-label="YouTube" class="magnetic"><i class="fab fa-instagram"></i></a>
-                    <a href="mailto:fbrisola@gmail.com" aria-label="Email" class="magnetic"><i class="fas fa-envelope"></i></a>
-                </div>
-            </div>
-        </section>
-
-    </main>
-
-    <footer>
-        <div class="container">
-            <p>&copy; 2024 Fernando Brisola Batista. Criado com tecnologia, coração e boa vibe.</p>
+      <div class="about-cards reveal d2">
+        <div class="a-card">
+          <div class="a-card-title">Engenharia de Ponta (ITA)</div>
+          <div class="a-card-desc">Mais de duas décadas desenvolvendo sistemas complexos. Do pensamento algorítmico à implementação — o rigor do ITA aplicado a problemas reais de negócio, não de laboratório.</div>
         </div>
-    </footer>
-
-    <!-- MODAL STRUCTURE -->
-    <div id="aventuraModal" class="modal">
-        <div class="modal-content">
-            <span class="close-btn">&times;</span>
-            <div id="modalBody"></div>
+        <div class="a-card">
+          <div class="a-card-title">IA Aplicada, não Teórica</div>
+          <div class="a-card-desc">Não falo de IA através de slides. Implemento — no marketing, nas avaliações comportamentais, nos processos de RH, nos fluxos de venda. IA que você vê no faturamento.</div>
         </div>
+        <div class="a-card">
+          <div class="a-card-title">Liderança com Método</div>
+          <div class="a-card-desc">Coach Integral Sistêmico pela FEBRACIS, com +1000h entregues. Neurociência, PNL e inteligência emocional aplicados ao desenvolvimento de líderes que entregam resultado.</div>
+        </div>
+        <div class="a-card">
+          <div class="a-card-title">Além do Código</div>
+          <div class="a-card-desc">Músico, designer, eterno curioso. Acredito que as melhores soluções nascem de mentes que vivem além do terminal. Criatividade e tecnologia não são opostos — são parceiros.</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- NEGÓCIOS -->
+<section class="section negocios" id="negocios">
+  <div class="container">
+    <div class="biz-header">
+      <div>
+        <div class="s-eyebrow reveal">
+          <div class="s-eyebrow-line"></div>
+          <span class="s-eyebrow-text">Meus Negócios</span>
+        </div>
+        <h2 class="s-title reveal">Onde você pode<br>trabalhar <em>comigo</em></h2>
+      </div>
+      <p class="reveal" style="color:var(--text2);max-width:420px;font-size:1rem;line-height:1.7">Três empresas construídas para resolver problemas reais com IA. Cada uma com proposta clara, público específico e resultado mensurável.</p>
     </div>
 
+    <div class="biz-grid">
 
-    <script>
-        document.addEventListener('DOMContentLoaded', function () {
+      <!-- MyDNA -->
+      <div class="biz-card reveal">
+        <div class="biz-tag">⬤ HR Tech · América Latina</div>
+        <div class="biz-name">MyDNA</div>
+        <div class="biz-tagline">Ecossistema digital completo de RH — Talent Acquisition, Employee Experience, Portal de Carreira e Outplacement em uma única plataforma integrada com IA. Presença em 11 países da América Latina.</div>
+        <div class="biz-for">Para: empresas e profissionais que querem RH estratégico, não operacional</div>
+        <ul class="biz-features">
+          <li>Talent Acquisition 4.0 — recrutamento e seleção com tecnologia e consultoria especializada</li>
+          <li>Employee Experience — desenvolvimento organizacional digital e integrado</li>
+          <li>Portal de Carreira com IA para gestão estratégica de trajetórias profissionais</li>
+          <li>Outplacement digital — reduz em até 50% o tempo de reinserção no mercado</li>
+          <li>Todas as soluções de RH em um único ecossistema, com economia de até 50% no orçamento</li>
+        </ul>
+        <a href="https://mydnadigital.com/" target="_blank" rel="noopener" class="biz-cta">Conhecer o MyDNA →</a>
+      </div>
 
-            // --- CREATE FLOATING PARTICLES ---
-            function createParticles() {
-                const particlesContainer = document.getElementById('particles');
-                const particleCount = 20;
+      <!-- Agência Logos -->
+      <div class="biz-card reveal d1">
+        <div class="biz-tag">⬤ Marketing Digital · PMEs</div>
+        <div class="biz-name">Agência Logos</div>
+        <div class="biz-tagline">Marketing digital com IA aplicada como método. Estratégia construída por quem foi Brand Manager na P&G e Customer Relationship Manager na Microsoft — não por agência genérica.</div>
+        <div class="biz-for">Para: PMEs que querem resultado previsível, não promessa genérica</div>
+        <ul class="biz-features">
+          <li>Diagnóstico digital antes de qualquer proposta ou contrato</li>
+          <li>Sites e landing pages construídos como ferramentas de vendas</li>
+          <li>Tráfego pago Google e Meta com funil e criativo orientado a dados</li>
+          <li>Conteúdo estratégico que posiciona, nutre e converte</li>
+          <li>Logos Growth Engine: máquina de conteúdo com IA rodando 24/7</li>
+        </ul>
+        <a href="https://agencialogos.com.br/contato/" target="_blank" rel="noopener" class="biz-cta">Solicitar Diagnóstico Gratuito →</a>
+      </div>
 
-                for (let i = 0; i < particleCount; i++) {
-                    const particle = document.createElement('div');
-                    particle.className = 'particle';
-                    particle.style.left = Math.random() * 100 + '%';
-                    particle.style.animationDelay = Math.random() * 20 + 's';
-                    particle.style.animationDuration = (Math.random() * 10 + 10) + 's';
-                    particlesContainer.appendChild(particle);
-                }
-            }
+      <!-- AssessIA -->
+      <div class="biz-card reveal d2">
+        <div class="biz-tag">⬤ People Analytics ·  Assessment</div>
+        <div class="biz-name">AssessIA</div>
+        <div class="biz-tagline">Plataforma de avaliações comportamentais com IA. Big Five, estilos de comunicação, motivadores intrínsecos e fit cultural — tudo integrado, com reports gerados automaticamente por IA.</div>
+        <div class="biz-for">Para: Gestores, consultorias de pessoas e líderes de equipe</div>
+        <ul class="biz-features">
+          <li>Big Five, estilos de comunicação e motivadores intrínsecos</li>
+          <li>Mapeamento de fit cultural e perfil organizacional</li>
+          <li>Avaliação de habilidades, competências e potencial de liderança</li>
+          <li>Reports automáticos com insights e recomendações gerados por IA</li>
+          <li>Plataforma white-label para consultorias, coaches e profissionais de saúde comportamental</li>
+        </ul>
+        <a href="#contato" class="biz-cta">Conhecer o AssessIA →</a>
+      </div>
 
-            createParticles();
+      <!-- Mentoria IA -->
+      <div class="biz-card reveal d3">
+        <div class="biz-tag">⬤ Mentoria · Grupo Fechado</div>
+        <div class="biz-name">Mentoria IA Aplicada</div>
+        <div class="biz-tagline">Para profissionais experientes que querem sair do uso básico e começar a construir com IA de verdade: agentes, automação, conectores e orquestração com aplicação no seu contexto real.</div>
+        <div class="biz-for">Para: gestores, empreendedores, consultores e profissionais autônomos</div>
+        <ul class="biz-features">
+          <li>5 encontros ao vivo (2h cada) em grupo fechado de 8–12 pessoas</li>
+          <li>Construção do seu primeiro agente de IA com objetivo e uso real</li>
+          <li>Automações conectadas a APIs, documentos, CRM e fluxos de trabalho</li>
+          <li>Plano individual de aplicação mapeado para o seu negócio</li>
+          <li>Demonstrações ao vivo do orquestrador próprio em operação real</li>
+        </ul>
+        <a href="https://fbrisola.com.br/mentoria/" target="_blank" rel="noopener" class="biz-cta">Conhecer a Mentoria →</a>
+      </div>
 
-            // --- SCROLL TO TOP FUNCTIONALITY ---
-            const scrollTopBtn = document.getElementById('scrollTop');
-            
-            window.addEventListener('scroll', () => {
-                if (window.pageYOffset > 300) {
-                    scrollTopBtn.classList.add('visible');
-                } else {
-                    scrollTopBtn.classList.remove('visible');
-                }
-            });
+    </div>
+  </div>
+</section>
 
-            scrollTopBtn.addEventListener('click', () => {
-                window.scrollTo({
-                    top: 0,
-                    behavior: 'smooth'
-                });
-            });
+<!-- DIFERENCIAIS -->
+<section class="section" id="diferenciais">
+  <div class="container">
+    <div class="s-eyebrow reveal"><div class="s-eyebrow-line"></div><span class="s-eyebrow-text">Por que Fernando</span></div>
+    <h2 class="s-title reveal" style="max-width:620px">A combinação que<br><em>poucos profissionais possuem</em></h2>
 
-            // --- DATA ---
-            const aventuras = [
-                { id: 'fbb', icon: 'fa-pills', title: 'FBB Solution', subtitle: 'O Farmacêutico Descolado que Aumenta Suas Vendas!', content: 'Em 2018, fundei a FBB Solution, uma empresa que revolucionou o jeito de fazer negócios na indústria farmacêutica. Sabe aqueles consultores que realmente entendem do assunto? Somos nós! Com o diretor comercial mais experiente do mercado, com mais de 50 anos de experiência em vendas no setor, a gente ajudou empresas a <strong>turbinar suas vendas</strong>, <strong>reduzir custos fixos</strong> e <strong>maximizar a demanda</strong>. De dermatologia a oncologia, passando por saúde da mulher e sistemas respiratórios, a FBB foi sucesso! Nosso super diretor comercial se aposentou e agora a FBB Solution está em uma nova fase de inovação e impacto!' },
-                { id: 'maturi', icon: 'fa-user-graduate', title: 'Maturi', subtitle: 'A Revolução da Longevidade no Trabalho!', content: 'Já pensou em como a experiência de vida pode ser um superpoder no mercado de trabalho? A Maturi está provando isso! De 2015 a 2019, estive envolvido com a MaturiJobs, onde criei e ministrei o <strong>Curso de Empreendedorismo "Startup 50+"</strong>, mostrando que a idade é só um número quando se tem motivação, conhecimento e vontade de realizar! A Maturi ajuda empresas a abraçarem a diversidade de idade e a encontrarem os melhores profissionais 50+. Porque a vida começa aos 50... e continua com tudo!' },
-                { id: 'dentalsmart', icon: 'fa-tooth', title: 'DentalSmart', subtitle: 'Sorrisos Perfeitos, Gestão Sem Estresse!', content: 'Quem disse que gerenciar uma clínica odontológica precisa ser complicado? Com a DentalSmart, a gente ajuda os dentistas a focarem no que realmente importa: o sorriso dos seus pacientes! É uma <strong>plataforma super intuitiva</strong> que organiza sua agenda ilimitada (chega de papel!), cadastro de pacientes, documentos,  anamneses inteligentes e muito mais. Quer fazer orçamentos digitais e ter o histórico clínico na palma da mão? A gente tem! E o melhor: tem plano pra todo mundo, do Essencial ao Premium, para deixar a sua clínica brilhando e seus pacientes felizes!' },
-                { id: 'farmgate', icon: 'fa-tractor', title: 'FarmGate', subtitle: 'Descomplicando o Algodão com Tecnologia!', content: 'Já imaginou um mercado de algodão mais fácil e seguro? Eu desenvolvi a FarmGate pra isso! É uma plataforma super moderna que <strong>conecta produtores, indústrias, traders e corretores de um jeito que todo mundo ganha</strong>. Menos burocracia, mais transparência, mais segurança, mais rapidez e zero dor de cabeça. A gente garante que o algodão chegue do campo à indústria de forma descomplicada, segura e eficiente. Chega de "rolo" com o algodão!' },
-                { id: 'logos', icon: 'fa-magic-wand-sparkles', title: 'Agência Logos', subtitle: 'Serviços de Marketing Digital Turbinado por IA!', content: 'No mundo digital de hoje, ter uma presença online incrível não é mais luxo, é necessidade! Na Agência Logos, a gente transforma seus desafios online em oportunidades de ouro. Seu site tá com teia de aranha? Ninguém te encontra no Google? Suas redes sociais estão no modo "fantasma"? A gente resolve! Combinamos a expertise humana com a inteligência artificial para criar estratégias personalizadas que realmente <strong>alavancam suas vendas</strong> e <strong>automatizam seu crescimento</strong>. Otimização de IA para negócios, chatbots inteligentes, criação de conteúdo super personalizado, e muito mais. Prepare-se para ver seu ROI decolar!' },
-                { id: 'mydna', icon: 'fa-dna', title: 'MyDNA', subtitle: 'Conectando Propósito, Alavancando Empresas com IA!', content: 'Sou CTO e CMO na MyDNA, um ecossistema de RH que está mudando o jogo na América Latina desde 2016. Nossa missão é simples, mas poderosa: ajudar pessoas a encontrarem seu propósito de vida na carreira e empresas a crescerem desenvolvendo seus colaboradores. Com a ajuda da <strong>tecnologia e da IA</strong>, a gente faz a ponte perfeita entre talentos e empresas, acompanhando toda a jornada profissional. Já impactamos milhões de pessoas e milhares de empresas! Venha descobrir seu DNA profissional!' },
-            ];
+    <div class="dif-grid">
+      <div class="dif-card reveal">
+        <div class="dif-num">01 —</div>
+        <div class="dif-title">Formado em ambientes onde erro tem custo real</div>
+        <div class="dif-desc">Quase 9 anos na BM&FBOVESPA — de Consultor Sênior a Diretor de TI, responsável por sistemas de liquidação, custódia, derivativos e câmbio. Ambientes onde segurança, performance e precisão não são opcionais. Essa disciplina de missão crítica molda cada decisão de arquitetura e produto.</div>
+      </div>
+      <div class="dif-card reveal d1">
+        <div class="dif-num">02 —</div>
+        <div class="dif-title">Visão de negócios, não de laboratório</div>
+        <div class="dif-desc">MBA pelo Insper e anos gerindo P&L na prática. Toda solução de IA que proponho passa por uma questão antes de qualquer outra: qual o impacto mensurável no resultado do cliente? Tecnologia que não gera ROI é hobby.</div>
+      </div>
+      <div class="dif-card reveal d2">
+        <div class="dif-num">03 —</div>
+        <div class="dif-title">Empreendedor que ainda está na trincheira</div>
+        <div class="dif-desc">Não sou consultor que aconselha de longe. Lidero três empresas em operação simultânea — codifico, vendo, recruto, escalo. Minha mentoria vem do que estou vivendo agora, não do que vivi há uma década.</div>
+      </div>
+      <div class="dif-card reveal">
+        <div class="dif-num">04 —</div>
+        <div class="dif-title">Especialista em comportamento humano</div>
+        <div class="dif-desc">Coach Integral Sistêmico pela FEBRACIS, a maior instituição de coaching do mundo. A AssessIA nasceu dessa combinação: tecnologia que lê padrões comportamentais + psicologia que interpreta pessoas. Raro encontrar quem domine os dois lados.</div>
+      </div>
+      <div class="dif-card reveal d1">
+        <div class="dif-num">05 —</div>
+        <div class="dif-title">Visão cross-setorial e padrões únicos</div>
+        <div class="dif-desc">Marketing, RH, finanças, agronegócio, saúde, educação — já atuei em todos. Enxergo padrões que especialistas de nicho não conseguem ver. E aplico soluções que já funcionaram em um mercado para transformar outro.</div>
+      </div>
+      <div class="dif-card reveal d2">
+        <div class="dif-num">06 —</div>
+        <div class="dif-title">Conteúdo que transforma, não que informa</div>
+        <div class="dif-desc">Mais de 1000 horas de palestras, cursos e mentorias entregues. Não ensino teoria: ensino o que testei, errei, ajustei e fiz funcionar no mundo real. Quem sai das minhas sessões sai com um plano, não com dúvidas.</div>
+      </div>
+    </div>
+  </div>
+</section>
 
-            const jornada = [
-                { side: 'left', company: 'P&G (1994-2000)', quote: 'Onde eu relancei a linha Pantene e virei o expert do shampoo!' },
-                { side: 'right', company: 'Microsoft (2000-2001)', quote: 'Mergulhei no mundo do CRM e das ferramentas para a Microsoft Brasil.' },
-                { side: 'left', company: 'BM&FBOVESPA (2006-2015)', quote: 'Uma maratona de aprendizado no mercado de capitais!' },
-                { side: 'right', company: 'Universo das Startups (2015-2019)', quote: 'Empreendedor, Mentor e CTO de várias startups, e mais aquele empurrãozinho para os empreendedores 50+.' },
-                { side: 'left', company: 'Banco Safra (2019-2021)', quote: 'Liderei a criação do banco digital AgZero do zero. Uma aventura!' },
-                { side: 'right', company: 'MyDNA (2022-presente)', quote: 'CTO e CMO, conectando propósito e carreira com inteligência artificial.' },
-            ];
+<!-- TRAJETÓRIA -->
+<section class="section timeline-section" id="trajetoria">
+  <div class="container">
+    <div class="s-eyebrow reveal" style="justify-content:center"><div class="s-eyebrow-line"></div><span class="s-eyebrow-text">Trajetória</span></div>
+    <h2 class="s-title reveal" style="text-align:center">25 anos de <em>inovação</em><br>em movimento</h2>
 
-            // --- POPULATE DYNAMIC CONTENT ---
-            const aventurasGrid = document.querySelector('.aventuras-grid');
-            aventuras.forEach(aventura => {
-                const card = document.createElement('div');
-                card.className = 'aventura-card';
-                card.dataset.id = aventura.id;
-                card.innerHTML = `
-                <i class="fas ${aventura.icon}"></i>
-                <h3>${aventura.title}</h3>
-                <p>${aventura.subtitle}</p>
-            `;
-                aventurasGrid.appendChild(card);
-            });
+    <div class="timeline">
 
-            const timelineContainer = document.querySelector('.timeline');
-            jornada.forEach(item => {
-                const timelineItem = document.createElement('div');
-                timelineItem.className = `timeline-item ${item.side}`;
-                timelineItem.innerHTML = `
-                <div class="timeline-content">
-                    <h3>${item.company}</h3>
-                    <p>"${item.quote}"</p>
-                </div>
-            `;
-                timelineContainer.appendChild(timelineItem);
-            });
+      <div class="tl-item reveal">
+        <div class="tl-content">
+          <div class="tl-year">1992 – 1994</div>
+          <div class="tl-title">Engenharia Eletrônica — ITA · Seicom</div>
+          <div class="tl-desc">Formado pelo ITA, início de carreira como engenheiro na Seicom — instalação de redes LAN complexas (Telesp, Banco Itaú, Itautec) e desenvolvimento de sistemas de comunicação móvel. A base técnica que sustenta tudo.</div>
+        </div>
+        <div class="tl-dot"><div class="tl-dot-inner"></div></div>
+        <div class="tl-empty"></div>
+      </div>
 
+      <div class="tl-item reveal">
+        <div class="tl-empty"></div>
+        <div class="tl-dot"><div class="tl-dot-inner"></div></div>
+        <div class="tl-content">
+          <div class="tl-year">1994 – 2001</div>
+          <div class="tl-title">P&G · Microsoft</div>
+          <div class="tl-desc">5 anos e 8 meses na Procter &amp; Gamble como Assistant Brand Manager, Brand Manager e Customer Marketing Manager — responsável por Pantene e Head &amp; Shoulders (crescimento de 90% no market share em 1998). Em seguida, Customer Relationship Manager na Microsoft, liderando telesales, customer care e marketing de banco de dados.</div>
+        </div>
+      </div>
 
-            // --- INTERACTIVITY ---
-            // Hamburger Menu
-            const hamburger = document.querySelector('.hamburger');
-            const navLinks = document.querySelector('.nav-links');
-            hamburger.addEventListener('click', () => {
-                hamburger.classList.toggle('active');
-                navLinks.classList.toggle('active');
-            });
-            navLinks.addEventListener('click', () => {
-                hamburger.classList.remove('active');
-                navLinks.classList.remove('active');
-            });
+      <div class="tl-item reveal">
+        <div class="tl-content">
+          <div class="tl-year">2001 – 2006</div>
+          <div class="tl-title">FBC Solution · Projetos Microsoft</div>
+          <div class="tl-desc">Consultoria estratégica e tecnológica para a indústria farmacêutica e grandes empresas. Conduziu dois projetos de grande porte para a Microsoft — Customer Care e Microsoft Business Solutions — otimizando processos, logística e canais de parceiros.</div>
+        </div>
+        <div class="tl-dot"><div class="tl-dot-inner"></div></div>
+        <div class="tl-empty"></div>
+      </div>
 
-            // Modal Logic
-            const modal = document.getElementById('aventuraModal');
-            const modalBody = document.getElementById('modalBody');
-            const closeBtn = document.querySelector('.close-btn');
-            aventurasGrid.addEventListener('click', e => {
-                const card = e.target.closest('.aventura-card');
-                if (card) {
-                    const aventuraData = aventuras.find(a => a.id === card.dataset.id);
-                    modalBody.innerHTML = `
-                    <h3>${aventuraData.title}</h3>
-                    <p>${aventuraData.content}</p>
-                `;
-                    modal.style.display = 'block';
-                    
-                    // Add shake animation to card
-                    card.classList.add('shake');
-                    setTimeout(() => card.classList.remove('shake'), 500);
-                }
-            });
-            closeBtn.onclick = () => modal.style.display = 'none';
-            window.onclick = e => {
-                if (e.target == modal) {
-                    modal.style.display = 'none';
-                }
-            };
+      <div class="tl-item reveal">
+        <div class="tl-empty"></div>
+        <div class="tl-dot"><div class="tl-dot-inner"></div></div>
+        <div class="tl-content">
+          <div class="tl-year">2006 – 2015</div>
+          <div class="tl-title">BM&FBOVESPA — Consultor a Diretor de TI</div>
+          <div class="tl-desc">Quase 10 anos na Bolsa de Valores, evoluindo de Consultor Sênior a Diretor Associado de TI. Responsável por sistemas de liquidação, custódia, derivativos OTC, renda fixa, SAP e CRM em ambiente de altíssima criticidade. Em paralelo, MBA pelo Insper (2013–2015).</div>
+        </div>
+      </div>
 
-            // Fade-in on Scroll
-            const faders = document.querySelectorAll('.fade-in');
-            const appearOptions = { threshold: 0.1, rootMargin: "0px 0px -50px 0px" };
-            const appearOnScroll = new IntersectionObserver(function (entries, observer) {
-                entries.forEach(entry => {
-                    if (!entry.isIntersecting) return;
-                    entry.target.classList.add('visible');
-                    observer.unobserve(entry.target);
-                });
-            }, appearOptions);
-            faders.forEach(fader => appearOnScroll.observe(fader));
+      <div class="tl-item reveal">
+        <div class="tl-content">
+          <div class="tl-year">2015 – 2019</div>
+          <div class="tl-title">CTO em Startups · kids21st · FBB Solution</div>
+          <div class="tl-desc">Fase de founder e CTO advisor: BoraBike (mobilidade urbana), TopValet (gestão de estacionamento), FarmGate (commodities agrícolas), Maturijobs (empreendedorismo 50+). Fundou também a kids21st, EdTech de programação para crianças, venture backed pela Investera.</div>
+        </div>
+        <div class="tl-dot"><div class="tl-dot-inner"></div></div>
+        <div class="tl-empty"></div>
+      </div>
 
-            // Progress Bar on Scroll
-            const progressBar = document.getElementById('progress-bar');
-            window.addEventListener('scroll', () => {
-                const scrollTop = document.documentElement.scrollTop;
-                const scrollHeight = document.documentElement.scrollHeight - document.documentElement.clientHeight;
-                const scrolled = (scrollTop / scrollHeight) * 100;
-                progressBar.style.width = scrolled + '%';
-            });
+      <div class="tl-item reveal">
+        <div class="tl-empty"></div>
+        <div class="tl-dot"><div class="tl-dot-inner"></div></div>
+        <div class="tl-content">
+          <div class="tl-year">2019 – 2021</div>
+          <div class="tl-title">Banco Safra — Head of Product &amp; Technology</div>
+          <div class="tl-desc">Liderança do produto e tecnologia da iniciativa de banco digital do Safra. Gestão de 8 squads multifuncionais (designers, tech leads, POs, devs, QA, Scrum Masters). Responsável do conceito ao lançamento — único ponto de integração entre negócio, produto e tecnologia.</div>
+        </div>
+      </div>
 
-            // Active Nav Link on Scroll
-            const sections = document.querySelectorAll('section');
-            const navLi = document.querySelectorAll('.nav-links li a');
-            window.addEventListener('scroll', () => {
-                let current = '';
-                sections.forEach(section => {
-                    const sectionTop = section.offsetTop;
-                    if (pageYOffset >= sectionTop - 80) { // 80 is nav height + a little buffer
-                        current = section.getAttribute('id');
-                    }
-                });
+      <div class="tl-item reveal">
+        <div class="tl-content">
+          <div class="tl-year">2022 – Presente</div>
+          <div class="tl-title">MyDNA — CTO &amp; CMO</div>
+          <div class="tl-desc">Liderança de tecnologia e marketing da maior plataforma HRTech da América Latina — 5M+ de profissionais e 500K+ empresas. Unificação de ecossistema multi-startup, implantação massiva de IA, automação de marketing e vendas, e crescimento de 300%+ de receita por colaborador.</div>
+        </div>
+        <div class="tl-dot"><div class="tl-dot-inner"></div></div>
+        <div class="tl-empty"></div>
+      </div>
 
-                navLi.forEach(a => {
-                    a.classList.remove('active');
-                    if (a.getAttribute('href').substring(1) === current) {
-                        a.classList.add('active');
-                    }
-                });
-            });
-        });
-    </script>
+    </div>
+  </div>
+</section>
+
+<!-- TESTIMONIALS -->
+<section class="section" id="depoimentos">
+  <div class="container">
+    <div class="s-eyebrow reveal"><div class="s-eyebrow-line"></div><span class="s-eyebrow-text">O Que Dizem</span></div>
+    <h2 class="s-title reveal">Resultados que<br><em>falam por si</em></h2>
+
+    <div class="test-grid">
+      <div class="test-card reveal">
+        <div class="test-quote">"</div>
+        <div class="test-text">O Fernando tem uma energia incrível! Ele me ajudou a ver meus projetos com outros olhos e a agir.</div>
+        <div class="test-author">G.S.</div>
+        <div class="test-role">Empreendedor</div>
+      </div>
+
+      <div class="test-card reveal d1">
+        <div class="test-quote">"</div>
+        <div class="test-text">As sessões de coaching foram um divisor de águas na minha carreira. Recomendo de olhos fechados!</div>
+        <div class="test-author">B.M.</div>
+        <div class="test-role">Life Coach e Mentora</div>
+      </div>
+
+      <div class="test-card reveal d2">
+        <div class="test-quote">"</div>
+        <div class="test-text">O Fernando não fala de IA de forma abstrata — ele demonstra em operação real. Quando as pessoas veem funcionando, entendem o que está em jogo. Foi isso que me fez querer a mentoria.</div>
+        <div class="test-author">Participante</div>
+        <div class="test-role">Mentoria IA Aplicada</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CONTATO -->
+<section class="section contact-section" id="contato">
+  <div class="container">
+    <div class="contact-grid">
+
+      <div>
+        <div class="s-eyebrow reveal"><div class="s-eyebrow-line"></div><span class="s-eyebrow-text">Contato</span></div>
+        <h2 class="s-title reveal">Vamos construir<br><em>algo juntos</em></h2>
+
+        <div id="form-wrap">
+          <form class="cform reveal" id="cform" novalidate>
+            <div class="frow">
+              <div class="fg">
+                <label for="nome">Nome completo</label>
+                <input type="text" id="nome" name="nome" placeholder="Seu nome" required>
+              </div>
+              <div class="fg">
+                <label for="empresa">Empresa</label>
+                <input type="text" id="empresa" name="empresa" placeholder="Sua empresa">
+              </div>
+            </div>
+            <div class="frow">
+              <div class="fg">
+                <label for="email">E-mail</label>
+                <input type="email" id="email" name="email" placeholder="seu@email.com" required>
+              </div>
+              <div class="fg">
+                <label for="wpp">WhatsApp</label>
+                <input type="tel" id="wpp" name="wpp" placeholder="(11) 99999-9999">
+              </div>
+            </div>
+            <div class="fg">
+              <label for="interesse">Qual o seu interesse?</label>
+              <select id="interesse" name="interesse" required>
+                <option value="" disabled selected>Selecione uma opção</option>
+                <option value="mydna">MyDNA — Gestão de RH</option>
+                <option value="logos">Agência Logos — Marketing Digital com IA</option>
+                <option value="assessia">AssessIA — Avaliações Comportamentais</option>
+                <option value="mentoria">Mentoria IA Aplicada — Próxima Turma</option>
+                <option value="palestra">Palestra ou Treinamento In-company</option>
+                <option value="outro">Outro assunto</option>
+              </select>
+            </div>
+            <div class="fg">
+              <label for="msg">Mensagem</label>
+              <textarea id="msg" name="msg" placeholder="Me conte sobre seu projeto, desafio ou o que você está buscando..." rows="4"></textarea>
+            </div>
+            <button type="submit" class="form-btn">Enviar Mensagem →</button>
+          </form>
+
+          <div class="form-success" id="form-success">
+            <div class="fs-icon">✅</div>
+            <div class="fs-title">Mensagem recebida!</div>
+            <div class="fs-text">Obrigado pelo contato. Fernando retornará em breve.</div>
+          </div>
+
+          <div class="form-error" id="form-error">
+            <div class="fe-icon">❌</div>
+            <div class="fe-title">Ops, algo deu errado</div>
+            <div class="fe-text" id="form-error-msg">Tente novamente ou envie diretamente para <a href="mailto:fbrisola@gmail.com" style="color:var(--gold)">fbrisola@gmail.com</a></div>
+            <button class="fe-retry" id="form-retry">Tentar novamente</button>
+          </div>
+        </div>
+      </div>
+
+      <div class="contact-info-side reveal d2">
+        <div>
+          <div class="ci-title">Prefere uma<br>conversa direta?</div>
+          <div class="ci-text">Fernando está disponível para projetos, parcerias, palestras e sessões de mentoria. Escolha o canal que você preferir e entre em contato.</div>
+        </div>
+
+        <div class="channels">
+          <a href="https://www.linkedin.com/in/fbrisola/" target="_blank" rel="noopener" class="channel">
+            <div class="channel-icon"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433c-1.144 0-2.063-.926-2.063-2.065 0-1.138.92-2.063 2.063-2.063 1.14 0 2.064.925 2.064 2.063 0 1.139-.925 2.065-2.064 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/></svg></div>
+            <div>
+              <div class="channel-label">LinkedIn</div>
+              <div class="channel-value">linkedin.com/in/fbrisola</div>
+            </div>
+          </a>
+          <a href="mailto:fbrisola@gmail.com" class="channel">
+            <div class="channel-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"/></svg></div>
+            <div>
+              <div class="channel-label">E-mail</div>
+              <div class="channel-value">fbrisola@gmail.com</div>
+            </div>
+          </a>
+          <a href="https://www.instagram.com/fernandobrisolabatista/" target="_blank" rel="noopener" class="channel">
+            <div class="channel-icon"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/></svg></div>
+            <div>
+              <div class="channel-label">Instagram</div>
+              <div class="channel-value">@fernandobrisolabatista</div>
+            </div>
+          </a>
+          <a href="https://github.com/fbrisola/" target="_blank" rel="noopener" class="channel">
+            <div class="channel-icon"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 .297c-6.63 0-12 5.373-12 12 0 5.303 3.438 9.8 8.205 11.385.6.113.82-.258.82-.577 0-.285-.01-1.04-.015-2.04-3.338.724-4.042-1.61-4.042-1.61C4.422 18.07 3.633 17.7 3.633 17.7c-1.087-.744.084-.729.084-.729 1.205.084 1.838 1.236 1.838 1.236 1.07 1.835 2.809 1.305 3.495.998.108-.776.417-1.305.76-1.605-2.665-.3-5.466-1.332-5.466-5.93 0-1.31.465-2.38 1.235-3.22-.135-.303-.54-1.523.105-3.176 0 0 1.005-.322 3.3 1.23.96-.267 1.98-.399 3-.405 1.02.006 2.04.138 3 .405 2.28-1.552 3.285-1.23 3.285-1.23.645 1.653.24 2.873.12 3.176.765.84 1.23 1.91 3.22 0 4.61-2.805 5.625-5.475 5.92.42.36.81 1.096.81 2.22 0 1.606-.015 2.896-.015 3.286 0 .315.21.69.825.57C20.565 22.092 24 17.592 24 12.297c0-6.627-5.373-12-12-12"/></svg></div>
+            <div>
+              <div class="channel-label">GitHub</div>
+              <div class="channel-value">github.com/fbrisola</div>
+            </div>
+          </a>
+        </div>
+
+        <div class="cta-box">
+          <div class="cta-box-title">Palestra ou Treinamento?</div>
+          <div class="cta-box-text">Fernando realiza palestras e workshops sobre IA aplicada, inovação, liderança e empreendedorismo — para empresas, eventos corporativos e instituições de ensino. Entre em contato para agenda e valores.</div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="f-logo">F<span>.</span>B<span>.</span>B</div>
+  <div class="f-tagline">Fernando Brisola Batista · CTO · CMO · AI Specialist · São Paulo, Brasil</div>
+  <div class="f-socials">
+    <a href="https://www.linkedin.com/in/fbrisola/" target="_blank" rel="noopener" class="f-social" aria-label="LinkedIn"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433c-1.144 0-2.063-.926-2.063-2.065 0-1.138.92-2.063 2.063-2.063 1.14 0 2.064.925 2.064 2.063 0 1.139-.925 2.065-2.064 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/></svg></a>
+    <a href="https://www.instagram.com/fernandobrisolabatista/" target="_blank" rel="noopener" class="f-social" aria-label="Instagram"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/></svg></a>
+    <a href="https://github.com/fbrisola/" target="_blank" rel="noopener" class="f-social" aria-label="GitHub"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 .297c-6.63 0-12 5.373-12 12 0 5.303 3.438 9.8 8.205 11.385.6.113.82-.258.82-.577 0-.285-.01-1.04-.015-2.04-3.338.724-4.042-1.61-4.042-1.61C4.422 18.07 3.633 17.7 3.633 17.7c-1.087-.744.084-.729.084-.729 1.205.084 1.838 1.236 1.838 1.236 1.07 1.835 2.809 1.305 3.495.998.108-.776.417-1.305.76-1.605-2.665-.3-5.466-1.332-5.466-5.93 0-1.31.465-2.38 1.235-3.22-.135-.303-.54-1.523.105-3.176 0 0 1.005-.322 3.3 1.23.96-.267 1.98-.399 3-.405 1.02.006 2.04.138 3 .405 2.28-1.552 3.285-1.23 3.285-1.23.645 1.653.24 2.873.12 3.176.765.84 1.23 1.91 1.23 3.22 0 4.61-2.805 5.625-5.475 5.92.42.36.81 1.096.81 2.22 0 1.606-.015 2.896-.015 3.286 0 .315.21.69.825.57C20.565 22.092 24 17.592 24 12.297c0-6.627-5.373-12-12-12"/></svg></a>
+    <a href="https://www.youtube.com/user/fbrisola" target="_blank" rel="noopener" class="f-social" aria-label="YouTube"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M23.495 6.205a3.007 3.007 0 0 0-2.088-2.088c-1.87-.501-9.396-.501-9.396-.501s-7.507-.01-9.396.501A3.007 3.007 0 0 0 .527 6.205a31.247 31.247 0 0 0-.522 5.805 31.247 31.247 0 0 0 .522 5.783 3.007 3.007 0 0 0 2.088 2.088c1.868.502 9.396.502 9.396.502s7.506 0 9.396-.502a3.007 3.007 0 0 0 2.088-2.088 31.247 31.247 0 0 0 .5-5.783 31.247 31.247 0 0 0-.5-5.805zM9.609 15.601V8.408l6.264 3.602z"/></svg></a>
+    <a href="mailto:fbrisola@gmail.com" class="f-social" aria-label="Email"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"/></svg></a>
+  </div>
+  <div class="f-copy">© 2025 Fernando Brisola Batista · Engenharia, estratégia e IA — para resultados reais.</div>
+</footer>
+
+<!-- WhatsApp Float -->
+<!-- Substitua o número abaixo pelo seu WhatsApp -->
+<a href="https://wa.me/5511992913413?text=Olá%20Fernando%2C%20vim%20pelo%20seu%20site%20e%20quero%20saber%20mais." target="_blank" rel="noopener" class="wa-float" aria-label="WhatsApp"><svg viewBox="0 0 24 24" fill="currentColor" style="width:26px;height:26px"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg></a>
+
+<script>
+// Nav scroll
+const nav = document.getElementById('nav');
+const mobileMenu = document.getElementById('mobile-menu');
+const ham = document.getElementById('hamburger');
+addEventListener('scroll', () => nav.classList.toggle('scrolled', scrollY > 50), {passive:true});
+
+function closeMobileMenu() {
+  document.body.classList.remove('menu-open');
+  ham.textContent = '☰';
+  mobileMenu.setAttribute('aria-hidden', 'true');
+  document.getElementById('mobile-plataformas')?.classList.remove('open');
+}
+
+// Hamburger
+ham.addEventListener('click', () => {
+  const open = !document.body.classList.contains('menu-open');
+  document.body.classList.toggle('menu-open', open);
+  ham.textContent = open ? '✕' : '☰';
+  mobileMenu.setAttribute('aria-hidden', open ? 'false' : 'true');
+});
+document.querySelectorAll('.nav-links a').forEach(a => {
+  a.addEventListener('click', closeMobileMenu);
+});
+document.querySelectorAll('.mobile-menu-list a').forEach(a => {
+  a.addEventListener('click', closeMobileMenu);
+});
+
+// Dropdown Plataformas — desktop
+const ddPlat = document.getElementById('nav-plataformas');
+if (ddPlat) {
+  const toggle = ddPlat.querySelector('.nav-dropdown-toggle');
+  toggle.addEventListener('click', () => {
+    ddPlat.classList.toggle('open');
+    toggle.setAttribute('aria-expanded', ddPlat.classList.contains('open'));
+  });
+}
+
+// Dropdown Plataformas — mobile
+const ddMobile = document.getElementById('mobile-plataformas');
+if (ddMobile) {
+  const toggle = ddMobile.querySelector('.nav-dropdown-toggle');
+  toggle.addEventListener('click', () => {
+    ddMobile.classList.toggle('open');
+    toggle.setAttribute('aria-expanded', ddMobile.classList.contains('open'));
+  });
+}
+
+// Scroll reveal
+const obs = new IntersectionObserver(entries => {
+  entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('visible'); });
+}, {threshold:0.1, rootMargin:'0px 0px -40px 0px'});
+document.querySelectorAll('.reveal').forEach(el => obs.observe(el));
+
+// Counter animation
+const cobs = new IntersectionObserver(entries => {
+  entries.forEach(e => {
+    if (!e.isIntersecting) return;
+    const el = e.target;
+    const target = parseInt(el.dataset.counter);
+    const suffix = el.dataset.suffix || '';
+    let cur = 0;
+    const step = target / 60;
+    const timer = setInterval(() => {
+      cur = Math.min(cur + step, target);
+      el.textContent = Math.floor(cur) + suffix;
+      if (cur >= target) clearInterval(timer);
+    }, 16);
+    cobs.unobserve(el);
+  });
+}, {threshold:0.5});
+document.querySelectorAll('[data-counter]').forEach(el => cobs.observe(el));
+
+// Contact form — send via send_mail.php
+const cform = document.getElementById('cform');
+const formWrap = document.getElementById('form-wrap');
+const formSuccess = document.getElementById('form-success');
+const formError = document.getElementById('form-error');
+const formErrorMsg = document.getElementById('form-error-msg');
+const formRetry = document.getElementById('form-retry');
+const formBtn = cform.querySelector('.form-btn');
+
+function showFormState(state) {
+  cform.style.display = state === 'form' ? '' : 'none';
+  formSuccess.classList.toggle('show', state === 'success');
+  formError.classList.toggle('show', state === 'error');
+}
+
+formRetry.addEventListener('click', () => showFormState('form'));
+
+cform.addEventListener('submit', async e => {
+  e.preventDefault();
+  formBtn.disabled = true;
+  formBtn.textContent = 'Enviando…';
+
+  const data = new FormData();
+  data.append('name',      cform.nome.value.trim());
+  data.append('email',     cform.email.value.trim());
+  data.append('empresa',   cform.empresa.value.trim());
+  data.append('wpp',       cform.wpp.value.trim());
+  data.append('interesse', cform.interesse.value);
+  data.append('message',   cform.msg.value.trim());
+
+  try {
+    const res = await fetch('send_mail.php', { method: 'POST', body: data });
+    const json = await res.json();
+    if (json.success) {
+      showFormState('success');
+    } else {
+      formErrorMsg.innerHTML = json.message || 'Erro ao enviar. Tente novamente ou escreva para <a href="mailto:fbrisola@gmail.com" style="color:var(--gold)">fbrisola@gmail.com</a>';
+      showFormState('error');
+    }
+  } catch {
+    formErrorMsg.innerHTML = 'Falha na conexão. Verifique sua internet ou escreva para <a href="mailto:fbrisola@gmail.com" style="color:var(--gold)">fbrisola@gmail.com</a>';
+    showFormState('error');
+  } finally {
+    formBtn.disabled = false;
+    formBtn.textContent = 'Enviar Mensagem →';
+  }
+});
+</script>
 </body>
-
 </html>
