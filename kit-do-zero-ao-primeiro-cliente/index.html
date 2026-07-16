@@ -1,0 +1,430 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Kit Do Zero ao Primeiro Cliente — IA para Começar um Novo Negócio</title>
+<meta name="description" content="O passo a passo e os prompts prontos da oficina IA para Começar um Novo Negócio, do MaturiFest, para você aplicar sozinho na sua ideia.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,600;9..144,700&family=Public+Sans:wght@400;500;600;700;800&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --pine:        #1F3B2C;
+    --pine-deep:   #142A1F;
+    --paper:       #FFFFFF;
+    --sage-tint:   #EFF4EF;
+    --sage-tint-2: #E4ECE4;
+    --copper:      #BE6A25;
+    --copper-deep: #9A5219;
+    --ink:         #1C2620;
+    --muted:       #5B6B5E;
+    --line:        #D9E2D9;
+    --radius:      14px;
+  }
+
+  *{ box-sizing:border-box; }
+  html{ scroll-behavior:smooth; }
+  body{
+    margin:0;
+    background:var(--paper);
+    color:var(--ink);
+    font-family:'Public Sans', -apple-system, sans-serif;
+    font-size:17px;
+    line-height:1.6;
+    -webkit-font-smoothing:antialiased;
+  }
+  h1,h2,h3{ font-family:'Fraunces', serif; margin:0; color:var(--pine-deep); }
+  a{ color:var(--copper-deep); }
+  .wrap{ max-width:880px; margin:0 auto; padding:0 28px; }
+
+  /* ---------- Skip link / focus ---------- */
+  a:focus-visible, button:focus-visible, input:focus-visible, textarea:focus-visible{
+    outline:3px solid var(--copper); outline-offset:2px;
+  }
+
+  /* ---------- Header / Hero ---------- */
+  .hero{
+    background: linear-gradient(180deg, var(--pine) 0%, var(--pine-deep) 100%);
+    color:#F4F7F3;
+    padding:64px 0 76px;
+    position:relative;
+    overflow:hidden;
+  }
+  .hero::after{
+    content:"";
+    position:absolute; right:-120px; top:-140px;
+    width:420px; height:420px; border-radius:50%;
+    background:radial-gradient(circle, rgba(190,106,37,0.35) 0%, rgba(190,106,37,0) 70%);
+  }
+  .eyebrow{
+    font-family:'IBM Plex Mono', monospace;
+    font-size:13px; letter-spacing:0.14em; text-transform:uppercase;
+    color:#D7C9A8; margin-bottom:18px; position:relative; z-index:1;
+  }
+  .hero h1{
+    color:#FFFFFF; font-size:clamp(34px, 5.4vw, 54px); font-weight:600;
+    line-height:1.12; max-width:11ch; position:relative; z-index:1;
+  }
+  .hero p.lede{
+    margin-top:22px; max-width:52ch; font-size:19px; color:#D9E2D6;
+    position:relative; z-index:1;
+  }
+  .hero .facil{
+    margin-top:34px; display:flex; align-items:center; gap:12px;
+    font-size:14.5px; color:#B9C6B6; position:relative; z-index:1;
+  }
+  .hero .facil .dot{ width:6px; height:6px; border-radius:50%; background:var(--copper); }
+
+  /* ---------- How to use ---------- */
+  .howto{
+    background:var(--sage-tint);
+    border-bottom:1px solid var(--line);
+    padding:36px 0;
+  }
+  .howto .wrap{ display:flex; gap:28px; flex-wrap:wrap; align-items:flex-start; }
+  .howto-step{ flex:1 1 220px; }
+  .howto-step .n{
+    font-family:'IBM Plex Mono', monospace; color:var(--copper-deep); font-weight:600;
+    font-size:13px; letter-spacing:0.06em;
+  }
+  .howto-step p{ margin:6px 0 0; color:var(--ink); font-size:15.5px; }
+
+  /* ---------- Your idea input panel ---------- */
+  .idea-panel{
+    padding:56px 0 12px;
+  }
+  .idea-panel h2{ font-size:26px; margin-bottom:8px; }
+  .idea-panel .sub{ color:var(--muted); margin-bottom:26px; font-size:15.5px; max-width:60ch; }
+  .field{ margin-bottom:18px; }
+  .field label{
+    display:block; font-weight:700; font-size:14.5px; margin-bottom:8px; color:var(--pine-deep);
+  }
+  .field input, .field textarea{
+    width:100%; font-family:'Public Sans', sans-serif; font-size:16px;
+    padding:13px 15px; border-radius:10px; border:1.5px solid var(--line);
+    background:#FBFCFB; color:var(--ink); resize:vertical;
+  }
+  .field textarea{ min-height:64px; }
+  .field input::placeholder, .field textarea::placeholder{ color:#8A968B; }
+  .hint{ font-size:13.5px; color:var(--muted); margin-top:8px; }
+
+  /* ---------- Steps ---------- */
+  .steps{ padding:20px 0 64px; }
+  .step{
+    display:grid; grid-template-columns:64px 1fr; gap:0 22px;
+    padding:38px 0; border-top:1px solid var(--line);
+  }
+  .step:last-child{ border-bottom:1px solid var(--line); }
+  .step-num{
+    width:52px; height:52px; border-radius:50%;
+    background:var(--pine); color:#fff; display:flex; align-items:center; justify-content:center;
+    font-family:'Fraunces', serif; font-weight:600; font-size:22px;
+  }
+  .step-body{ min-width:0; }
+  .step-kicker{
+    font-family:'IBM Plex Mono', monospace; font-size:12.5px; letter-spacing:0.1em;
+    text-transform:uppercase; color:var(--copper-deep); font-weight:600;
+  }
+  .step h3{ font-size:23px; margin-top:6px; }
+  .step .desc{ color:var(--ink); margin-top:10px; font-size:16px; }
+  .tool-tag{
+    display:inline-flex; align-items:center; gap:6px; margin-top:14px;
+    background:var(--sage-tint-2); color:var(--pine-deep); font-weight:700;
+    font-size:13px; padding:6px 12px; border-radius:20px;
+  }
+
+  .prompt-card{
+    margin-top:18px; background:var(--pine-deep); border-radius:var(--radius);
+    padding:20px 22px 18px; position:relative;
+  }
+  .prompt-card .label{
+    font-family:'IBM Plex Mono', monospace; font-size:11.5px; letter-spacing:0.1em;
+    text-transform:uppercase; color:#9FB39B; margin-bottom:10px; display:block;
+  }
+  .prompt-text{
+    font-family:'IBM Plex Mono', monospace; font-size:14.5px; line-height:1.7;
+    color:#F1F5EF; white-space:pre-wrap; margin:0; padding-right:4px;
+  }
+  .prompt-text .fill{ color:#F3C892; font-weight:600; }
+  .copy-btn{
+    margin-top:16px; display:inline-flex; align-items:center; gap:8px;
+    background:var(--copper); color:#fff; border:none; border-radius:9px;
+    padding:11px 18px; font-family:'Public Sans', sans-serif; font-weight:700;
+    font-size:14.5px; cursor:pointer; transition:background .15s ease, transform .1s ease;
+  }
+  .copy-btn:hover{ background:var(--copper-deep); }
+  .copy-btn:active{ transform:scale(0.97); }
+  .copy-btn.copied{ background:#3E6B4A; }
+
+  .takeaway{
+    margin-top:16px; background:var(--sage-tint); border-radius:10px;
+    padding:14px 16px; font-size:14.5px; color:var(--pine-deep);
+  }
+  .takeaway b{ color:var(--copper-deep); }
+
+  .bonus-step{ background:var(--sage-tint); margin:0 -28px; padding-left:28px; padding-right:28px; border-radius:16px; }
+  .bonus-num{ background:var(--copper); font-size:26px; }
+
+  /* ---------- Plan section ---------- */
+  .plan{ background:var(--sage-tint); padding:60px 0; }
+  .plan h2{ font-size:28px; }
+  .plan .sub{ color:var(--muted); margin-top:8px; max-width:58ch; }
+  .plan-grid{
+    margin-top:30px; display:grid; grid-template-columns:repeat(auto-fit, minmax(230px,1fr));
+    gap:16px;
+  }
+  .plan-card{
+    background:var(--paper); border:1px solid var(--line); border-radius:12px; padding:18px 18px 16px;
+  }
+  .plan-card .day{ font-family:'IBM Plex Mono', monospace; font-size:12px; color:var(--copper-deep); font-weight:700; letter-spacing:.06em; }
+  .plan-card p{ margin:8px 0 0; font-size:14.5px; }
+
+  /* ---------- Footer ---------- */
+  footer{ padding:52px 0 60px; }
+  footer .wrap{ border-top:1px solid var(--line); padding-top:36px; }
+  footer h3{ font-size:20px; }
+  footer p{ color:var(--muted); font-size:15px; max-width:56ch; margin-top:10px; }
+  .footer-cta{
+    margin-top:20px; display:inline-block; background:var(--pine); color:#fff;
+    padding:12px 20px; border-radius:9px; font-weight:700; text-decoration:none; font-size:14.5px;
+  }
+  .footer-cta:hover{ background:var(--pine-deep); }
+  .footer-cta#whatsapp-send:hover{ background:var(--copper-deep); }
+  .fine{ margin-top:30px; font-size:13px; color:#8A968B; }
+
+  @media (max-width:600px){
+    .step{ grid-template-columns:1fr; }
+    .step-num{ margin-bottom:12px; }
+    .hero{ padding:48px 0 56px; }
+  }
+
+  @media (prefers-reduced-motion: reduce){
+    *{ scroll-behavior:auto !important; transition:none !important; }
+  }
+</style>
+</head>
+<body>
+
+<header class="hero">
+  <div class="wrap">
+    <div class="eyebrow">MaturiFest · Oficina IA para Começar um Novo Negócio</div>
+    <h1>Kit Do Zero ao Primeiro Cliente</h1>
+    <p class="lede">O mesmo método que usamos ao vivo na oficina — agora para você aplicar sozinho, na sua própria ideia, com os prompts prontos para copiar.</p>
+    <div class="facil"><span class="dot"></span> Fernando Brisola Batista</div>
+  </div>
+</header>
+
+<section class="howto">
+  <div class="wrap">
+    <div class="howto-step">
+      <div class="n">01</div>
+      <p>Preencha sua ideia e sua experiência aqui embaixo — os prompts abaixo se atualizam sozinhos.</p>
+    </div>
+    <div class="howto-step">
+      <div class="n">02</div>
+      <p>Copie cada prompt, na ordem, e cole numa conversa com o ChatGPT ou o Claude.</p>
+    </div>
+    <div class="howto-step">
+      <div class="n">03</div>
+      <p>Leia a resposta, converse mais se quiser, e siga para o prompt seguinte.</p>
+    </div>
+  </div>
+</section>
+
+<section class="idea-panel">
+  <div class="wrap">
+    <h2>Comece por aqui</h2>
+    <p class="sub">Escreva em poucas palavras. Não precisa ser perfeito — você pode ajustar depois, direto na conversa com a IA.</p>
+
+    <div class="field">
+      <label for="ideia">Sua ideia de negócio</label>
+      <input type="text" id="ideia" placeholder="Ex.: doces artesanais sem açúcar para festas" />
+    </div>
+    <div class="field">
+      <label for="experiencia">Sua experiência profissional</label>
+      <textarea id="experiencia" placeholder="Ex.: 25 anos como professora de matemática, sempre cozinhei para a família e amigos"></textarea>
+    </div>
+    <p class="hint">Os quatro prompts da oficina, mais o prompt bônus, já vêm com o texto pronto — o que você escrever aqui aparece destacado em laranja dentro de cada um.</p>
+  </div>
+</section>
+
+<section class="steps">
+  <div class="wrap">
+
+    <div class="step">
+      <div class="step-num">1</div>
+      <div class="step-body">
+        <div class="step-kicker">Pergunta 1 · Validação</div>
+        <h3>Isso é um negócio ou um hobby?</h3>
+        <p class="desc">Esse primeiro prompt testa se a sua ideia resolve um problema real — antes de você investir tempo ou dinheiro nela.</p>
+        <span class="tool-tag">🛠 ChatGPT ou Claude</span>
+        <div class="prompt-card">
+          <span class="label">Prompt 1 — copie e cole</span>
+          <p class="prompt-text" id="prompt1"></p>
+          <button class="copy-btn" data-target="prompt1">Copiar prompt</button>
+        </div>
+        <div class="takeaway"><b>O que fica:</b> a estrutura papel + contexto + perguntas específicas. Essa fórmula funciona para qualquer ideia futura, não só para esta.</div>
+      </div>
+    </div>
+
+    <div class="step">
+      <div class="step-num">2</div>
+      <div class="step-body">
+        <div class="step-kicker">Pergunta 2 · Cliente e objeções</div>
+        <h3>Quem compraria isso, e por quê?</h3>
+        <p class="desc">Aqui a IA simula clientes reais e antecipa as objeções que eles teriam — para você já chegar preparado na conversa de verdade.</p>
+        <span class="tool-tag">🛠 ChatGPT ou Claude</span>
+        <div class="prompt-card">
+          <span class="label">Prompt 2 — copie e cole</span>
+          <p class="prompt-text" id="prompt2"></p>
+          <button class="copy-btn" data-target="prompt2">Copiar prompt</button>
+        </div>
+        <div class="takeaway"><b>O que fica:</b> testar objeções antes da venda evita descobrir o "não" só na hora em que já custou seu tempo.</div>
+      </div>
+    </div>
+
+    <div class="step">
+      <div class="step-num">3</div>
+      <div class="step-body">
+        <div class="step-kicker">Pergunta 3 · Nome e identidade</div>
+        <h3>Como chamo isso e como isso se parece?</h3>
+        <p class="desc">Gere sugestões de nome e, na mesma conversa, peça para a IA criar um logo simples a partir de uma descrição em palavras — sem precisar abrir outra ferramenta.</p>
+        <span class="tool-tag">🛠 ChatGPT (texto e imagem)</span>
+        <div class="prompt-card">
+          <span class="label">Prompt 3 — copie e cole</span>
+          <p class="prompt-text" id="prompt3"></p>
+          <button class="copy-btn" data-target="prompt3">Copiar prompt</button>
+        </div>
+        <div class="takeaway"><b>O que fica:</b> você não precisa saber desenhar — precisa saber descrever o estilo em palavras simples (acolhedor, moderno, artesanal...). O ChatGPT paga gera a imagem na mesma conversa.</div>
+      </div>
+    </div>
+
+    <div class="step">
+      <div class="step-num">4</div>
+      <div class="step-body">
+        <div class="step-kicker">Pergunta 4 · Primeiro passo real</div>
+        <h3>Qual é o meu primeiro passo real?</h3>
+        <p class="desc">Este prompt não promete uma venda garantida — promete tirar você de trás da tela. A meta da semana é ter uma conversa real e ouvir um "sim" ou um "não" de alguém.</p>
+        <span class="tool-tag">🛠 ChatGPT ou Claude</span>
+        <div class="prompt-card">
+          <span class="label">Prompt 4 — copie e cole</span>
+          <p class="prompt-text" id="prompt4"></p>
+          <button class="copy-btn" data-target="prompt4">Copiar prompt</button>
+        </div>
+        <div class="takeaway"><b>O que fica:</b> ouvir um "sim" ou um "não" real de alguém já é mais do que a maioria faz na primeira semana — e é o suficiente para quebrar a inércia.</div>
+      </div>
+    </div>
+
+    <div class="step bonus-step">
+      <div class="step-num bonus-num">★</div>
+      <div class="step-body">
+        <div class="step-kicker">Bônus · Depois da 1ª semana</div>
+        <h3>E se eu quiser ir além dos 7 dias?</h3>
+        <p class="desc">Use este prompt só depois de já ter conversado com pessoas reais — não antes. Ele expande o primeiro passo em um plano de 30 dias, dividido em 4 semanas.</p>
+        <span class="tool-tag">🛠 ChatGPT ou Claude</span>
+        <div class="prompt-card">
+          <span class="label">Prompt bônus — copie e cole</span>
+          <p class="prompt-text" id="prompt5"></p>
+          <button class="copy-btn" data-target="prompt5">Copiar prompt</button>
+        </div>
+        <div class="takeaway"><b>O que fica:</b> preço, primeiros clientes pagantes e o que mais organizar no caminho — a estrutura para transformar o primeiro contato em negócio de verdade.</div>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<section class="plan">
+  <div class="wrap">
+    <h2>Depois do Prompt 4</h2>
+    <p class="sub">A IA vai te devolver 7 ações, uma por dia. A meta não é fechar uma venda garantida — é sair de trás da tela e ter uma conversa real.</p>
+    <div class="plan-grid">
+      <div class="plan-card"><div class="day">DIA 1</div><p>A ação mais simples de todas para sair do zero — normalmente é a que a IA sugerir primeiro.</p></div>
+      <div class="plan-card"><div class="day">DIA 2–3</div><p>Listar pelo menos 3 pessoas reais que poderiam ser suas clientes.</p></div>
+      <div class="plan-card"><div class="day">DIA 4–5</div><p>Ter a conversa de verdade com elas, mostrar a ideia, e oferecer uma forma simples de dizer "sim".</p></div>
+      <div class="plan-card"><div class="day">DIA 6–7</div><p>Ajustar com base no que ouviu — um "não" também é resposta valiosa — e decidir o próximo passo.</p></div>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="wrap">
+    <h3>Quer ajuda para ir além do primeiro passo?</h3>
+    <p>Se você já testou o método e quer apoio para estruturar o negócio de verdade — plano, marca, primeiras vendas — eu ofereço uma mentoria em grupo pequeno para começar do zero, com acompanhamento até o primeiro cliente.</p>
+    <div style="display:flex; gap:14px; flex-wrap:wrap; margin-top:20px;">
+      <a class="footer-cta" href="https://fbrisola.com.br/mentoria-negocio/">Conhecer a mentoria de IA para começar seu negócio</a>
+      <a class="footer-cta" id="whatsapp-send" href="#" target="_blank" rel="noopener" style="background:var(--copper);">Mandar minha ideia pro Fernando →</a>
+    </div>
+    <p class="hint" style="margin-top:14px;">Preencha sua ideia lá em cima — o botão do WhatsApp já leva ela pronta pro Fernando.</p>
+    <p class="fine">Material de apoio da oficina "IA para Começar um Novo Negócio" — MaturiFest 2026. Fernando Brisola Batista · Agência Logos · AssessIA</p>
+  </div>
+</footer>
+
+<script>
+  const ideiaEl = document.getElementById('ideia');
+  const expEl = document.getElementById('experiencia');
+
+  function val(el, placeholder){
+    const v = el.value.trim();
+    return v.length ? v : placeholder;
+  }
+
+  function highlight(text, fills){
+    // Escape basic HTML, then wrap fill values in span
+    let out = text
+      .replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;');
+    fills.forEach(f => {
+      if(!f) return;
+      const esc = f.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;');
+      out = out.split(esc).join('<span class="fill">' + esc + '</span>');
+    });
+    return out;
+  }
+
+  function render(){
+    const ideia = val(ideiaEl, '[sua ideia de negócio]');
+    const exp = val(expEl, '[sua experiência profissional]');
+
+    const p1raw = `Aja como um consultor de novos negócios experiente. Minha ideia é: ${ideia}.\nMinha experiência profissional é: ${exp}. Me responda:\n1) Isso resolve um problema real de quem?\n2) Alguém pagaria por isso hoje?\n3) Qual é a versão mais simples possível para testar em 30 dias?`;
+
+    const p2raw = `Agora simule 3 clientes em potencial diferentes para a ideia de negócio "${ideia}", com perfis distintos. Para cada um, me diga: o que essa pessoa objetaria antes de comprar, e como eu responderia a essa objeção.`;
+
+    const p3raw = `Sugira 5 nomes para o negócio "${ideia}", curtos e fáceis de lembrar. Depois, gere uma imagem simples de logo para o nome escolhido, em estilo [acolhedor / moderno / artesanal — descreva em 1 frase o que combina com esse público].`;
+
+    const p4raw = `Com base em tudo que conversamos sobre "${ideia}", me dê um plano de 7 dias, com uma ação por dia, para eu sair da teoria: conversar de verdade com pelo menos 3 pessoas que poderiam ser minhas clientes, mostrar a ideia, e oferecer uma forma simples delas dizerem "sim" — mesmo que pequena, como uma reserva ou um pedido. Nada de "pesquisar" ou "estudar" sozinho em casa: só ações que me tirem de trás da tela.`;
+
+    const p5raw = `Agora me ajude a pensar maior. Com tudo o que conversamos sobre "${ideia}" e com o resultado da minha primeira semana de ação, monte um plano de 30 dias, dividido em 4 semanas, para eu sair do primeiro contato com clientes e começar a estruturar esse negócio de verdade: como definir um preço, como conseguir os primeiros clientes pagantes, e o que mais preciso organizar ou aprender no caminho.`;
+
+    document.getElementById('prompt1').innerHTML = highlight(p1raw, [ideia, exp]);
+    document.getElementById('prompt2').innerHTML = highlight(p2raw, [ideia]);
+    document.getElementById('prompt3').innerHTML = highlight(p3raw, [ideia]);
+    document.getElementById('prompt4').innerHTML = highlight(p4raw, [ideia]);
+    document.getElementById('prompt5').innerHTML = highlight(p5raw, [ideia]);
+
+    const waMsg = `Olá Fernando! Vim do Kit da oficina do MaturiFest.\nMinha ideia: ${ideia}\nMinha experiência: ${exp}\nQuero saber mais sobre a mentoria pra começar meu negócio.`;
+    document.getElementById('whatsapp-send').href = 'https://wa.me/5511992913413?text=' + encodeURIComponent(waMsg);
+  }
+
+  ideiaEl.addEventListener('input', render);
+  expEl.addEventListener('input', render);
+  render();
+
+  document.querySelectorAll('.copy-btn').forEach(btn => {
+    btn.addEventListener('click', () => {
+      const target = document.getElementById(btn.dataset.target);
+      const text = target.innerText;
+      navigator.clipboard.writeText(text).then(() => {
+        const original = btn.textContent;
+        btn.textContent = 'Copiado ✓';
+        btn.classList.add('copied');
+        setTimeout(() => { btn.textContent = original; btn.classList.remove('copied'); }, 1800);
+      }).catch(() => {
+        btn.textContent = 'Selecione e copie manualmente';
+      });
+    });
+  });
+</script>
+
+</body>
+</html>
