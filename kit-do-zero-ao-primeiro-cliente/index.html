@@ -332,6 +332,22 @@
       </div>
     </div>
 
+    <div class="step bonus-step">
+      <div class="step-num bonus-num">⚙</div>
+      <div class="step-body">
+        <div class="step-kicker">Bônus · Personalização avançada</div>
+        <h3>Quer respostas mais diretas, sem "puxa-saco"?</h3>
+        <p class="desc">O ChatGPT deixa você configurar, uma vez só, como ele responde em toda conversa futura — sem precisar pedir isso a cada prompt. Chama-se "personalizar o ChatGPT" (ou "instruções personalizadas"). Este é um exemplo real, que uso no meu próprio ChatGPT, pra ter respostas mais diretas e menos elogios vazios:</p>
+        <span class="tool-tag">🛠 ChatGPT</span>
+        <div class="prompt-card">
+          <span class="label">Exemplo de personalização — copie e cole nas configurações</span>
+          <p class="prompt-text" id="prompt-custom"></p>
+          <button class="copy-btn" data-target="prompt-custom">Copiar texto</button>
+        </div>
+        <div class="takeaway"><b>Onde configurar:</b> no ChatGPT, vá em Configurações → Personalizar ChatGPT (ou "Custom Instructions") e cole o texto lá. Vale a partir daí, em qualquer conversa nova — inclusive nos 4 prompts deste Kit.</div>
+      </div>
+    </div>
+
   </div>
 </section>
 
@@ -401,6 +417,32 @@
     document.getElementById('prompt3').innerHTML = highlight(p3raw, [ideia]);
     document.getElementById('prompt4').innerHTML = highlight(p4raw, [ideia]);
     document.getElementById('prompt5').innerHTML = highlight(p5raw, [ideia]);
+
+    const customInstructionsText = `Atue como um conselheiro estratégico, direto e intelectualmente honesto.
+
+Seu papel é maximizar clareza, precisão, qualidade de raciocínio e qualidade de execução.
+
+Não concorde automaticamente comigo.
+Não valide ideias sem análise crítica.
+Não use elogios desnecessários.
+Não suavize problemas reais.
+Não force positividade.
+
+Questione premissas fracas.
+Aponte riscos, inconsistências, custos ocultos e pontos cegos.
+Se houver falhas no raciocínio, explique objetivamente por que o raciocínio é fraco.
+Se existir autoengano, excesso de otimismo ou falta de prioridade, diga claramente.
+
+Priorize: verdade factual, lógica, eficiência, execução, clareza estratégica.
+Evite: rudeza, sarcasmo, agressividade gratuita, elogios artificiais, validação emocional automática, discursos motivacionais.
+
+Estilo de resposta:
+Vá direto ao ponto. Seja objetivo e específico. Seja respeitoso e profissional. Corrija erros com clareza. Estruture respostas em listas, passos ou tabelas quando útil. Seja conciso por padrão. Expanda apenas quando necessário. Elimine redundâncias. Não explique o óbvio. Não use disclaimers genéricos. Se a pergunta for ambígua, peça esclarecimento em 1 frase.
+
+Quando apropriado: apresente trade-offs, estime impacto vs esforço, priorize ações, diferencie curto prazo vs longo prazo, destaque riscos de execução, proponha planos acionáveis e verificáveis.
+
+Objetivo principal: maximizar qualidade de decisão, execução e resultado real.`;
+    document.getElementById('prompt-custom').innerText = customInstructionsText;
 
     const waMsg = `Olá Fernando! Vim do Kit da oficina do MaturiFest.\nMinha ideia: ${ideia}\nMinha experiência: ${exp}\nQuero saber mais sobre a mentoria pra começar meu negócio.`;
     document.getElementById('whatsapp-send').href = 'https://wa.me/5511992913413?text=' + encodeURIComponent(waMsg);
