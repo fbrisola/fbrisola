@@ -166,6 +166,24 @@
   .bonus-step{ background:var(--sage-tint); margin:0 -28px; padding-left:28px; padding-right:28px; border-radius:16px; }
   .bonus-num{ background:var(--copper); font-size:26px; }
 
+  /* ---------- Truques section ---------- */
+  .trucos{ background:var(--pine-deep); padding:60px 0; }
+  .trucos h2{ font-size:28px; color:#fff; }
+  .trucos .sub{ color:#B9C6B6; margin-top:8px; max-width:60ch; }
+  .trucos-grid{
+    margin-top:30px; display:grid; grid-template-columns:repeat(auto-fit, minmax(260px,1fr));
+    gap:18px;
+  }
+  .truco-card{
+    background:rgba(255,255,255,0.06); border:1px solid rgba(255,255,255,0.12);
+    border-radius:12px; padding:20px 20px 18px;
+  }
+  .truco-card .icon{ font-size:22px; }
+  .truco-card h3{
+    color:#fff; font-size:17.5px; margin-top:10px; font-family:'Fraunces', serif; font-weight:600;
+  }
+  .truco-card p{ margin:8px 0 0; font-size:14.5px; color:#D9E2D6; line-height:1.6; }
+
   /* ---------- Plan section ---------- */
   .plan{ background:var(--sage-tint); padding:60px 0; }
   .plan h2{ font-size:28px; }
@@ -348,6 +366,52 @@
       </div>
     </div>
 
+  </div>
+</section>
+
+<section class="trucos">
+  <div class="wrap">
+    <h2>Truques que fazem diferença</h2>
+    <p class="sub">Isso não é sobre os prompts em si — é sobre como usar a ferramenta no dia a dia, depois da oficina.</p>
+    <div class="trucos-grid">
+
+      <div class="truco-card">
+        <div class="icon">🎙</div>
+        <h3>Fale, não digite</h3>
+        <p>No celular, toque no ícone de microfone dentro do ChatGPT ou do Claude e fale sua pergunta em voz alta, como se estivesse ditando uma mensagem de voz. É mais rápido que digitar e funciona tão bem quanto texto.</p>
+      </div>
+
+      <div class="truco-card">
+        <div class="icon">📷</div>
+        <h3>Mostre, não só descreva</h3>
+        <p>Tire uma foto de um produto, um cardápio, uma embalagem ou até um papel escrito à mão, e envie junto com sua pergunta. A IA lê imagem tanto quanto texto — não precisa descrever o que ela pode simplesmente ver.</p>
+      </div>
+
+      <div class="truco-card">
+        <div class="icon">🔁</div>
+        <h3>A primeira resposta é rascunho</h3>
+        <p>Se a resposta não te convenceu, não comece de novo — continue a mesma conversa e diga "não gostei, tente pensando em X". É uma conversa, não uma busca: a segunda ou terceira tentativa costuma ser melhor que a primeira.</p>
+      </div>
+
+      <div class="truco-card">
+        <div class="icon">🔍</div>
+        <h3>Confira antes de confiar</h3>
+        <p>A IA às vezes inventa números, leis ou fatos com total confiança — isso se chama alucinação. Qualquer preço, dado legal ou estatística que ela te der, confirme numa fonte de fora antes de usar para decidir algo importante.</p>
+      </div>
+
+      <div class="truco-card">
+        <div class="icon">🔒</div>
+        <h3>Nunca cole dado sensível</h3>
+        <p>CPF, dado de cliente, senha, número de conta — nada disso deve entrar numa conversa com IA, mesmo em planos pagos. Trate a conversa como se pudesse ser lida por outra pessoa.</p>
+      </div>
+
+      <div class="truco-card">
+        <div class="icon">📁</div>
+        <h3>Guarde o contexto do seu negócio</h3>
+        <p>No ChatGPT e no Claude, isso se chama "Projeto". Você cria uma pasta, coloca as informações do seu negócio uma vez, e toda conversa nova já parte dali — sem precisar reexplicar tudo de novo.</p>
+      </div>
+
+    </div>
   </div>
 </section>
 
