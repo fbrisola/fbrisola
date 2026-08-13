@@ -77,6 +77,25 @@
   .hero .facil .dot{ width:6px; height:6px; border-radius:50%; background:var(--copper); }
 
   /* ---------- How to use ---------- */
+  .live-proof{
+    background:var(--sage-tint-2);
+    border-bottom:1px solid var(--line);
+    padding:20px 0;
+  }
+  .live-proof a{
+    display:flex; align-items:center; gap:14px; flex-wrap:wrap;
+    color:var(--pine-deep); text-decoration:none; font-weight:700;
+  }
+  .live-proof a:hover{
+    color:var(--copper-deep); text-decoration:underline;
+  }
+  .live-proof-tag{
+    display:inline-flex; align-items:center;
+    background:var(--copper); color:#fff; border-radius:20px;
+    padding:6px 12px; font-family:'IBM Plex Mono', monospace;
+    font-size:12px; font-weight:600; letter-spacing:0.08em; text-transform:uppercase;
+  }
+
   .howto{
     background:var(--sage-tint);
     border-bottom:1px solid var(--line);
@@ -215,6 +234,7 @@
     .step{ grid-template-columns:1fr; }
     .step-num{ margin-bottom:12px; }
     .hero{ padding:48px 0 56px; }
+    .live-proof a{ align-items:flex-start; gap:10px; }
   }
 
   @media (prefers-reduced-motion: reduce){
@@ -232,6 +252,15 @@
     <div class="facil"><span class="dot"></span> Fernando Brisola Batista</div>
   </div>
 </header>
+
+<section class="live-proof">
+  <div class="wrap">
+    <a href="https://chatgpt.com/share/6a7debbe-a4e0-83e9-9008-39d423b4162b" target="_blank" rel="noopener">
+      <span class="live-proof-tag">Ao vivo na oficina</span>
+      <span>Veja a conversa completa que geramos ao vivo na oficina MaturiFest, com a ideia real de um voluntário da plateia →</span>
+    </a>
+  </div>
+</section>
 
 <section class="howto">
   <div class="wrap">
