@@ -32,15 +32,16 @@ nav{position:fixed;z-index:100;top:0;left:0;right:0;display:flex;align-items:cen
 .nav-links a:hover{color:var(--text)}
 .nav-cta,.btn-primary,.btn-cta{font-family:'JetBrains Mono',monospace;font-size:12px;color:var(--black);background:var(--accent);padding:12px 20px;text-decoration:none;font-weight:800;letter-spacing:.05em;display:inline-flex;gap:10px;align-items:center;justify-content:center;transition:.2s}
 .nav-cta:hover,.btn-primary:hover,.btn-cta:hover{background:#d7fa7a;transform:translateY(-2px);box-shadow:0 12px 34px rgba(200,240,96,.22)}
-.hero{min-height:100vh;display:grid;grid-template-columns:1.05fr .95fr;gap:64px;align-items:center;max-width:1240px;margin:0 auto;padding:132px 40px 76px;position:relative}
+.hero{min-height:100vh;display:grid;grid-template-columns:1.05fr .95fr;gap:64px;align-items:center;max-width:1240px;margin:0 auto;padding:100px 40px 56px;position:relative}
 .hero-tag,.section-tag{font-family:'JetBrains Mono',monospace;font-size:11px;color:var(--accent);letter-spacing:.14em;text-transform:uppercase;display:flex;gap:12px;align-items:center;margin-bottom:24px}
+.hero .hero-tag{margin-bottom:14px}
 .hero-tag:before,.section-tag:before{content:'';width:28px;height:1px;background:var(--accent)}
-h1{font-family:'DM Serif Display',serif;font-size:clamp(54px,7vw,98px);line-height:.98;letter-spacing:-.035em;margin-bottom:26px}
+h1{font-family:'DM Serif Display',serif;font-size:clamp(46px,6.4vw,88px);line-height:1.0;letter-spacing:-.03em;margin-bottom:16px}
 h1 em,.section-title em,.footer-cta em{font-style:italic;color:var(--accent)}
-.hero-lead{font-size:21px;line-height:1.55;color:var(--soft);max-width:650px;margin-bottom:20px}
-.hero-desc{font-size:17px;color:var(--muted);max-width:620px;line-height:1.75;margin-bottom:38px}
+.hero-lead{font-size:19px;line-height:1.5;color:var(--soft);max-width:650px;margin-bottom:14px}
+.hero-desc{font-size:16px;color:var(--muted);max-width:620px;line-height:1.65;margin-bottom:24px}
 .hero-desc strong,.hero-lead strong{color:var(--text)}
-.hero-actions{display:flex;gap:16px;align-items:center;flex-wrap:wrap;margin-bottom:28px}
+.hero-actions{display:flex;gap:16px;align-items:center;flex-wrap:wrap;margin-bottom:20px}
 .btn-primary{font-size:13px;padding:18px 30px}
 .btn-secondary{font-family:'JetBrains Mono',monospace;font-size:12px;color:var(--muted);text-decoration:none;border-bottom:1px solid var(--border2);padding:16px 0;letter-spacing:.05em}
 .btn-secondary:hover{color:var(--text);border-color:var(--text)}
@@ -122,7 +123,7 @@ footer{max-width:1240px;margin:0 auto;border-top:1px solid var(--border);padding
 <header class="hero">
   <div>
     <div class="hero-tag">Nova turma · Acompanhamento próximo</div>
-    <h1>Você já sabe fazer. <em>Aprenda a fazer dez vezes mais</em> com IA.</h1>
+    <h1>Você já sabe fazer. <em>Agora, dez vezes mais</em>.</h1>
     <p class="hero-lead"><strong>Você gasta horas em tarefas repetitivas que IA já poderia estar fazendo por você.</strong> Sabe que dá pra ir além do ChatGPT genérico, mas não sabe por onde começar a construir de verdade.</p>
     <p class="hero-desc">Mentoria prática para quem já opera — não é curso de introdução a prompt. Você sai com agentes, automações e um sistema real rodando no seu trabalho, não com mais teoria sobre IA.</p>
     <div class="hero-actions">
