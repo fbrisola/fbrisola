@@ -109,6 +109,20 @@ footer{max-width:1240px;margin:0 auto;border-top:1px solid var(--border);padding
 #faq .faq p{font-size:15.5px;line-height:1.72;color:var(--muted)}
 @media(max-width:980px){#faq .faq-list{grid-template-columns:1fr}}
 
+.compare-grid{display:grid;grid-template-columns:1fr 1fr;gap:2px;margin-top:8px}
+.compare-col{background:var(--surface);padding:38px 40px}
+.compare-col--out{border-left:2px solid var(--danger)}
+.compare-col--in{border-left:2px solid var(--accent)}
+.compare-label{font-family:'JetBrains Mono',monospace;font-size:11px;letter-spacing:.1em;text-transform:uppercase;margin-bottom:20px}
+.compare-col--out .compare-label{color:var(--danger)}
+.compare-col--in .compare-label{color:var(--accent)}
+.compare-col ul{list-style:none;display:flex;flex-direction:column;gap:14px}
+.compare-col li{font-size:16px;color:var(--muted);line-height:1.55;padding-left:24px;position:relative}
+.compare-col li:before{position:absolute;left:0;top:0;font-family:'JetBrains Mono',monospace;font-weight:800}
+.compare-col--out li:before{content:'×';color:var(--danger)}
+.compare-col--in li:before{content:'✓';color:var(--accent)}
+@media(max-width:980px){.compare-grid{grid-template-columns:1fr}}
+
 </style>
 </head>
 <body>
@@ -143,7 +157,7 @@ footer{max-width:1240px;margin:0 auto;border-top:1px solid var(--border);padding
 <div class="stats-bar reveal">
   <div class="stat"><div class="stat-num">5</div><div class="stat-label">Encontros ao vivo</div></div>
   <div class="stat"><div class="stat-num">2h</div><div class="stat-label">Por sessão</div></div>
-  <div class="stat"><div class="stat-num">Poucas</div><div class="stat-label">Vagas por turma</div></div>
+  <div class="stat"><div class="stat-num">8</div><div class="stat-label">Vagas por turma</div></div>
   <div class="stat"><div class="stat-num">1</div><div class="stat-label">Caso real por aluno</div></div>
 </div>
 
@@ -170,6 +184,32 @@ footer{max-width:1240px;margin:0 auto;border-top:1px solid var(--border);padding
       </div>
     </div>
     <div class="quote"><blockquote>“A IA não é para quem não sabe fazer. É para quem já sabe fazer e quer fazer dez vezes mais.”</blockquote><cite>— Fernando Brisola</cite></div>
+  </div>
+</section>
+
+<section id="diferenca">
+  <div class="section-tag">A diferença real</div>
+  <h2 class="section-title">Isso não é mais um curso de prompt. <em>É outra categoria de coisa.</em></h2>
+  <p class="section-lead">O feed está cheio de conteúdo sobre ferramentas e hacks rápidos. O que separa isso é simples de descrever e difícil de fingir: sistema real, rodando, que você mesmo constrói — não slide sobre IA.</p>
+  <div class="compare-grid reveal">
+    <div class="compare-col compare-col--out">
+      <div class="compare-label">// O que já satura o mercado</div>
+      <ul>
+        <li>Prompt pronto pra copiar e colar</li>
+        <li>Ferramenta genérica, sem conexão com o seu trabalho real</li>
+        <li>Case de resultado que ninguém mais consegue reproduzir</li>
+        <li>Quem ensina nunca rodou aquilo em produção, todo dia, com risco real</li>
+      </ul>
+    </div>
+    <div class="compare-col compare-col--in">
+      <div class="compare-label">// O que você constrói aqui</div>
+      <ul>
+        <li>Agente, conector e orquestração aplicados ao seu caso, não a um exemplo genérico</li>
+        <li>Sistema que continua seu — roda depois que a mentoria termina</li>
+        <li>Resultado medido: antes e depois no seu próprio trabalho</li>
+        <li>Mentor que usa o mesmo sistema pra rodar as próprias empresas, todo dia</li>
+      </ul>
+    </div>
   </div>
 </section>
 
@@ -235,7 +275,7 @@ footer{max-width:1240px;margin:0 auto;border-top:1px solid var(--border);padding
     <div class="card">
       <div class="card-kicker">01 / Prova de quem já passou</div>
       <h3>Ele achou uma falha de segurança que ninguém tinha visto.</h3>
-      <p>O Jairo, sênior em projetos e tecnologia, não ficou só nos exercícios da mentoria. Sozinho, identificou uma vulnerabilidade de command injection numa integração de terceiros que estava usando e construiu a correção com o SDK oficial — sem eu pedir. Três sessões seguidas, superou o que devia ser só "dever de casa". Hoje aplica a mesma lógica de orquestração multi-agente a um problema real do próprio negócio, com um piloto que já gera relatórios de qualidade alta em produção.</p>
+      <p>O Jairo é sênior em projetos e tecnologia, com pós em Ciência de Dados — mas quase nenhuma prática em IA generativa antes de começar. Em quatro sessões, saiu de "nunca construí um agente" para montar sozinho um sistema com orquestrador, múltiplos agentes especializados e matriz de autonomia — a mesma arquitetura que uso pra rodar minhas empresas, aplicada a um problema real do próprio negócio dele. No meio do caminho, sem eu pedir, identificou sozinho uma vulnerabilidade de command injection numa integração de terceiros que estava usando e construiu a correção com o SDK oficial. Pediu pra estender sessão três vezes porque queria ir mais fundo do que o roteiro previa. Terminou aplicando o que aprendeu num sistema que já roda de verdade — não um exercício de aula.</p>
     </div>
     <div class="card">
       <div class="card-kicker">02 / Testado na própria operação</div>
@@ -304,9 +344,9 @@ footer{max-width:1240px;margin:0 auto;border-top:1px solid var(--border);padding
     </div>
     <div class="pricing-right">
       <div>
-        <div class="urgency-title">⚡ Vagas limitadas</div>
-        <div class="urgency-text">Poucas vagas. Foco em resultado.</div>
-        <div class="urgency-sub">Cada turma trabalha com número reduzido de participantes para acompanhamento próximo, diagnóstico aprofundado e foco em construção prática de casos reais. O objetivo é gerar transformação mensurável no seu trabalho.</div>
+        <div class="urgency-title">⚡ 8 vagas por turma</div>
+        <div class="urgency-text">Fecha quando enche. Não reabre até a próxima.</div>
+        <div class="urgency-sub">Não é matrícula em fluxo contínuo. Cada turma tem uma janela de inscrição e um número fixo de 8 vagas, porque acompanhamento próximo de verdade não escala além disso. Quando essa turma fechar, a entrada seguinte é só na próxima — sem data marcada ainda.</div>
         <div class="btn-note" style="text-align:left;margin-top:24px;color:var(--accent)">// Qual é a melhor opção para você?</div>
       </div>
       <div>
