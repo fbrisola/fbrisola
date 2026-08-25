@@ -394,6 +394,56 @@ body{
 }
 .biz-cta:hover{background:var(--gold-l);transform:translateY(-1px);box-shadow:0 6px 20px rgba(196,149,42,.28)}
 
+/* ─── MENTORIA SPOTLIGHT ─── */
+.mentor-spotlight{background:var(--bg2)}
+.spotlight-card{
+  background:var(--bg3);border:1px solid var(--gold-b);
+  border-radius:24px;padding:3rem;
+  display:grid;grid-template-columns:1.4fr 1fr;gap:3rem;
+  position:relative;overflow:hidden;
+}
+.spotlight-card::before{
+  content:'';position:absolute;top:-40%;right:-10%;
+  width:420px;height:420px;border-radius:50%;
+  background:radial-gradient(circle,rgba(196,149,42,.14) 0%,transparent 70%);
+  pointer-events:none;
+}
+.spotlight-list{list-style:none;display:flex;flex-direction:column;gap:.7rem;margin-bottom:2rem}
+.spotlight-list li{
+  padding-left:1.6rem;position:relative;
+  font-size:.9375rem;color:var(--text2);line-height:1.6;
+}
+.spotlight-list li::before{
+  content:'✓';position:absolute;left:0;top:0;
+  color:var(--gold);font-weight:700;
+}
+.spotlight-ctas{display:flex;align-items:center;gap:1.25rem;flex-wrap:wrap}
+.spotlight-urgency{
+  font-family:var(--fm);font-size:.75rem;color:var(--gold-l);
+  letter-spacing:.02em;
+}
+.spotlight-proof{
+  background:var(--bg2);border:1px solid var(--border2);
+  border-radius:16px;padding:2rem;
+  display:flex;flex-direction:column;justify-content:center;
+  position:relative;
+}
+.spotlight-quote-mark{
+  font-family:var(--fd);font-size:3rem;color:var(--gold);
+  line-height:1;margin-bottom:.5rem;
+}
+.spotlight-quote-text{
+  font-size:1rem;color:var(--text);line-height:1.7;
+  font-style:italic;margin-bottom:1.25rem;
+}
+.spotlight-quote-author{
+  font-family:var(--fm);font-size:.7rem;color:var(--text3);
+  text-transform:uppercase;letter-spacing:.08em;
+}
+@media(max-width:1024px){
+  .spotlight-card{grid-template-columns:1fr;padding:2.25rem}
+}
+
 /* ─── DIFERENCIAIS ─── */
 .dif-grid{
   display:grid;grid-template-columns:repeat(3,1fr);
@@ -656,9 +706,9 @@ body.menu-open .mobile-menu{
       </button>
       <div class="nav-dropdown-menu" role="menu">
         <a href="/mentoria" target="_blank" rel="noopener" role="menuitem">Mentoria IA</a>
+        <a href="/mentoria-negocio" target="_blank" rel="noopener" role="menuitem">Mentoria IA para Negócios</a>
         <a href="https://aars.fbrisola.com.br/" target="_blank" rel="noopener" role="menuitem">Diagnóstico IA</a>
         <div class="dd-divider"></div>
-        <a href="https://assessia.fbrisola.com.br" target="_blank" rel="noopener" role="menuitem">AssessIA</a>
         <a href="https://unopag.fbrisola.com.br" target="_blank" rel="noopener" role="menuitem">UnoPag</a>
         <a href="https://dental.fbrisola.com.br" target="_blank" rel="noopener" role="menuitem">DentalSmart</a>
         <a href="https://farmgate.com.br" target="_blank" rel="noopener" role="menuitem">Farmgate</a>
@@ -683,9 +733,9 @@ body.menu-open .mobile-menu{
       </button>
       <div class="nav-dropdown-menu" role="menu">
         <a href="/mentoria" target="_blank" rel="noopener" role="menuitem">Mentoria IA</a>
+        <a href="/mentoria-negocio" target="_blank" rel="noopener" role="menuitem">Mentoria IA para Negócios</a>
         <a href="https://aars.fbrisola.com.br/" target="_blank" rel="noopener" role="menuitem">Diagnóstico IA</a>
         <div class="dd-divider"></div>
-        <a href="https://assessia.fbrisola.com.br" target="_blank" rel="noopener" role="menuitem">AssessIA</a>
         <a href="https://unopag.fbrisola.com.br" target="_blank" rel="noopener" role="menuitem">UnoPag</a>
         <a href="https://dental.fbrisola.com.br" target="_blank" rel="noopener" role="menuitem">DentalSmart</a>
         <a href="https://farmgate.com.br" target="_blank" rel="noopener" role="menuitem">Farmgate</a>
@@ -772,6 +822,36 @@ body.menu-open .mobile-menu{
     </div>
   </div>
 </div>
+
+<!-- MENTORIA SPOTLIGHT -->
+<section class="section mentor-spotlight" id="mentoria">
+  <div class="container">
+    <div class="spotlight-card reveal">
+      <div>
+        <div class="biz-tag">⬤ Mentoria IA Aplicada · Turma Fechada</div>
+        <h2 class="s-title">Você já sabe fazer.<br><em>Agora, dez vezes mais.</em></h2>
+        <p style="color:var(--text2);font-size:1rem;line-height:1.75;max-width:520px;margin-bottom:1.75rem">
+          Para profissionais experientes que querem sair do uso básico e começar a construir com IA de verdade: agentes, automação, conectores e orquestração aplicados no seu contexto real — não em teoria.
+        </p>
+        <ul class="spotlight-list">
+          <li>Construção do seu primeiro agente de IA com objetivo e uso real</li>
+          <li>Automações conectadas a APIs, documentos, CRM e fluxos de trabalho</li>
+          <li>Plano individual de aplicação mapeado para o seu negócio</li>
+          <li>Demonstrações ao vivo do orquestrador próprio em operação real</li>
+        </ul>
+        <div class="spotlight-ctas">
+          <a href="https://fbrisola.com.br/mentoria/" target="_blank" rel="noopener" class="btn-gold">Conhecer a Mentoria →</a>
+          <span class="spotlight-urgency">8 vagas por turma · Grupo fechado de 8–12 pessoas</span>
+        </div>
+      </div>
+      <div class="spotlight-proof">
+        <div class="spotlight-quote-mark">"</div>
+        <div class="spotlight-quote-text">O Fernando não fala de IA de forma abstrata — ele demonstra em operação real. Quando as pessoas veem funcionando, entendem o que está em jogo. Foi isso que me fez querer a mentoria.</div>
+        <div class="spotlight-quote-author">Participante — Mentoria IA Aplicada</div>
+      </div>
+    </div>
+  </div>
+</section>
 
 <!-- SOBRE -->
 <section class="section" id="sobre">
@@ -882,22 +962,6 @@ body.menu-open .mobile-menu{
           <li>Plataforma white-label para consultorias, coaches e profissionais de saúde comportamental</li>
         </ul>
         <a href="#contato" class="biz-cta">Conhecer o AssessIA →</a>
-      </div>
-
-      <!-- Mentoria IA -->
-      <div class="biz-card reveal d3">
-        <div class="biz-tag">⬤ Mentoria · Grupo Fechado</div>
-        <div class="biz-name">Mentoria IA Aplicada</div>
-        <div class="biz-tagline">Para profissionais experientes que querem sair do uso básico e começar a construir com IA de verdade: agentes, automação, conectores e orquestração com aplicação no seu contexto real.</div>
-        <div class="biz-for">Para: gestores, empreendedores, consultores e profissionais autônomos</div>
-        <ul class="biz-features">
-          <li>5 encontros ao vivo (2h cada) em grupo fechado de 8–12 pessoas</li>
-          <li>Construção do seu primeiro agente de IA com objetivo e uso real</li>
-          <li>Automações conectadas a APIs, documentos, CRM e fluxos de trabalho</li>
-          <li>Plano individual de aplicação mapeado para o seu negócio</li>
-          <li>Demonstrações ao vivo do orquestrador próprio em operação real</li>
-        </ul>
-        <a href="https://fbrisola.com.br/mentoria/" target="_blank" rel="noopener" class="biz-cta">Conhecer a Mentoria →</a>
       </div>
 
     </div>
