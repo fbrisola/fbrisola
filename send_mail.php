@@ -1,4 +1,6 @@
 <?php
+$destinatario = 'fbrisola@gmail.com'; // Único destinatário; alterar aqui quando necessário.
+
 header('Content-Type: application/json; charset=UTF-8');
 
 if ($_SERVER['REQUEST_METHOD'] !== 'POST') {
@@ -14,14 +16,29 @@ if (!empty($_POST['honeypot'])) {
     exit;
 }
 
-$nome      = trim(filter_input(INPUT_POST, 'name',      FILTER_SANITIZE_SPECIAL_CHARS));
-$email     = trim(filter_input(INPUT_POST, 'email',     FILTER_SANITIZE_EMAIL));
-$empresa   = trim(filter_input(INPUT_POST, 'empresa',   FILTER_SANITIZE_SPECIAL_CHARS));
-$wpp       = trim(filter_input(INPUT_POST, 'wpp',       FILTER_SANITIZE_SPECIAL_CHARS));
-$interesse = trim(filter_input(INPUT_POST, 'interesse', FILTER_SANITIZE_SPECIAL_CHARS));
-$mensagem  = trim(filter_input(INPUT_POST, 'message',   FILTER_SANITIZE_SPECIAL_CHARS));
+$nome      = trim((string) filter_input(INPUT_POST, 'name',      FILTER_SANITIZE_SPECIAL_CHARS));
+$email     = trim((string) filter_input(INPUT_POST, 'email',     FILTER_SANITIZE_EMAIL));
+$empresa   = trim((string) filter_input(INPUT_POST, 'empresa',   FILTER_SANITIZE_SPECIAL_CHARS));
+$wpp       = trim((string) filter_input(INPUT_POST, 'wpp',       FILTER_SANITIZE_SPECIAL_CHARS));
+$interesse = trim((string) filter_input(INPUT_POST, 'interesse', FILTER_SANITIZE_SPECIAL_CHARS));
+$mensagem  = trim((string) filter_input(INPUT_POST, 'message',   FILTER_SANITIZE_SPECIAL_CHARS));
+
+// Campos adicionais não mudam a validação dos contatos legados sem origem.
+$origemPresente = array_key_exists('origem', $_POST);
+$origem = trim((string) filter_input(INPUT_POST, 'origem', FILTER_SANITIZE_SPECIAL_CHARS));
+$consent = $_POST['consent'] ?? '';
+$utm = [];
+foreach (['utm_source', 'utm_medium', 'utm_campaign', 'utm_content'] as $campo) {
+    $utm[$campo] = trim((string) filter_input(INPUT_POST, $campo, FILTER_SANITIZE_SPECIAL_CHARS));
+}
 
 $erros = [];
+if ($origemPresente && !in_array($origem, ['automacao', 'ia'], true)) {
+    $erros[] = 'Origem inválida';
+}
+if ($origemPresente && $consent !== '1') {
+    $erros[] = 'É necessário autorizar o tratamento dos dados';
+}
 
 if (empty($nome) || mb_strlen($nome) < 3) {
     $erros[] = 'Nome deve ter pelo menos 3 caracteres';
@@ -39,8 +56,8 @@ if (!empty($erros)) {
     exit;
 }
 
-$destinatario = 'fbrisola@gmail.com';
-$assunto      = '=?UTF-8?B?' . base64_encode('Nova mensagem do site — ' . $nome) . '?=';
+$prefixo = ['automacao' => '[Lead automacao] ', 'ia' => '[Lead IA no Fone] '][$origem] ?? '';
+$assunto = '=?UTF-8?B?' . base64_encode($prefixo . 'Nova mensagem do site — ' . $nome) . '?=';
 
 $interesseLabel = [
     'mydna'    => 'MyDNA — Gestão de RH',
@@ -48,8 +65,28 @@ $interesseLabel = [
     'assessia' => 'AssessIA — Avaliações Comportamentais',
     'mentoria' => 'Mentoria IA Aplicada — Próxima Turma',
     'palestra' => 'Palestra ou Treinamento In-company',
+    'automacao' => 'Automatiza IA — Automação pela Agência Logos',
+    'ia-no-fone' => 'IA no Fone — Material gratuito e newsletter',
     'outro'    => 'Outro assunto',
 ][$interesse] ?? $interesse;
+
+$dadosLead = '';
+if ($origemPresente) {
+    $finalidade = $origem === 'ia'
+        ? 'Material gratuito e newsletter IA no Fone'
+        : 'Contato sobre automação e envio do material gratuito';
+    $metadados = array_merge(['Origem' => $origem], $utm, [
+        'Consentimento' => '1 — autorizado',
+        'Finalidade' => $finalidade,
+        'Política' => 'https://fbrisola.com.br/privacidade/ — versão 2026-11-05',
+        'Recebido em (UTC)' => gmdate('Y-m-d H:i:s'),
+    ]);
+    foreach ($metadados as $rotulo => $valor) {
+        $dadosLead .= '<tr><td style="padding:8px 0"><strong>'
+            . htmlspecialchars($rotulo, ENT_QUOTES, 'UTF-8') . ':</strong> '
+            . htmlspecialchars($valor, ENT_QUOTES, 'UTF-8') . '</td></tr>';
+    }
+}
 
 $corpoEmail = '<!DOCTYPE html>
 <html lang="pt-BR">
@@ -87,7 +124,7 @@ $corpoEmail = '<!DOCTYPE html>
             <tr><td>
               <p style="font-size:11px;font-weight:700;color:#C4952A;text-transform:uppercase;letter-spacing:.1em;margin:0 0 6px">Mensagem</p>
               <p style="font-size:15px;color:#1a1a2e;margin:0;padding:16px;background:#f8f9fa;border-left:3px solid #C4952A;border-radius:4px;line-height:1.7">' . nl2br(htmlspecialchars($mensagem)) . '</p>
-            </td></tr>
+            </td></tr>' . $dadosLead . '
           </table>
         </td></tr>
         <tr><td style="background:#07080F;padding:20px 40px;text-align:center">
