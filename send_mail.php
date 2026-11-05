@@ -1,5 +1,10 @@
 <?php
-$destinatario = 'fbrisola@gmail.com'; // Único destinatário; alterar aqui quando necessário.
+// Destinatários por origem; edite os endereços aqui quando necessário.
+$destinatarios = [
+    'automacao' => 'automacao@fbrisola.com.br',
+    'ia' => 'ia@fbrisola.com.br',
+    'padrao' => 'fbrisola@gmail.com', // Home sem origem e qualquer outra origem.
+];
 
 header('Content-Type: application/json; charset=UTF-8');
 
@@ -26,6 +31,7 @@ $mensagem  = trim((string) filter_input(INPUT_POST, 'message',   FILTER_SANITIZE
 // Campos adicionais não mudam a validação dos contatos legados sem origem.
 $origemPresente = array_key_exists('origem', $_POST);
 $origem = trim((string) filter_input(INPUT_POST, 'origem', FILTER_SANITIZE_SPECIAL_CHARS));
+$destinatario = $destinatarios[$origem] ?? $destinatarios['padrao'];
 $consent = $_POST['consent'] ?? '';
 $utm = [];
 foreach (['utm_source', 'utm_medium', 'utm_campaign', 'utm_content'] as $campo) {
@@ -33,9 +39,6 @@ foreach (['utm_source', 'utm_medium', 'utm_campaign', 'utm_content'] as $campo) 
 }
 
 $erros = [];
-if ($origemPresente && !in_array($origem, ['automacao', 'ia'], true)) {
-    $erros[] = 'Origem inválida';
-}
 if ($origemPresente && $consent !== '1') {
     $erros[] = 'É necessário autorizar o tratamento dos dados';
 }
@@ -147,5 +150,5 @@ if ($enviado) {
     echo json_encode(['success' => true, 'message' => 'Mensagem enviada com sucesso!']);
 } else {
     http_response_code(500);
-    echo json_encode(['success' => false, 'message' => 'Erro ao enviar mensagem. Tente novamente ou escreva diretamente para fbrisola@gmail.com']);
+    echo json_encode(['success' => false, 'message' => 'Erro ao enviar mensagem. Tente novamente ou escreva diretamente para ' . $destinatario]);
 }
