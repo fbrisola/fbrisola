@@ -25,4 +25,4 @@ jobs:
           TARGET: ${{ secrets.SSH_TARGET }}
           # Sobrescreve arquivos enviados, mas não apaga o que existe só no servidor (sem --delete)
           ARGS: "-rlgoDvz"
-          EXCLUDE: "/.git/, /.github/, /node_modules/, /TODO.md, /pass.php, /index-v1.html, /index-v2.html, /fbb.html"
+          EXCLUDE: "/tests/, /ia-newsletter-data/, /.git/, /.github/, /node_modules/, /TODO.md, /pass.php, /index-v1.html, /index-v2.html, /fbb.html"
