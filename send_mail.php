@@ -1,7 +1,7 @@
 <?php
 // Destinatários por origem; edite os endereços aqui quando necessário.
 $destinatarios = [
-    'automacao' => 'automacao@fbrisola.com.br',
+    'automacao' => 'ia@fbrisola.com.br',
     'ia' => 'ia@fbrisola.com.br',
     'padrao' => 'fbrisola@gmail.com', // Home sem origem e qualquer outra origem.
 ];

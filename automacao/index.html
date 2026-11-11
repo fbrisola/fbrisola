@@ -70,7 +70,7 @@ form.addEventListener('submit', async event => {
   } catch (err) {
     form.hidden = true;
     error.hidden = false;
-    document.getElementById('error-message').textContent = err.name === 'AbortError' || err instanceof TypeError ? 'Falha na conexão. Tente novamente ou escreva para automacao@fbrisola.com.br.' : err.message;
+    document.getElementById('error-message').textContent = err.name === 'AbortError' || err instanceof TypeError ? 'Falha na conexão. Tente novamente ou escreva para ia@fbrisola.com.br.' : err.message;
     document.getElementById('retry').focus();
   } finally {
     clearTimeout(timeout);
