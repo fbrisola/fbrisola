@@ -144,9 +144,17 @@ $headers .= "From: Site FBrisola <noreply@fbrisola.com.br>\r\n";
 $headers .= "Reply-To: =?UTF-8?B?" . base64_encode($nome) . "?= <{$email}>\r\n";
 $headers .= "X-Mailer: PHP/" . phpversion() . "\r\n";
 
-$enviado = mail($destinatario, $assunto, $corpoEmail, $headers);
+require_once __DIR__ . '/ia-newsletter.php';
+$enviado = ia_mail($destinatario, $assunto, $corpoEmail, $headers);
 
 if ($enviado) {
+    if ($origem === 'ia' && $consent === '1') {
+        try {
+            ia_send_confirmation($email, $nome, $_SERVER['REMOTE_ADDR'] ?? 'unknown');
+        } catch (Throwable $error) {
+            error_log('IA newsletter: confirmation delivery failed (' . get_class($error) . ')');
+        }
+    }
     echo json_encode(['success' => true, 'message' => 'Mensagem enviada com sucesso!']);
 } else {
     http_response_code(500);
