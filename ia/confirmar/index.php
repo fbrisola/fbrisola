@@ -4,13 +4,20 @@ header('Cache-Control: no-store');
 header('Referrer-Policy: no-referrer');
 header('X-Robots-Tag: noindex, nofollow');
 $confirmed = false;
+$pending = false;
+$isPost = $_SERVER['REQUEST_METHOD'] === 'POST';
+$token = $isPost ? ($_POST['t'] ?? '') : ($_GET['t'] ?? '');
 $message = 'Este link é inválido ou expirou. Volte ao IA no Fone para pedir um novo e-mail de confirmação.';
 try {
     $dir = ia_data_dir();
-    $data = ia_validate($_GET['t'] ?? '', ia_secret($dir));
+    $data = ia_validate($token, ia_secret($dir));
     if ($data !== null) {
-        ia_confirm_once($dir, $data);
-        $confirmed = true;
+        if ($isPost) {
+            ia_confirm_once($dir, $data);
+            $confirmed = true;
+        } else {
+            $pending = true;
+        }
     } else {
         http_response_code(400);
     }
@@ -31,6 +38,12 @@ try {
 </style></head><body><a class="skip" href="#conteudo">Pular para o conteúdo</a><div class="wrap"><header><nav aria-label="Principal"><a class="brand" href="/">FERNANDO BRISOLA</a><a href="/ia/">IA no Fone →</a></nav></header><main id="conteudo" class="prose"><p class="eyebrow">IA no Fone / Newsletter</p>
 <?php if ($confirmed): ?>
 <h1>E-mail confirmado!</h1><p>Seu guia está disponível. A newsletter semanal começa em breve.</p><p><a class="button" href="/materiais/guia-chatbot-ou-agente.pdf" download>Baixar o guia (PDF)</a></p>
+<?php elseif ($pending): ?>
+<h1>Confirme seu e-mail</h1><p>Clique no botão para confirmar seu cadastro e liberar o guia.</p>
+<form method="post" action="/ia/confirmar/">
+<input type="hidden" name="t" value="<?= htmlspecialchars($token, ENT_QUOTES, 'UTF-8') ?>">
+<button class="button" type="submit">Confirmar meu e-mail</button>
+</form>
 <?php else: ?>
 <h1>Confirmação não concluída</h1><p><?= htmlspecialchars($message, ENT_QUOTES, 'UTF-8') ?></p><p><a class="button" href="/ia/">Voltar ao IA no Fone</a></p>
 <?php endif; ?>

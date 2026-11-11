@@ -3,18 +3,22 @@
 function ia_data_dir()
 {
     $root = __DIR__;
-    $outside = dirname($root) . '/ia-newsletter-data';
-    $dir = is_dir($outside) || is_writable(dirname($root)) ? $outside : $root . '/ia-newsletter-data';
+    $dir = $root . '/ia-newsletter-data';
+    if (!is_dir($dir) && !@mkdir($dir, 0700, true) && !is_dir($dir)) {
+        $dir = dirname($root) . '/ia-newsletter-data';
+    }
+    ia_protect_dir($dir);
+    return $dir;
+}
+
+function ia_protect_dir($dir)
+{
     if (!is_dir($dir) && !@mkdir($dir, 0700, true) && !is_dir($dir)) {
         throw new RuntimeException('Cannot create newsletter storage');
     }
-    if ($dir === $root . '/ia-newsletter-data') {
-        $deny = "<IfModule mod_authz_core.c>\nRequire all denied\n</IfModule>\n<IfModule !mod_authz_core.c>\nDeny from all\n</IfModule>\n";
-        if (file_put_contents($dir . '/.htaccess', $deny, LOCK_EX) === false) {
-            throw new RuntimeException('Cannot protect newsletter storage');
-        }
-    }
-    return $dir;
+    $deny = "<IfModule mod_authz_core.c>\nRequire all denied\n</IfModule>\n<IfModule !mod_authz_core.c>\nDeny from all\n</IfModule>\n";
+    ia_write($dir . '/.htaccess', $deny);
+    ia_write($dir . '/index.html', '');
 }
 
 function ia_write($path, $value)
@@ -78,14 +82,38 @@ function ia_validate($token, $secret, $now = null)
     return $data;
 }
 
+function ia_recipient_key($email)
+{
+    list($local, $domain) = explode('@', strtolower($email), 2);
+    $local = explode('+', $local, 2)[0];
+    if ($domain === 'gmail.com' || $domain === 'googlemail.com') {
+        $local = str_replace('.', '', $local);
+        $domain = 'gmail.com';
+    }
+    return $local . '@' . $domain;
+}
+
+function ia_ip_key($ip)
+{
+    $packed = @inet_pton($ip);
+    return $packed !== false && strlen($packed) === 16
+        ? bin2hex(substr($packed, 0, 8)) . '/64' : $ip;
+}
+
 function ia_allow($dir, $email, $ip, $now = null)
 {
     $now = $now ?? time();
     return ia_locked($dir, function () use ($dir, $email, $ip, $now) {
         foreach (glob($dir . '/rate-*.json') as $old) {
-            if (filemtime($old) < $now - 3600) { unlink($old); }
+            if (filemtime($old) < $now - 86400) { unlink($old); }
         }
-        $rules = [ ['email:' . strtolower($email), 600, 1], ['ip:' . $ip, 3600, 5] ];
+        $recipient = ia_recipient_key($email);
+        $rules = [
+            ['email-hour:' . $recipient, 3600, 1],
+            ['email-day:' . $recipient, 86400, 3],
+            ['ip:' . ia_ip_key($ip), 3600, 5],
+            ['global', 3600, 60],
+        ];
         $updates = [];
         foreach ($rules as $rule) {
             $path = $dir . '/rate-' . hash('sha256', $rule[0]) . '.json';

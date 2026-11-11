@@ -8,6 +8,13 @@ function check($condition, $label) {
 $dir = sys_get_temp_dir() . '/ia-newsletter-test-' . bin2hex(random_bytes(8));
 mkdir($dir, 0700);
 try {
+    ia_protect_dir($dir);
+    check(strpos(file_get_contents($dir . '/.htaccess'), 'Require all denied') !== false
+        && strpos(file_get_contents($dir . '/.htaccess'), 'Deny from all') !== false, 'storage always denies web access');
+    check(is_file($dir . '/index.html') && filesize($dir . '/index.html') === 0, 'empty storage index');
+    unlink($dir . '/.htaccess');
+    ia_protect_dir($dir);
+    check(is_file($dir . '/.htaccess'), 'missing protection repaired');
     $secret = ia_secret($dir);
     check(strlen($secret) === 32 && ia_secret($dir) === $secret, 'persistent random secret');
     check((fileperms($dir . '/secret.key') & 0777) === 0600, 'secret permissions');
@@ -24,13 +31,39 @@ try {
         check(ia_validate($bad, $secret) === null, 'malformed token rejected');
     }
     check(ia_allow($dir, 'teste@example.com', '127.0.0.1', $now), 'first request allowed');
-    check(!ia_allow($dir, 'TESTE@example.com', '127.0.0.2', $now + 599), 'email cooldown across IPs');
+    check(!ia_allow($dir, 'TESTE@example.com', '127.0.0.2', $now + 3599), 'email cooldown across IPs');
     for ($i = 1; $i <= 4; $i++) {
         check(ia_allow($dir, "test$i@example.com", '127.0.0.1', $now), 'IP within quota');
     }
     check(!ia_allow($dir, 'six@example.com', '127.0.0.1', $now), 'sixth IP request blocked');
-    check(ia_allow($dir, 'teste@example.com', '127.0.0.2', $now + 600), 'email cooldown ends');
+    check(ia_allow($dir, 'teste@example.com', '127.0.0.2', $now + 3600), 'email cooldown ends');
     check(ia_allow($dir, 'six@example.com', '127.0.0.1', $now + 3600), 'IP window ends');
+    check(ia_recipient_key('First.Last+tag@GoogleMail.com') === 'firstlast@gmail.com', 'Gmail aliases normalized');
+    check(ia_recipient_key('First.Last+tag@Example.com') === 'first.last@example.com', 'other domains retain dots');
+    check(ia_allow($dir, 'First.Last+one@gmail.com', '192.0.2.1', $now), 'Gmail first request');
+    check(!ia_allow($dir, 'firstlast+two@googlemail.com', '192.0.2.2', $now), 'Gmail alias blocked');
+    check(ia_allow($dir, 'daily@example.com', '192.0.2.3', $now), 'daily first');
+    check(ia_allow($dir, 'daily@example.com', '192.0.2.3', $now + 3600), 'daily second');
+    check(ia_allow($dir, 'daily@example.com', '192.0.2.3', $now + 7200), 'daily third');
+    check(!ia_allow($dir, 'daily+alias@example.com', '192.0.2.4', $now + 10800), 'daily fourth blocked');
+    check(ia_allow($dir, 'daily@example.com', '192.0.2.3', $now + 86400), 'daily window ends');
+    foreach (glob($dir . '/rate-*.json') as $file) { unlink($file); }
+    for ($i = 0; $i < 5; $i++) {
+        check(ia_allow($dir, "ipv6-$i@example.com", '2001:db8:1:2::' . ($i + 1), $now), 'IPv6 within quota');
+    }
+    check(!ia_allow($dir, 'ipv6-six@example.com', '2001:db8:1:2:ffff::1', $now), 'IPv6 /64 quota');
+    check(ia_allow($dir, 'ipv6-next@example.com', '2001:db8:1:3::1', $now), 'different IPv6 /64 allowed');
+    foreach (glob($dir . '/rate-*.json') as $file) { unlink($file); }
+    for ($i = 0; $i < 60; $i++) {
+        check(ia_allow($dir, "global-$i@example.com", '192.0.2.' . ($i + 1), $now), 'global within quota');
+    }
+    check(!ia_allow($dir, 'global-extra@example.com', '198.51.100.1', $now + 3599), 'global 61st blocked');
+    check(ia_allow($dir, 'global-extra@example.com', '198.51.100.1', $now + 3600), 'global window ends');
+    $old = $dir . '/rate-obsolete.json';
+    file_put_contents($old, '[]');
+    touch($old, $now - 86401);
+    ia_allow($dir, 'cleanup@example.com', '198.51.100.2', $now);
+    check(!is_file($old), 'old rate files removed');
     putenv('IA_NEWSLETTER_TEST_MAIL=' . $dir . '/mail.jsonl');
     ia_confirm_once($dir, $data);
     ia_confirm_once($dir, $data);
@@ -53,5 +86,6 @@ try {
     putenv('IA_NEWSLETTER_TEST_MAIL');
     foreach (glob($dir . '/*') as $file) { unlink($file); }
     unlink($dir . '/.lock');
+    unlink($dir . '/.htaccess');
     rmdir($dir);
 }
